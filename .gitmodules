@@ -1,0 +1,3 @@
+[submodule "src/btreetest/btree_framework"]
+	path = src/btreetest/btree_framework
+	url = https://github.com/andreas-steffens/btree-framework
