@@ -477,7 +477,7 @@ void TestBTreeKeySortOperatorOverloadAssignMultiInstance (_t_container *pContain
 
 	for (ui32 = 0; ui32 < nMulti; ui32++)
 	{
-		if ((ui32 == 0) || (ui32 == size_type (nMulti - 1)))
+		if ((ui32 == 0) || (ui32 == typename _t_container::size_type (nMulti - 1)))
 		{
 			nEntries = nOuterEntries;
 		}
@@ -562,7 +562,7 @@ void TestBTreeKeySortLowerBoundOnLeafNode (_t_container *pContainer, uint32_t nN
 
 	nRslt = ::std::distance (pContainer->cbegin (), sCIter);
 
-	if (nRslt != size_type (nNodeSize - 1))
+	if (nRslt != typename _t_container::size_type (nNodeSize - 1))
 	{
 		::std::cerr << "ERROR: TestBTreeKeySortLowerBoundOnLeafNode: pContainer->lower_bound did not return with iterator equivalent to value t - 1" << ::std::endl;
 
@@ -594,7 +594,7 @@ void TestBTreeKeySortLowerBoundOnLeafNode (_t_container *pContainer, uint32_t nN
 
 	nRslt = ::std::distance (pContainer->cbegin (), sCIter);
 
-	if (nRslt != size_type (nNodeSize - 1))
+	if (nRslt != typename _t_container::size_type (nNodeSize - 1))
 	{
 		::std::cerr << "ERROR: TestBTreeKeySortLowerBoundOnLeafNode: pContainer->lower_bound did not return with iterator equivalent to value t - 1" << ::std::endl;
 
@@ -716,7 +716,7 @@ void TestBTreeKeySortSerializeIncomplete (_t_container *pContainer, uint32_t nNo
 
 	nRslt = pContainer->serialize (nOffset, nWindowSize, pnData);
 
-	if (nRslt != size_type (nSize - nOffset))
+	if (nRslt != typename _t_container::size_type (nSize - nOffset))
 	{
 		::std::cerr << "ERROR: TestBTreeKeySortSerialize: size mismatch!" << ::std::endl;
 		::std::cerr << "expected size: " << nSize - nOffset << ::std::endl;
