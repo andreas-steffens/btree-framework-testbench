@@ -452,7 +452,7 @@ void TestBTreeArraySerializeIncomplete (_t_container *pContainer, typename _t_co
 
 	nRslt = pContainer->serialize (nOffset, nWindowSize, pnData);
 
-	if (nRslt != (nSize - nOffset))
+	if (nRslt != size_type (nSize - nOffset))
 	{
 		::std::cerr << "ERROR: TestBTreeArraySerializeIncomplete: size mismatch!" << ::std::endl;
 		::std::cerr << "expected size: " << nSize - nOffset << ::std::endl;
@@ -494,7 +494,7 @@ void TestBTreeArrayCodeCoverageRootMergeWithLowerRight (_t_container *pContainer
 	nSize *= nNodeSize * 2;
 	nSize *= nNodeSize * 2;
 
-	if ((65 * (nNodeSize * 2 - 1)) > nSize)
+	if (size_type (65 * (nNodeSize * 2 - 1)) > nSize)
 	{
 		nSize = 65 * (nNodeSize * 2 - 1);
 	}
