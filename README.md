@@ -113,23 +113,20 @@ Licensed under the Lesser GNU Public License, Version 3.0: [http://www.gnu.org/l
 
 ## Test lists
 
-stl-set
-stl-multiset
-stl-map
-stl-multimap
+stl-set, stl-multiset, stl-map and stl-multimap
 
 	0		- test exercises assignment operator of selected container type
 
 	1000	- test exercises interface method insert (const value_type &)
-	1001	- test exercises interface method insert&#90;iterator&#96; (iterator &, iterator &)
-	1002	- test exercises interface method erase (const&#95;iterator &) 
-	1003	- test exercises interface method erase (const key&#95;value &)
-	1004	- test exercises interface method erase (const&#95;iterator &, const&#95;iterator &)
-	1005	- test exercises interface method key&#95;comp ()
-	1006	- test exercises interface method value&#95;comp ()
+	1001	- test exercises interface method insert<iterator> (iterator &, iterator &)
+	1002	- test exercises interface method erase (const_iterator &) 
+	1003	- test exercises interface method erase (const key_value &)
+	1004	- test exercises interface method erase (const_iterator &, const_iterator &)
+	1005	- test exercises interface method key_comp ()
+	1006	- test exercises interface method value_comp ()
 	1008	- test exercises interface method swap (container &)
-	1009	- test exercises interface method find (const key&#95;type &)
-	1010	- test exercises interface methods lower&#95;bound (const key&#95;type &) and upper&#95;bound (const key&#95;type &)
+	1009	- test exercises interface method find (const key_type &)
+	1010	- test exercises interface methods lower_bound (const key_type &) and upper_bound (const key_type &)
 
 array
 
@@ -142,7 +139,7 @@ array
 	6		- test exercises if container is still ready to operate once interface method clear () has been called
 	7		- test exercises scenario where data is rapidly inserted and removed again
 	8		- test exercises if container is still ready to operate once interface method unload () has been called
-	9		- test exercises if container is still ready to operate once interface debug method show&#95;integrity () has been called
+	9		- test exercises if container is still ready to operate once interface debug method show_integrity () has been called
 	10		- test exercises copy constructor of container type
 	11		- test exercises overloaded assignment operator of container type
 	12		- test exercises overloaded subscript operator of container type
@@ -154,16 +151,16 @@ array
 	18		- test reads no data from container using method serialize () with read length set to zero
 
 	1000	- test exercises interface method assign (const size_type, const value_type &)
-	1001	- test exercises interface method assign&#90;iterator&#96; (iterator &, iterator &)
-	1002	- test exercises interface method push&#95;back () and pop&#95;back ()
-	1003	- test exercises interface method insert (const&#95;iterator, const size&#95;type &, const value&#95;type &)
-	1004	- test exercises interface method insert&#90;iterator&#96; (const&#95;iterator, iterator &, iterator &)
-	1005	- test exercises interface method insert (const&#95;iterator, iterator &, iterator &) on a large container via self-reference
-	1006	- test exercises interface method insert (const&#95;iterator, const&#95;iterator &, const&#95;iterator &) on a large container via self-reference
-	1007	- test exercises interface method insert (const&#95;iterator, reverse&#95;iterator &, reverse&#95;iterator &) on a large container via self-reference
-	1008	- test exercises interface method insert (const&#95;iterator, const&#95;reverse&#95;iterator &, const&#95;reverse&#95;iterator &) on a large container via self-reference
-	1009	- test exercises interface method erase (const key&#95;value &)
-	1010	- test exercises interface method erase (const&#95;iterator &, const&#95;iterator &)
+	1001	- test exercises interface method assign<iterator> (iterator &, iterator &)
+	1002	- test exercises interface method push_back () and pop_back ()
+	1003	- test exercises interface method insert (const_iterator, const size_type &, const value_type &)
+	1004	- test exercises interface method insert<iterator> (const_iterator, iterator &, iterator &)
+	1005	- test exercises interface method insert (const_iterator, iterator &, iterator &) on a large container via self-reference
+	1006	- test exercises interface method insert (const_iterator, const_iterator &, const_iterator &) on a large container via self-reference
+	1007	- test exercises interface method insert (const_iterator, reverse_iterator &, reverse_iterator &) on a large container via self-reference
+	1008	- test exercises interface method insert (const_iterator, const_reverse_iterator &, const_reverse_iterator &) on a large container via self-reference
+	1009	- test exercises interface method erase (const key_value &)
+	1010	- test exercises interface method erase (const_iterator &, const_iterator &)
 	1011	- test exercises interface method swap (container &)
 
 	2000	- code coverage test where data is removed resulting in nodes being merged, while the right node has a lower id than the left node
@@ -179,8 +176,8 @@ keysort
 	6		- test exercises if container is still ready to operate once interface method clear () has been called
 	7		- test exercises scenario where data is rapidly inserted and removed again
 	8		- test exercises if container is still ready to operate once interface method unload () has been called
-	9		- test exercises interface method erase (const&#95;iterator &), while removing specific instance of a key set
-	10		- test exercises if container is still ready to operate once interface debug method show&#95;integrity () has been called
+	9		- test exercises interface method erase (const_iterator &), while removing specific instance of a key set
+	10		- test exercises if container is still ready to operate once interface debug method show_integrity () has been called
 	11		- test exercises copy constructor of container type
 	12		- test exercises overloaded assignment operator of container type
 	13		- test exercises overloaded assignment operator of container type, while making sure key sets remain in order
@@ -193,18 +190,18 @@ keysort
 	20		- test reads data from part of a random node using method serialize (), while making sure key sets remain in order
 
 	1000	- test exercises interface method insert (const value_type &)
-	1001	- test exercises interface method insert&#90;iterator&#96; (iterator &, iterator &)
-	1002	- test exercises interface method erase (const&#95;iterator &) 
-	1003	- test exercises interface method erase (const key&#95;value &)
-	1004	- test exercises interface method erase (const&#95;iterator &, const&#95;iterator &)
+	1001	- test exercises interface method insert<iterator> (iterator &, iterator &)
+	1002	- test exercises interface method erase (const_iterator &) 
+	1003	- test exercises interface method erase (const key_value &)
+	1004	- test exercises interface method erase (const_iterator &, const_iterator &)
 	1005	- test exercises interface method swap (container &)
-	1006	- test exercises interface method find (const key&#95;type &)
-	1007	- test exercises interface methods lower&#95;bound (const key&#95;type &) and upper&#95;bound (const key&#95;type &)
+	1006	- test exercises interface method find (const key_type &)
+	1007	- test exercises interface methods lower_bound (const key_type &) and upper_bound (const key_type &)
 
-	2000	- code coverage test which exercises corner cases in method determine&#95;position ()
-	2001	- code coverage test which exercises corner cases in method find&#95;first&#95;key ()
-	2002	- code coverage test which exercises corner cases in method get&#95;init&#95;pos&#95;of&#95;key () on leaf node
-	2003	- code coverage test which exercises corner cases in overloaded method set&#95;iter&#95;data ()
+	2000	- code coverage test which exercises corner cases in method determine_position ()
+	2001	- code coverage test which exercises corner cases in method find_first_key ()
+	2002	- code coverage test which exercises corner cases in method get_init_pos_of_key () on leaf node
+	2003	- code coverage test which exercises corner cases in overloaded method set_iter_data ()
 	2004	- code coverage test which exercises corner cases in overloaded compare operator
 
 array-iter
@@ -220,9 +217,9 @@ array-iter
 	8		- test exercises arithmetic operator+ with different step sizes versus different node sizes
 	9		- test exercises arithmetic operator- with different step sizes versus different node sizes
 	10		- test exercises dereference operator*
-	11		- test exercises subscript operator[size&#95;type]
+	11		- test exercises subscript operator[size_type]
 	12		- test exercises subscript operator[int]
-	13		- test exercises compound operator+= (size&#95;type)
+	13		- test exercises compound operator+= (size_type)
 	14		- test exercises compound operator+= (int)
 	15		- test exercises compound operator+= (iterator)
 	16		- test exercises arithmetic operator+ and operator- with none of the operands being the result instance (r = a + b) or (r = a - b)
@@ -247,9 +244,9 @@ keysort-iter
 	7		- test exercises arithmetic operator- with one of the operands being the result instance on a small scale
 	8		- test exercises arithmetic operator+ with different step sizes versus different node sizes
 	9		- test exercises arithmetic operator- with different step sizes versus different node sizes
-	10		- test exercises subscript operator[size&#95;type]
+	10		- test exercises subscript operator[size_type]
 	11		- test exercises subscript operator[int]
-	12		- test exercises compound operator+= (size&#95;type)
+	12		- test exercises compound operator+= (size_type)
 	13		- test exercises compound operator+= (int)
 	14		- test exercises compound operator+= (iterator)
 	15		- test exercises arithmetic operator+ and operator- with none of the operands being the result instance (r = a + b) or (r = a - b)
