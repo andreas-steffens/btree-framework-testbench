@@ -48,7 +48,7 @@ Via cygwin command execute the following commands:
 ```
 cd .../to/your/projects/location
 git clone --recursive https://github.com/andreas-steffens/btree-framework-testbench
-cd btree-framework/src/btreetest
+cd btree-framework-testbench/src/btreetest
 ```
 
 Here you can find a number of batch files called msvce201x.x86(&#95;64).bat. These batch files can be executed via command line or the windows explorer. Each of those batch files creates a directory named "cmake" and generates all cmake files as well as the respective visual studio express solution files, set up for the selected platform and visual studio express version, in there. Then it tries to open whatever visual studio express application can be found under the registry key HKEY&#95;CLASSES&#95;ROOT\Applications\WDExpress.exe\shell\open\command. Please see below what versions of visual studio express and target platforms are currently supported:
@@ -68,7 +68,7 @@ To run regression tests, execute the following command lines in cygwin:
 
 ```
 cd .../to/your/projects/location
-cd btree-framework/src/btreetest
+cd btree-framework-testbench/src/btreetest
 
 # use this command line for the debug build -- Warning: This is very slow and may take days to complete!
 make -f Makefile.cygwin regression
@@ -86,7 +86,7 @@ Via command execute the following commands:
 ```
 cd .../to/your/projects/location
 git clone --recursive https://github.com/andreas-steffens/btree-framework-testbench
-cd btree-framework/src/btreetest
+cd btree-framework-testbench/src/btreetest
 make debug        # this builds the binary with debug settings
 make regression   # this builds the binary with debug settings and runs all regression tests
 ```
