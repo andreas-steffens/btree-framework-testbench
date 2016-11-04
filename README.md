@@ -124,9 +124,18 @@ stl-set, stl-multiset, stl-map and stl-multimap
 	1004	- test exercises interface method erase (const_iterator &, const_iterator &)
 	1005	- test exercises interface method key_comp ()
 	1006	- test exercises interface method value_comp ()
-	1008	- test exercises interface method swap (container &)
-	1009	- test exercises interface method find (const key_type &)
-	1010	- test exercises interface methods lower_bound (const key_type &) and upper_bound (const key_type &)
+	1007	- test exercises interface method swap (container &)
+	1008	- test exercises interface method find (const key_type &)
+	1009	- test exercises interface methods lower_bound (const key_type &) and upper_bound (const key_type &)
+	1010	- test exercises interface method emplace<_t_va_args> (_t_va_args && ...)
+	1011	- test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with perfect hint
+	1012	- test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with near perfect hint
+	1013	- test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with potentially bad hint
+	1014	- test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with terrible hint
+	1015	- test exercises interface method insert (const_iterator &, const value_type &) with perfect hint
+	1016	- test exercises interface method insert (const_iterator &, const value_type &) with near perfect hint
+	1017	- test exercises interface method insert (const_iterator &, const value_type &) with potentially bad hint
+	1018	- test exercises interface method insert (const_iterator &, const value_type &) with terrible hint
 
 array
 
@@ -162,6 +171,8 @@ array
 	1009	- test exercises interface method erase (const key_value &)
 	1010	- test exercises interface method erase (const_iterator &, const_iterator &)
 	1011	- test exercises interface method swap (container &)
+	1012	- test exercises interface method emplace<_t_va_args> (const_iterator &, _t_va_args && ...)
+	1013	- test exercises interface method emplace_back<_t_va_args> (_t_va_args && ...)
 
 	2000	- code coverage test where data is removed resulting in nodes being merged, while the right node has a lower id than the left node
 
@@ -197,6 +208,15 @@ keysort
 	1005	- test exercises interface method swap (container &)
 	1006	- test exercises interface method find (const key_type &)
 	1007	- test exercises interface methods lower_bound (const key_type &) and upper_bound (const key_type &)
+	1008	- test exercises interface method emplace<_t_va_args> (_t_va_args && ...)
+	1009	- test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with perfect hint
+	1010	- test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with near perfect hint
+	1011	- test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with potentially bad hint
+	1012	- test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with terrible hint
+	1013	- test exercises interface method insert (const_iterator &, const value_type &) with perfect hint
+	1014	- test exercises interface method insert (const_iterator &, const value_type &) with near perfect hint
+	1015	- test exercises interface method insert (const_iterator &, const value_type &) with potentially bad hint
+	1016	- test exercises interface method insert (const_iterator &, const value_type &) with terrible hint
 
 	2000	- code coverage test which exercises corner cases in method determine_position ()
 	2001	- code coverage test which exercises corner cases in method find_first_key ()
@@ -226,6 +246,7 @@ array-iter
 	17		- test exercises all compare operators (<, >, <=, >=, ==, !=)
 	18		- test exercises interface method swap (iterator &) with parameter from a different container
 	19		- test exercises interface method swap (iterator &) with parameter from the same different container
+
 	2000	- code coverage test exercises compare operator with same instance as an input
 	2001	- code coverage test exercises situation where the time stamp is up to date after a re-assignment
 	2002	- code coverage test exercises situation where the time stamp is up to date after a re-register
