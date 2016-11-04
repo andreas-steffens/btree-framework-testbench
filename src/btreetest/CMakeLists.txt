@@ -1,11 +1,12 @@
-cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required (VERSION 3.1)
 
 project (btreetest)
 
 if (UNIX)
-	option	(LINUX_BUILD_DEBUG		"set build to debug settings for regression and validation testing"	ON)
-	option	(LINUX_BUILD_RELEASE	"set build to release settings for performance testing"				OFF)
-	option	(LINUX_BUILD_COVERAGE	"set build to coverage settings to create a coverage report"		OFF)
+	option	(LINUX_BUILD_DEBUG				"set build to debug settings for regression and validation testing"	OFF)
+	option	(LINUX_BUILD_RELEASE			"set build to release settings for performance testing"				OFF)
+	option	(LINUX_BUILD_RELEASE_DBG_INFO	"set build to release settings for profiling"						OFF)
+	option	(LINUX_BUILD_COVERAGE			"set build to coverage settings to create a coverage report"		OFF)
 endif ()
 
 list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/btree_framework)
@@ -22,12 +23,14 @@ set		(	sources
 			./testbench/application_classes/regression/btreetestmultiset.cpp
 			./testbench/application_classes/regression/btreetestset.cpp
 			./testbench/common/btreetestcommon.cpp
+			./testbench/common/btreeperftestcommon.cpp
 			./testbench/primitives/btreearraytestprimitive.cpp
 			./testbench/primitives/btreecommonprimitives.cpp
 			./testbench/primitives/btreekeysorttestprimitive.cpp
 			./testbench/primitives/btreemultimapprimitives.cpp
 			./testbench/primitives/btreemultisetprimitives.cpp
 			./testbench/tests/performance/btreearrayperftestbench.cpp
+			./testbench/tests/performance/btreemultimapperftestbench.cpp
 			./testbench/tests/regression/btreearrayitertestbench.cpp
 			./testbench/tests/regression/btreearraytestbench.cpp
 			./testbench/tests/regression/btreekeysortitertestbench.cpp
@@ -43,6 +46,16 @@ set		(	sources
 			./testbench/wrapper_classes/btreemultimaptestwrapper.cpp
 			./testbench/wrapper_classes/btreemultisettestwrapper.cpp
 			./testbench/wrapper_classes/btreesettestwrapper.cpp
+			./testbench/sub_division/btreetestsubdivisionkeysort.cpp
+			./testbench/sub_division/btreetestsubdivisionarray.cpp
+			./testbench/sub_division/btreetestsubdivisionkeysortiter.cpp
+			./testbench/sub_division/btreetestsubdivisionarrayiter.cpp
+			./testbench/sub_division/btreetestsubdivisionmap.cpp
+			./testbench/sub_division/btreetestsubdivisionmultimap.cpp
+			./testbench/sub_division/btreetestsubdivisionset.cpp
+			./testbench/sub_division/btreetestsubdivisionmultiset.cpp
+			./testbench/examples/example_1_polymorphic_calls.cpp
+			./testbench/examples/example_2_simple_database.cpp
 			./btreetest.cpp
 		)
 
@@ -71,6 +84,7 @@ set		(	headers
 			./testbench/application_classes/regression/btreetestmultiset.h
 			./testbench/application_classes/regression/btreetestset.h
 			./testbench/common/btreetestcommon.h
+			./testbench/common/btreeperftestcommon.h
 			./testbench/primitives/btreearraytestprimitive.h
 			./testbench/primitives/btreecommonprimitives.h
 			./testbench/primitives/btreekeysorttestprimitive.h
@@ -78,6 +92,7 @@ set		(	headers
 			./testbench/primitives/btreemultisetprimitives.h
 			./testbench/primitives/btreeprimitivedefinitions.h
 			./testbench/tests/performance/btreearrayperftestbench.h
+			./testbench/tests/performance/btreemultimapperftestbench.h
 			./testbench/tests/regression/btreearrayitertestbench.h
 			./testbench/tests/regression/btreearraytestbench.h
 			./testbench/tests/regression/btreekeysortitertestbench.h
@@ -93,6 +108,16 @@ set		(	headers
 			./testbench/wrapper_classes/btreemultimaptestwrapper.h
 			./testbench/wrapper_classes/btreemultisettestwrapper.h
 			./testbench/wrapper_classes/btreesettestwrapper.h
+			./testbench/sub_division/btreetestsubdivisionkeysort.h
+			./testbench/sub_division/btreetestsubdivisionarray.h
+			./testbench/sub_division/btreetestsubdivisionkeysortiter.h
+			./testbench/sub_division/btreetestsubdivisionarrayiter.h
+			./testbench/sub_division/btreetestsubdivisionmap.h
+			./testbench/sub_division/btreetestsubdivisionmultimap.h
+			./testbench/sub_division/btreetestsubdivisionset.h
+			./testbench/sub_division/btreetestsubdivisionmultiset.h
+			./testbench/examples/example_1_polymorphic_calls.h
+			./testbench/examples/example_2_simple_database.h
 		)
 
 set		(	srcs
@@ -116,6 +141,8 @@ source_group ("sources\\testbench\\tests\\performance" REGULAR_EXPRESSION \./tes
 source_group ("sources\\testbench\\tests\\regression" REGULAR_EXPRESSION \./testbench/tests/regression/.*\\.cpp)
 source_group ("sources\\testbench\\wrapper_classes\\base" REGULAR_EXPRESSION \./testbench/wrapper_classes/base/.*\\.cpp)
 source_group ("sources\\testbench\\wrapper_classes" REGULAR_EXPRESSION \./testbench/wrapper_classes/.*\\.cpp)
+source_group ("sources\\testbench\\sub_division" REGULAR_EXPRESSION \./testbench/sub_division/.*\\.cpp)
+source_group ("sources\\testbench\\examples" REGULAR_EXPRESSION \./testbench/examples/.*\\.cpp)
 source_group ("sources\\testbench" REGULAR_EXPRESSION \./.*\.cpp)
 
 source_group ("headers\\applications\\avp_path_find" REGULAR_EXPRESSION \./applications/avp_path_find/.*\\.h)
@@ -127,6 +154,8 @@ source_group ("headers\\testbench\\tests\\performance" REGULAR_EXPRESSION \./tes
 source_group ("headers\\testbench\\tests\\regression" REGULAR_EXPRESSION \./testbench/tests/regression/.*\\.h)
 source_group ("headers\\testbench\\wrapper_classes\\base" REGULAR_EXPRESSION \./testbench/wrapper_classes/base/.*\\.h)
 source_group ("headers\\testbench\\wrapper_classes" REGULAR_EXPRESSION \./testbench/wrapper_classes/.*\\.h)
+source_group ("headers\\testbench\\sub_division" REGULAR_EXPRESSION \./testbench/sub_division/.*\\.h)
+source_group ("headers\\testbench\\examples" REGULAR_EXPRESSION \./testbench/examples/.*\\.h)
 
 if (MSVC)
 
@@ -170,6 +199,41 @@ if (MSVC)
 
 elseif (UNIX)
 
+	if ((NOT LINUX_BUILD_DEBUG) AND (NOT LINUX_BUILD_RELEASE) AND (NOT LINUX_BUILD_RELEASE_DBG_INFO) AND (NOT LINUX_BUILD_COVERAGE))
+		message (STATUS "")
+		message (STATUS "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+		message (STATUS "")
+		message (STATUS "It looks like you tried to call cmake directly!")
+		message (STATUS "This is problematic, since cmake just destroyed the original Makefile. To recover from that please run recover_makefile.sh or execute the following commands:")
+		message (STATUS "rm -fv CMakeCache.txt")
+		message (STATUS "rm -rfv CMakeFiles")
+		message (STATUS "cp -fv Makefile.backup Makefile")
+		message (STATUS "")
+		message (STATUS "Please use one of the command lines below, instead of calling cmake.")
+		message (STATUS "The make file rules will call cmake for you with the correct cmake settings being involved. Those will allow not only for different binaries to be build, but also to build those in parallel. However, during the compile process, each job may take up to ~1GB of memory, so use the make option -j with caution or not at all!")
+		message (STATUS "")
+		message (STATUS "make debug                             # builds regression test binary with debug flags")
+		message (STATUS "make profile                           # builds regression test binary with profile flags (resulting binary is supposed to be used with a profiler)")
+		message (STATUS "make release                           # builds regression test binary with release flags")
+		message (STATUS "make regression                        # build debug binary and runs regression tests (this may take hours to complete)")
+		message (STATUS "make clean_all                         # runs any clean commands")
+		message (STATUS "make clean                             # removes any build file (may those be intermediate or final) plus destroys all auto generated test make files")
+		message (STATUS "make clean_regression_tests            # cleans all regression tests regardless of their result")
+		message (STATUS "make clean_failed_regression_tests     # cleans all regression tests that returned with an error code")
+		message (STATUS "")
+		message (STATUS "Depending on what binary has been build, use one of the following command lines to find out what quick test can be run, instead of running a full regression:")
+		message (STATUS "btreetest_dbg --help")
+		message (STATUS "btreetest_prf --help")
+		message (STATUS "btreetest --help")
+		message (STATUS "")
+		message (STATUS "Please read the README file in the base directory to see all build rules.")
+		message (STATUS "")
+		message (STATUS "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+		message (STATUS "")
+
+		message (SEND_ERROR "This is not an error despite what cmake is saying! Please read the message above!")
+	endif ()
+
 	# general gcc / g++ compiler settings
 	set		(CMAKE_C_FLAGS		"${CMAKE_C_FLAGS} --std=c11 -fpermissive")
 	set		(CMAKE_CXX_FLAGS	"${CMAKE_CXX_FLAGS} --std=c++11 -fpermissive")
@@ -179,13 +243,24 @@ elseif (UNIX)
 		set		(CMAKE_C_FLAGS				"${CMAKE_C_FLAGS} -g -O0 -ftemplate-backtrace-limit=0" CACHE STRING "c compiler flags used during linux debug builds." FORCE)
 		set		(CMAKE_EXE_LINKER_FLAGS		"${CMAKE_EXE_LINKER_FLAGS}" CACHE STRING "linker flags used during linux debug binary builds." FORCE)
 		set		(CMAKE_SHARED_LINKER_FLAGS	"${CMAKE_SHARED_LINKER_FLAGS}" CACHE STRING "linker flags used during linux debug shared library builds." FORCE)
+
+#		add_definitions ("-D_DEBUG")
 	endif ()
 	
 	if (LINUX_BUILD_RELEASE)
-		set		(CMAKE_CXX_FLAGS			"${CMAKE_CXX_FLAGS} -O3 -march=native" CACHE STRING "c++ compiler flags used during linux release builds." FORCE)
-		set		(CMAKE_C_FLAGS				"${CMAKE_C_FLAGS} -O3 -march=native" CACHE STRING "c compiler flags used during linux release builds." FORCE)
+		set		(CMAKE_CXX_FLAGS			"${CMAKE_CXX_FLAGS} -O3 -s -march=native" CACHE STRING "c++ compiler flags used during linux release builds." FORCE)
+		set		(CMAKE_C_FLAGS				"${CMAKE_C_FLAGS} -O3 -s -march=native" CACHE STRING "c compiler flags used during linux release builds." FORCE)
 		set		(CMAKE_EXE_LINKER_FLAGS		"${CMAKE_EXE_LINKER_FLAGS}" CACHE STRING "linker flags used during linux release binary builds." FORCE)
 		set		(CMAKE_SHARED_LINKER_FLAGS	"${CMAKE_SHARED_LINKER_FLAGS}" CACHE STRING "linker flags used during linux release shared library builds." FORCE)
+	endif ()
+	
+	if (LINUX_BUILD_RELEASE_DBG_INFO)
+		set		(CMAKE_CXX_FLAGS			"${CMAKE_CXX_FLAGS} -g -O2 -march=native" CACHE STRING "c++ compiler flags used during linux release builds." FORCE)
+		set		(CMAKE_C_FLAGS				"${CMAKE_C_FLAGS} -g -O2 -march=native" CACHE STRING "c compiler flags used during linux release builds." FORCE)
+		set		(CMAKE_EXE_LINKER_FLAGS		"${CMAKE_EXE_LINKER_FLAGS}" CACHE STRING "linker flags used during linux release binary builds." FORCE)
+		set		(CMAKE_SHARED_LINKER_FLAGS	"${CMAKE_SHARED_LINKER_FLAGS}" CACHE STRING "linker flags used during linux release shared library builds." FORCE)
+
+#		add_definitions ("-D_DEBUG")
 	endif ()
 	
 	if (LINUX_BUILD_COVERAGE)

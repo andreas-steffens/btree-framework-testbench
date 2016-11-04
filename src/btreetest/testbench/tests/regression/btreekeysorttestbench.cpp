@@ -2,7 +2,7 @@
 **
 ** file:	btreekeysorttestbench.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -317,6 +317,8 @@ void TestBTreeKeySortHTMLoutput (_t_container *pContainer, typename _t_container
 template<class _t_container>
 void TestBTreeKeySortCopyConstructorTest (_t_container *pClRef, _t_container sClCopy)
 {
+	typename _t_container::key_type			nLastKey = 0;
+
 	if (sClCopy != *pClRef)
 	{
 		::std::cerr << ::std::endl << "ERROR: copied instance mismatches reference!" << ::std::endl;
@@ -327,6 +329,22 @@ void TestBTreeKeySortCopyConstructorTest (_t_container *pClRef, _t_container sCl
 		::std::cerr << "outputting copied instance to cc_copy.html" << ::std::endl;
 
 		sClCopy.show_integrity ("cc_copy.html");
+
+		exit (-1);
+	}
+
+	associative_container_add_primitive (&sClCopy, 1, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
+
+	if (sClCopy == *pClRef)
+	{
+		::std::cerr << ::std::endl << "ERROR: copied instance is supposed to mismatch reference!" << ::std::endl;
+		::std::cerr << "outputting reference to cc_reference_match.html" << ::std::endl;
+
+		pClRef->show_integrity ("cc_reference_match.html");
+
+		::std::cerr << "outputting copied instance to cc_copy_match.html" << ::std::endl;
+
+		sClCopy.show_integrity ("cc_copy_match.html");
 
 		exit (-1);
 	}
@@ -1182,7 +1200,7 @@ void TestBTreeKeySortSTLifInsertViaIteratorPairEx (btreetest_keysort_stl_if_inse
 }
 
 template<class _t_container, class _t_pair_container>
-void TestBTreeKeySortSTLifInsertViaIterator (_t_container *pContainer, _t_pair_container *pPairContainer, typename _t_container::size_type nNumEntries, bayerTreeCacheDescription_t *psCacheDescription, uint32_t nNodeSize)
+void TestBTreeKeySortSTLifInsertViaIterator (_t_container *pContainer, _t_pair_container *pPairContainer, typename _t_container::size_type nNumEntries, uint32_t nNodeSize)
 {
 	typedef ::std::list<typename _t_container::value_type>								list_t;
 	typedef ::std::vector<typename _t_container::value_type>							vector_t;
@@ -1808,6 +1826,36 @@ void TestBTreeKeySortSTLifLowerBoundUpperBound (_t_container *pContainer, _t_pai
 
 		exit (-1);
 	}
+}
+
+template<class _t_container>
+void TestBTreeKeySortSTLifEmplace (_t_container *pContainer, typename _t_container::size_type nNumEntries)
+{
+	uint32_t		nLastKey = 1;
+
+	::std::cout << "exercises method compatible to STL interface CBTreeBaseDefaults<>::CBTreeKeysort<>:: emplace ()" << ::std::endl;
+
+	associative_container_emplace_primitive (pContainer, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
+}
+
+template<class _t_container>
+void TestBTreeKeySortSTLifEmplaceHint (_t_container *pContainer, typename _t_container::size_type nNumEntries, typename _t_container::size_type nHintVariation)
+{
+	uint32_t		nLastKey = 1;
+
+	::std::cout << "exercises method compatible to STL interface CBTreeBaseDefaults<>::CBTreeKeysort<>:: emplace_hint () with hint variation set to " << nHintVariation << ::std::endl;
+
+	associative_container_emplace_hint_primitive (pContainer, nNumEntries, nHintVariation, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
+}
+
+template<class _t_container>
+void TestBTreeKeySortSTLifInsertHint (_t_container *pContainer, typename _t_container::size_type nNumEntries, typename _t_container::size_type nHintVariation)
+{
+	uint32_t		nLastKey = 1;
+
+	::std::cout << "exercises method compatible to STL interface CBTreeBaseDefaults<>::CBTreeKeysort<>:: insert (hint) with hint variation set to " << nHintVariation << ::std::endl;
+
+	associative_container_insert_hint_primitive (pContainer, nNumEntries, nHintVariation, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 }
 
 template<class _t_container, class _t_pair_container>
@@ -2462,7 +2510,7 @@ void TestBTreeKeySort (uint32_t nTest, uint32_t nNodeSize, uint32_t nPageSize, _
 
 	case BTREETEST_KEYSORT_REMOVE_INSTANCES		:
 		{
-//			TestBTreeKeySortRemoveInstance (pKeySortTestWrapper, 64, 3);
+			TestBTreeKeySortRemoveInstance (pKeySortTestWrapper, 64, 3);
 			TestBTreeKeySortRemoveInstance (pKeySortPairTestWrapper, 64, 3);
 
 			break;
@@ -2566,9 +2614,7 @@ void TestBTreeKeySort (uint32_t nTest, uint32_t nNodeSize, uint32_t nPageSize, _
 
 	case BTREETEST_KEYSORT_STL_IF_INSERT_VIA_ITERATOR	:
 		{
-			bayerTreeCacheDescription_t	sCacheDesc = {nPageSize};
-
-			TestBTreeKeySortSTLifInsertViaIterator (pKeySortTestWrapper, pKeySortPairTestWrapper, 64, &sCacheDesc, nNodeSize);
+			TestBTreeKeySortSTLifInsertViaIterator (pKeySortTestWrapper, pKeySortPairTestWrapper, 64, nNodeSize);
 
 			break;
 		}
@@ -2615,6 +2661,78 @@ void TestBTreeKeySort (uint32_t nTest, uint32_t nNodeSize, uint32_t nPageSize, _
 			break;
 		}
 
+	case BTREETEST_KEYSORT_STL_IF_EMPLACE:
+		{
+			TestBTreeKeySortSTLifEmplace (pKeySortTestWrapper, 64);
+			TestBTreeKeySortSTLifEmplace (pKeySortPairTestWrapper, 64);
+
+			break;
+		}
+
+	case BTREETEST_KEYSORT_STL_IF_EMPLACE_HINT:
+		{
+			TestBTreeKeySortSTLifEmplaceHint (pKeySortTestWrapper, 64, 0);
+			TestBTreeKeySortSTLifEmplaceHint (pKeySortPairTestWrapper, 64, 0);
+
+			break;
+		}
+
+	case BTREETEST_KEYSORT_STL_IF_EMPLACE_HINT_MINOR:
+		{
+			TestBTreeKeySortSTLifEmplaceHint (pKeySortTestWrapper, 64, 1);
+			TestBTreeKeySortSTLifEmplaceHint (pKeySortPairTestWrapper, 64, 1);
+
+			break;
+		}
+
+	case BTREETEST_KEYSORT_STL_IF_EMPLACE_HINT_SIGNIFICANT:
+		{
+			TestBTreeKeySortSTLifEmplaceHint (pKeySortTestWrapper, 64, 6);
+			TestBTreeKeySortSTLifEmplaceHint (pKeySortPairTestWrapper, 64, 6);
+
+			break;
+		}
+
+	case BTREETEST_KEYSORT_STL_IF_EMPLACE_HINT_LARGE:
+		{
+			TestBTreeKeySortSTLifEmplaceHint (pKeySortTestWrapper, 64, 64);
+			TestBTreeKeySortSTLifEmplaceHint (pKeySortPairTestWrapper, 64, 64);
+
+			break;
+		}
+
+	case BTREETEST_KEYSORT_STL_IF_INSERT_HINT	:
+		{
+			TestBTreeKeySortSTLifInsertHint (pKeySortTestWrapper, 64, 0);
+			TestBTreeKeySortSTLifInsertHint (pKeySortPairTestWrapper, 64, 0);
+
+			break;
+		}
+
+	case BTREETEST_KEYSORT_STL_IF_INSERT_HINT_MINOR	:
+		{
+			TestBTreeKeySortSTLifInsertHint (pKeySortTestWrapper, 64, 1);
+			TestBTreeKeySortSTLifInsertHint (pKeySortPairTestWrapper, 64, 1);
+
+			break;
+		}
+
+	case BTREETEST_KEYSORT_STL_IF_INSERT_HINT_SIGNIFICANT	:
+		{
+			TestBTreeKeySortSTLifInsertHint (pKeySortTestWrapper, 64, 6);
+			TestBTreeKeySortSTLifInsertHint (pKeySortPairTestWrapper, 64, 6);
+
+			break;
+		}
+
+	case BTREETEST_KEYSORT_STL_IF_INSERT_HINT_LARGE	:
+		{
+			TestBTreeKeySortSTLifInsertHint (pKeySortTestWrapper, 64, 64);
+			TestBTreeKeySortSTLifInsertHint (pKeySortPairTestWrapper, 64, 64);
+
+			break;
+		}
+	
 	case BTREETEST_KEYSORT_CODE_COVERAGE_DETERMINE_POSITION	:
 		{
 			TestBTreeKeySortCCdeterminePosition (pKeySortTestWrapper, nNodeSize);

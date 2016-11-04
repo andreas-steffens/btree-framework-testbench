@@ -49,8 +49,6 @@ void RunInsert (_t_container *pContainer, _t_iterator &rIter, ::std::vector<uint
 template<class _t_container, class _t_type>
 void TestArrayPerfInsertSingleRun (const char *pszTitle, _t_container *pContainer, _t_type &rType, uint32_t nOperation, uint64_t nProblemSize, typename _t_container::size_type nProblemSizeBias, CResultList_t *pClResultList)
 {
-	typedef ::std::chrono::duration<double>			duration_t;
-
 	typedef typename _t_container::const_iterator	citer_t;
 
 	uint64_t		i;
@@ -95,15 +93,11 @@ void TestArrayPerfInsertSingleRun (const char *pszTitle, _t_container *pContaine
 		}
 
 		auto		sClkEnd = ::std::chrono::high_resolution_clock::now ();
-		duration_t	sTimeSpan = ::std::chrono::duration_cast<duration_t> (sClkEnd - sClkStart);
 
-		dblTimeSpan = sTimeSpan.count ();
+		dblTimeSpan = convert_chrono_duration_to_seconds (sClkStart, sClkEnd);
 	} while (dblTimeSpan < 1.0);
 
-	double									dblIOPs = nCnt / dblTimeSpan;
-	::std::pair<double, const char *>		sResult (dblIOPs, pszTitle);
-
-	pClResultList->insert (sResult);
+	add_perf_result (*pClResultList, dblTimeSpan, nCnt, pszTitle);
 }
 
 template<class _t_type>
@@ -114,44 +108,43 @@ void TestArrayPerfInsertSingleSelectOperation (uint32_t nOperation, uint64_t nPr
 	btree_ram_io_properties_65555_t	sRAMproperties65555;
 	btree_ram_io_properties_55555_t	sRAMproperties55555;
 	btree_ram_io_properties_55455_t	sRAMproperties55455;
-	bayerTreeCacheDescription_t		sCacheDesc = {4096};
-	CResultList_t					sResultList (sRAMproperties55555, &sCacheDesc, 16);
+	CResultList_t					sResultList (sRAMproperties55555, 16);
 	::std::list<uint32_t>			sList32;
 	::std::vector<uint32_t>			sVector32;
 	CBTreeArray<uint32_t, btree_ram_io_properties_66565_t>
-									sBtrArray32_66565_16 (sRAMproperties66565, &sCacheDesc, 16);
+									sBtrArray32_66565_16 (sRAMproperties66565, 16);
 	CBTreeArray<uint32_t, btree_ram_io_properties_66565_t>
-									sBtrArray32_66565_256 (sRAMproperties66565, &sCacheDesc, 256);
+									sBtrArray32_66565_256 (sRAMproperties66565, 256);
 	CBTreeArray<uint32_t, btree_ram_io_properties_66565_t>
-									sBtrArray32_66565_1024 (sRAMproperties66565, &sCacheDesc, 1024);
+									sBtrArray32_66565_1024 (sRAMproperties66565, 1024);
 	
 	CBTreeArray<uint32_t, btree_ram_io_properties_66555_t>
-									sBtrArray32_66555_16 (sRAMproperties66555, &sCacheDesc, 16);
+									sBtrArray32_66555_16 (sRAMproperties66555, 16);
 	CBTreeArray<uint32_t, btree_ram_io_properties_66555_t>
-									sBtrArray32_66555_256 (sRAMproperties66555, &sCacheDesc, 256);
+									sBtrArray32_66555_256 (sRAMproperties66555, 256);
 	CBTreeArray<uint32_t, btree_ram_io_properties_66555_t>
-									sBtrArray32_66555_1024 (sRAMproperties66555, &sCacheDesc, 1024);
+									sBtrArray32_66555_1024 (sRAMproperties66555, 1024);
 	
 	CBTreeArray<uint32_t, btree_ram_io_properties_65555_t>
-									sBtrArray32_65555_16 (sRAMproperties65555, &sCacheDesc, 16);
+									sBtrArray32_65555_16 (sRAMproperties65555, 16);
 	CBTreeArray<uint32_t, btree_ram_io_properties_65555_t>
-									sBtrArray32_65555_256 (sRAMproperties65555, &sCacheDesc, 256);
+									sBtrArray32_65555_256 (sRAMproperties65555, 256);
 	CBTreeArray<uint32_t, btree_ram_io_properties_65555_t>
-									sBtrArray32_65555_1024 (sRAMproperties65555, &sCacheDesc, 1024);
+									sBtrArray32_65555_1024 (sRAMproperties65555, 1024);
 	
 	CBTreeArray<uint32_t, btree_ram_io_properties_55555_t>
-									sBtrArray32_55555_16 (sRAMproperties55555, &sCacheDesc, 16);
+									sBtrArray32_55555_16 (sRAMproperties55555, 16);
 	CBTreeArray<uint32_t, btree_ram_io_properties_55555_t>
-									sBtrArray32_55555_256 (sRAMproperties55555, &sCacheDesc, 256);
+									sBtrArray32_55555_256 (sRAMproperties55555, 256);
 	CBTreeArray<uint32_t, btree_ram_io_properties_55555_t>
-									sBtrArray32_55555_1024 (sRAMproperties55555, &sCacheDesc, 1024);
+									sBtrArray32_55555_1024 (sRAMproperties55555, 1024);
 	
 	CBTreeArray<uint32_t, btree_ram_io_properties_55455_t>
-									sBtrArray32_55455_16 (sRAMproperties55455, &sCacheDesc, 16);
+									sBtrArray32_55455_16 (sRAMproperties55455, 16);
 	CBTreeArray<uint32_t, btree_ram_io_properties_55455_t>
-									sBtrArray32_55455_256 (sRAMproperties55455, &sCacheDesc, 256);
+									sBtrArray32_55455_256 (sRAMproperties55455, 256);
 	CBTreeArray<uint32_t, btree_ram_io_properties_55455_t>
-									sBtrArray32_55455_1024 (sRAMproperties55455, &sCacheDesc, 1024);
+									sBtrArray32_55455_1024 (sRAMproperties55455, 1024);
 	
 	InitTestType (rType, nProblemSizeBias);
 
@@ -183,9 +176,6 @@ void TestArrayPerfInsertSingleSelectOperation (uint32_t nOperation, uint64_t nPr
 	TestArrayPerfInsertSingleRun ("CBTreeArray<uint32_t, 32, 32, 16, 32, 32> (256)", &sBtrArray32_55455_256, rType, nOperation, nProblemSize, nProblemSizeBias, &sResultList);
 	TestArrayPerfInsertSingleRun ("CBTreeArray<uint32_t, 32, 32, 16, 32, 32> (1024)", &sBtrArray32_55455_1024, rType, nOperation, nProblemSize, nProblemSizeBias, &sResultList);
 
-	auto	sCRIter = sResultList.crbegin ();
-	auto	sCRIterEnd = sResultList.crend ();
-
 	switch (nOperation)
 	{
 	case	0	:	::std::cout << "front insert operation";	break;
@@ -195,57 +185,37 @@ void TestArrayPerfInsertSingleSelectOperation (uint32_t nOperation, uint64_t nPr
 
 	::std::cout << ::std::endl;
 
-	::std::cout << "problem size: " << nProblemSize;
-
-	if (nProblemSizeBias != 1)
-	{
-		::std::cout << " x " << nProblemSizeBias;
-	}
-
-	::std::cout << ::std::endl;
-
-	for (; sCRIter != sCRIterEnd; sCRIter++)
-	{
-		::std::cout << ::std::setw (12) << (*sCRIter).first << " OP/s " << (*sCRIter).second << ::std::endl;
-	}
+	output_perf_results (sResultList, nProblemSize, nProblemSizeBias);
 }
 
-void TestArrayPerfInsertSingle ()
+void TestArrayPerfInsertSingle (uint64_t nProblemSize, uint32_t nProblemBias)
 {
 	uint32_t	sSelectedTypeui32;
 
-	TestArrayPerfInsertSingleSelectOperation (0, 100000, 1, sSelectedTypeui32);
-	TestArrayPerfInsertSingleSelectOperation (1, 100000, 1, sSelectedTypeui32);
-	TestArrayPerfInsertSingleSelectOperation (2, 100000, 1, sSelectedTypeui32);
+	TestArrayPerfInsertSingleSelectOperation (2, nProblemSize, nProblemBias, sSelectedTypeui32);
+	TestArrayPerfInsertSingleSelectOperation (0, nProblemSize, nProblemBias, sSelectedTypeui32);
+	TestArrayPerfInsertSingleSelectOperation (1, nProblemSize, nProblemBias, sSelectedTypeui32);
 }
 
-void TestArrayPerfInsertArrayCopy ()
+void TestArrayPerfInsertArrayCopy (uint64_t nProblemSize, uint32_t nProblemBias)
 {
 	uint32_t	sSelectedTypeui32;
 
-	TestArrayPerfInsertSingleSelectOperation (0, 10000, 10, sSelectedTypeui32);
-	TestArrayPerfInsertSingleSelectOperation (1, 10000, 10, sSelectedTypeui32);
-	TestArrayPerfInsertSingleSelectOperation (2, 10000, 10, sSelectedTypeui32);
-
-	TestArrayPerfInsertSingleSelectOperation (2, 1000, 100, sSelectedTypeui32);
-	TestArrayPerfInsertSingleSelectOperation (2, 100, 1000, sSelectedTypeui32);
-	TestArrayPerfInsertSingleSelectOperation (2, 10, 10000, sSelectedTypeui32);
+	TestArrayPerfInsertSingleSelectOperation (2, nProblemSize, nProblemBias, sSelectedTypeui32);
+	TestArrayPerfInsertSingleSelectOperation (0, nProblemSize, nProblemBias, sSelectedTypeui32);
+	TestArrayPerfInsertSingleSelectOperation (1, nProblemSize, nProblemBias, sSelectedTypeui32);
 }
 
-void TestArrayPerfInsertIterator ()
+void TestArrayPerfInsertIterator (uint64_t nProblemSize, uint32_t nProblemBias)
 {
 	::std::vector<uint32_t>		sSelectedTypeVector_ui32;
 
-	TestArrayPerfInsertSingleSelectOperation (0, 10000, 10, sSelectedTypeVector_ui32);
-	TestArrayPerfInsertSingleSelectOperation (1, 10000, 10, sSelectedTypeVector_ui32);
-	TestArrayPerfInsertSingleSelectOperation (2, 10000, 10, sSelectedTypeVector_ui32);
-
-	TestArrayPerfInsertSingleSelectOperation (2, 1000, 100, sSelectedTypeVector_ui32);
-	TestArrayPerfInsertSingleSelectOperation (2, 100, 1000, sSelectedTypeVector_ui32);
-	TestArrayPerfInsertSingleSelectOperation (2, 10, 10000, sSelectedTypeVector_ui32);
+	TestArrayPerfInsertSingleSelectOperation (2, nProblemSize, nProblemBias, sSelectedTypeVector_ui32);
+	TestArrayPerfInsertSingleSelectOperation (0, nProblemSize, nProblemBias, sSelectedTypeVector_ui32);
+	TestArrayPerfInsertSingleSelectOperation (1, nProblemSize, nProblemBias, sSelectedTypeVector_ui32);
 }
 
-void TestArrayPerf (uint32_t nTestNum)
+void TestArrayPerf (uint32_t nTestNum, uint64_t nProblemSize, uint32_t nProblemBias)
 {
 	::std::cout << "array performance test bench" << ::std::endl;
 	::std::cout << ::std::fixed << ::std::setprecision (2);
@@ -254,19 +224,19 @@ void TestArrayPerf (uint32_t nTestNum)
 	{
 	case BTREETEST_ARRAY_PERF_INSERT_SINGLE		:
 
-		TestArrayPerfInsertSingle ();
+		TestArrayPerfInsertSingle (nProblemSize, nProblemBias);
 
 		break;
 
 	case BTREETEST_ARRAY_PERF_INSERT_ARRAY_COPY	:
 
-		TestArrayPerfInsertArrayCopy ();
+		TestArrayPerfInsertArrayCopy (nProblemSize, nProblemBias);
 
 		break;
 
 	case BTREETEST_ARRAY_PERF_INSERT_ITERATOR	:
 
-		TestArrayPerfInsertIterator ();
+		TestArrayPerfInsertIterator (nProblemSize, nProblemBias);
 
 		break;
 

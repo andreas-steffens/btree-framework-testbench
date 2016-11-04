@@ -2,7 +2,7 @@
 **
 ** file:	btreemultisettestwrapper.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -49,6 +49,8 @@ public:
 	typedef typename reference_t::value_type					value_type;
 	typedef typename reference_t::key_type						key_type;
 	typedef typename reference_t::size_type						size_type;
+
+	typedef typename ::std::make_signed<size_type>::type		signed_size_type;
 
 	typedef _t_data												value_test_type;
 	typedef uint32_t											key_test_type;
@@ -111,11 +113,19 @@ public:
 	
 	iterator				insert								(const value_type &rData);
 
+	void					insert_hint							(const value_type &rData);
+	
 	template<class _t_iterator, class _t_test_iterator>
 	void					insert_self_reference				(_t_iterator sIterFirst, _t_iterator sIterLast, _t_test_iterator &rIterTest);
 
 	template<class _t_ext_container, class _t_ext_iterator, class _t_ref_iterator>
 	void					test_all_containers_insert			(_t_ext_container *pExtContainer, _t_ext_iterator &rExtPos, _t_ref_iterator &rIterBegin, _t_ref_iterator &rIterFirst, _t_ref_iterator &rIterLast) const;
+
+	template<class ..._t_va_args>
+	void					emplace								(_t_va_args && ... rrArgs);
+	
+	template<class ..._t_va_args>
+	void					emplace_hint						(_t_va_args && ... rrArgs);
 
 	key_compare				key_comp							() const;
 	value_compare			value_comp							() const;

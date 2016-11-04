@@ -2,7 +2,7 @@
 **
 ** file:	btreearraytestwrapper.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -633,6 +633,112 @@ void CBTreeArrayTestWrapper<_t_data, _t_sizetype, _t_ref_container>::insert_via_
 }
 
 template<class _t_data, class _t_sizetype, class _t_ref_container>
+void CBTreeArrayTestWrapper<_t_data, _t_sizetype, _t_ref_container>::emplace
+	(
+		typename CBTreeArrayTestWrapper<_t_data, _t_sizetype, _t_ref_container>::const_iterator sCIterPos, 
+		const typename CBTreeArrayTestWrapper<_t_data, _t_sizetype, _t_ref_container>::value_type &rData
+	)
+{
+	size_type				nDist;
+	const_iterator			sCIterRefBegin;
+	iterator				sIterRefRslt;
+	test_const_iterator		sCIter;
+
+	sCIterRefBegin = this->m_pReference->cbegin ();
+
+	nDist = ::std::distance (sCIterRefBegin, sCIterPos);
+
+	this->m_pReference->insert (sCIterPos, rData);
+
+	sCIter = m_pContainerRAM6565_n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM6565_n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM6555_n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM6555_n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5555_n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5555_n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5554_n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5554_n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5454_n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5454_n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5444_n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5444_n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM4444_n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM4444_n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM6565_2n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM6565_2n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM6555_2n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM6555_2n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5555_2n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5555_2n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5554_2n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5554_2n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5454_2n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5454_2n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5444_2n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5444_2n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM4444_2n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM4444_2n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM6565_4n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM6565_4n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM6555_4n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM6555_4n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5555_4n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5555_4n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5554_4n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5554_4n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5454_4n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5454_4n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM5444_4n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM5444_4n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerRAM4444_4n->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerRAM4444_4n->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile6565min->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile6565min->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile6555min->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile6555min->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile5555min->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile5555min->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile5554min->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile5554min->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile5454min->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile5454min->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile6565default->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile6565default->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile6555default->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile6555default->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile5555default->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile5555default->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile5554default->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile5554default->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile5454default->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile5454default->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile6565large->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile6565large->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile6555large->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile6555large->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile5555large->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile5555large->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile5554large->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile5554large->emplace (sCIter, rData.nData, rData.nDebug);
+	sCIter = m_pContainerFile5454large->cbegin (); ::std::advance (sCIter, nDist); sCIter.sync (); m_pContainerFile5454large->emplace (sCIter, rData.nData, rData.nDebug);
+
+	test ();
+}
+
+template<class _t_data, class _t_sizetype, class _t_ref_container>
+void CBTreeArrayTestWrapper<_t_data, _t_sizetype, _t_ref_container>::emplace_back
+	(
+		const typename CBTreeArrayTestWrapper<_t_data, _t_sizetype, _t_ref_container>::value_type &rData
+	)
+{
+	this->m_pReference->push_back (rData);
+
+	m_pContainerRAM6565_n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM6555_n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5555_n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5554_n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5454_n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5444_n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM4444_n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM6565_2n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM6555_2n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5555_2n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5554_2n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5454_2n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5444_2n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM4444_2n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM6565_4n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM6555_4n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5555_4n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5554_4n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5454_4n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM5444_4n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerRAM4444_4n->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile6565min->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile6555min->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile5555min->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile5554min->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile5454min->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile6565default->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile6555default->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile5555default->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile5554default->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile5454default->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile6565large->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile6555large->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile5555large->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile5554large->emplace_back (rData.nData, rData.nDebug);
+	m_pContainerFile5454large->emplace_back (rData.nData, rData.nDebug);
+	
+	test ();
+}
+
+template<class _t_data, class _t_sizetype, class _t_ref_container>
 typename CBTreeArrayTestWrapper<_t_data, _t_sizetype, _t_ref_container>::iterator
 	CBTreeArrayTestWrapper<_t_data, _t_sizetype, _t_ref_container>::erase
 	(
@@ -1106,62 +1212,65 @@ void CBTreeArrayTestWrapper<_t_data, _t_sizetype, _t_ref_container>::init_contai
 	CBTreeIOpropertiesRAM<size_test_type, uint32_t, uint16_t, uint32_t, uint16_t>		sRAMprop5454;
 	CBTreeIOpropertiesRAM<size_test_type, uint32_t, uint16_t, uint16_t, uint16_t>		sRAMprop5444;
 	CBTreeIOpropertiesRAM<size_test_type, uint16_t, uint16_t, uint16_t, uint16_t>		sRAMprop4444;
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesMin6565 ("./", 1);
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin6555 ("./", 1);
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin5555 ("./", 1);
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesMin5554 ("./", 1);
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesMin5454 ("./", 1);
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesDefault6565 ("./");
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault6555 ("./");
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault5555 ("./");
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesDefault5554 ("./");
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesDefault5454 ("./");
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesLarge6565 ("./", 16777216);
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesLarge6555 ("./", 16777216);
-	bayerTreeCacheDescription_t															sCacheDescPageSize = {nPageSize};
-	bayerTreeCacheDescription_t															sCacheDescMin = {1};
-	bayerTreeCacheDescription_t															sCacheDescNearestBigger = {nPageSize * 2 / 3};
-	bayerTreeCacheDescription_t															sCacheDescLarge = {nPageSize * 16};
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesMin6565 ("./", 1, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin6555 ("./", 1, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin5555 ("./", 1, 1);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesMin5554 ("./", 1, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesMin5454 ("./", 1, nPageSize * 16);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesDefault6565 ("./", 1048576, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault6555 ("./", 1048576, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault5555 ("./", 1048576, nPageSize * 16);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesDefault5554 ("./", 1048576, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesDefault5454 ("./", 1048576, 1);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesLarge6565 ("./", 16777216, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesLarge6555 ("./", 16777216, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesLarge5555 ("./", 1048576, 1);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesLarge5554 ("./", 1048576, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesLarge5454 ("./", 1048576, nPageSize * 16);
+//	btree_cache_description_t															sCacheDescPageSize = {nPageSize};
+//	btree_cache_description_t															sCacheDescMin = {1};
+//	btree_cache_description_t															sCacheDescNearestBigger = {nPageSize * 2 / 3};
+//	btree_cache_description_t															sCacheDescLarge = {nPageSize * 16};
 	uint32_t																			i = 0;
 
-	m_pContainerRAM6565_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM6555_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM5555_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM5554_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM5454_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM5444_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM4444_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM6565_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM6555_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM5555_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM5554_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM5454_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM5444_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM4444_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM6565_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM6555_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM5555_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM5554_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM5454_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM5444_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM4444_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerFile6565min = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesMin6565, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerFile6555min = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin6555, &sCacheDescPageSize, nNodeSize * 8, this->m_pReference);
-	m_pContainerFile5555min = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin5555, &sCacheDescMin, nNodeSize * 7, this->m_pReference);
-	m_pContainerFile5554min = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesMin5554, &sCacheDescNearestBigger, nNodeSize * 6, this->m_pReference);
-	m_pContainerFile5454min = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesMin5454, &sCacheDescLarge, nNodeSize * 5, this->m_pReference);
+	m_pContainerRAM6565_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, nNodeSize, this->m_pReference);
+	m_pContainerRAM6555_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, nNodeSize, this->m_pReference);
+	m_pContainerRAM5555_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, nNodeSize, this->m_pReference);
+	m_pContainerRAM5554_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, nNodeSize, this->m_pReference);
+	m_pContainerRAM5454_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, nNodeSize, this->m_pReference);
+	m_pContainerRAM5444_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, nNodeSize, this->m_pReference);
+	m_pContainerRAM4444_n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, nNodeSize, this->m_pReference);
+	m_pContainerRAM6565_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM6555_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM5555_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM5554_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM5454_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM5444_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM4444_2n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM6565_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM6555_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM5555_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM5554_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM5454_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM5444_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM4444_4n = new CBTreeTestArray<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, nNodeSize * 4, this->m_pReference);
+	m_pContainerFile6565min = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesMin6565, nNodeSize * 4, this->m_pReference);
+	m_pContainerFile6555min = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin6555, nNodeSize * 8, this->m_pReference);
+	m_pContainerFile5555min = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin5555, nNodeSize * 7, this->m_pReference);
+	m_pContainerFile5554min = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesMin5554, nNodeSize * 6, this->m_pReference);
+	m_pContainerFile5454min = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesMin5454, nNodeSize * 5, this->m_pReference);
 
-	m_pContainerFile6565default = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesDefault6565, &sCacheDescNearestBigger, nNodeSize * 3, this->m_pReference);
-	m_pContainerFile6555default = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault6555, &sCacheDescNearestBigger, nNodeSize * 2, this->m_pReference);
-	m_pContainerFile5555default = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault5555, &sCacheDescLarge, nNodeSize, this->m_pReference);
-	m_pContainerFile5554default = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesDefault5554, &sCacheDescPageSize, nNodeSize * 8, this->m_pReference);
-	m_pContainerFile5454default = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesDefault5454, &sCacheDescMin, nNodeSize * 7, this->m_pReference);
+	m_pContainerFile6565default = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesDefault6565, nNodeSize * 3, this->m_pReference);
+	m_pContainerFile6555default = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault6555, nNodeSize * 2, this->m_pReference);
+	m_pContainerFile5555default = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault5555, nNodeSize, this->m_pReference);
+	m_pContainerFile5554default = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesDefault5554, nNodeSize * 8, this->m_pReference);
+	m_pContainerFile5454default = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesDefault5454, nNodeSize * 7, this->m_pReference);
 
-	m_pContainerFile6565large = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesLarge6565, &sCacheDescPageSize, nNodeSize * 5, this->m_pReference);
-	m_pContainerFile6555large = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesLarge6555, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerFile5555large = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault5555, &sCacheDescMin, nNodeSize * 3, this->m_pReference);
-	m_pContainerFile5554large = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesDefault5554, &sCacheDescNearestBigger, nNodeSize * 2, this->m_pReference);
-	m_pContainerFile5454large = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesDefault5454, &sCacheDescLarge, nNodeSize, this->m_pReference);
+	m_pContainerFile6565large = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesLarge6565, nNodeSize * 5, this->m_pReference);
+	m_pContainerFile6555large = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesLarge6555, nNodeSize * 4, this->m_pReference);
+	m_pContainerFile5555large = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesLarge5555, nNodeSize * 3, this->m_pReference);
+	m_pContainerFile5554large = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesLarge5554, nNodeSize * 2, this->m_pReference);
+	m_pContainerFile5454large = new CBTreeTestArray<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesLarge5454, nNodeSize, this->m_pReference);
 
 	BTREE_ASSERT (NULL != m_pContainerRAM6565_n, "CBTreeArrayTestWrapper<_t_data, _t_value, _t_ref_container>::init_containers: ERROR: insufficient memory! (m_pContainerRAM6565_n)");
 	BTREE_ASSERT (NULL != m_pContainerRAM6555_n, "CBTreeArrayTestWrapper<_t_data, _t_value, _t_ref_container>::init_containers: ERROR: insufficient memory! (m_pContainerRAM6555_n)");

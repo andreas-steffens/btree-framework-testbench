@@ -2,7 +2,7 @@
 **
 ** file:	btreemaptestbench.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -25,9 +25,15 @@
 
 #include "testbench/application_classes/regression/btreetestmap.h"
 
-#include "testbench/primitives/btreemultimapprimitives.h"
+#include "testbench/primitives/btreecommonprimitives.h"
+//#include "testbench/primitives/btreemultimapprimitives.h"
 
 #include "testbench/common/btreetestcommon.h"
+
+#include "testbench/wrapper_classes/btreemaptestwrapper.h"
+
+#include "testbench/tests/regression/btreemultimaptestbench.h"
+
 #include "specific_data_classes/btreemap.h"
 
 template<class _t_key, class _t_map>
@@ -45,7 +51,16 @@ typedef enum
 	BTREETEST_MAP_STL_IF_VALUE_COMP, 
 	BTREETEST_MAP_STL_IF_SWAP, 
 	BTREETEST_MAP_STL_IF_FIND, 
-	BTREETEST_MAP_STL_IF_LOWER_BOUND_UPPER_BOUND
+	BTREETEST_MAP_STL_IF_LOWER_BOUND_UPPER_BOUND, 
+	BTREETEST_MAP_STL_IF_EMPLACE, 
+	BTREETEST_MAP_STL_IF_EMPLACE_HINT, 
+	BTREETEST_MAP_STL_IF_EMPLACE_HINT_MINOR, 
+	BTREETEST_MAP_STL_IF_EMPLACE_HINT_SIGNIFICANT, 
+	BTREETEST_MAP_STL_IF_EMPLACE_HINT_LARGE, 
+	BTREETEST_MAP_STL_IF_INSERT_HINT, 
+	BTREETEST_MAP_STL_IF_INSERT_HINT_MINOR, 
+	BTREETEST_MAP_STL_IF_INSERT_HINT_SIGNIFICANT, 
+	BTREETEST_MAP_STL_IF_INSERT_HINT_LARGE, 
 } btreetest_map_t;
 
 typedef enum
@@ -134,7 +149,7 @@ void TestBTreeMapSTLifInsertViaIteratorPart (const char *pszTitle, int nArg, uin
 
 	for (i = 0; i < nNumInstances; i++)
 	{
-		multiMapPrim_add (pContainer, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pContainer, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	get_begin (pContainer, sIterBegin);
@@ -189,7 +204,7 @@ void TestBTreeMapSTLifInsertViaIteratorPart (const char *pszTitle, int nArg, uin
 
 	for (i = 0; i < nNumInstances; i++)
 	{
-		multiMapPrim_add (pSrcContainer, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pSrcContainer, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	get_begin (pSrcContainer, sSrcIterBegin);
@@ -219,7 +234,7 @@ void TestBTreeMapSTLifInsertViaIteratorSame (const char *pszTitle, int nArg, uin
 
 	for (i = 0; i < nNumInstances; i++)
 	{
-		multiMapPrim_add (pSrcContainer, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pSrcContainer, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	get_end (pSrcContainer, sSrcIterEnd);
@@ -300,7 +315,7 @@ void TestBTreeMapSTLifInsertViaIteratorPartExtern (const char *pszTitle, int nAr
 
 	for (i = 0; i < nNumInstances; i++)
 	{
-		multiMapPrim_add (pSrcContainer, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pSrcContainer, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	_t_ext_iterator		sExtIterBegin;
@@ -363,7 +378,7 @@ void TestBTreeMapSTLifInsertViaIteratorSameExtern (const char *pszTitle, int nAr
 
 	for (i = 0; i < nNumInstances; i++)
 	{
-		multiMapPrim_add (pSrcContainer, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pSrcContainer, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	get_begin (pSrcContainer, sSrcIterBegin);

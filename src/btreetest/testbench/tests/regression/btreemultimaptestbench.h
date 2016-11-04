@@ -2,7 +2,7 @@
 **
 ** file:	btreemultimaptestbench.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -23,12 +23,16 @@
 
 #include "testbench/application_classes/regression/btreetestmultimap.h"
 
-#include "testbench/primitives/btreemultimapprimitives.h"
+//#include "testbench/primitives/btreemultimapprimitives.h"
+#include "testbench/primitives/btreecommonprimitives.h"
 
 #include "testbench/common/btreetestcommon.h"
-#include "specific_data_classes/btreemultimap.h"
 
 #include "testbench/tests/regression/btreemaptestbench.h"
+
+#include "testbench/wrapper_classes/btreemultimaptestwrapper.h"
+
+#include "specific_data_classes/btreemultimap.h"
 
 template<class _t_key, class _t_map>
 class CBTreeTestBenchMultiMap	:	public ::std::multimap<_t_key, _t_map>
@@ -92,7 +96,16 @@ typedef enum
 	BTREETEST_MULTIMAP_STL_IF_VALUE_COMP, 
 	BTREETEST_MULTIMAP_STL_IF_SWAP, 
 	BTREETEST_MULTIMAP_STL_IF_FIND, 
-	BTREETEST_MULTIMAP_STL_IF_LOWER_BOUND_UPPER_BOUND
+	BTREETEST_MULTIMAP_STL_IF_LOWER_BOUND_UPPER_BOUND, 
+	BTREETEST_MULTIMAP_STL_IF_EMPLACE, 
+	BTREETEST_MULTIMAP_STL_IF_EMPLACE_HINT, 
+	BTREETEST_MULTIMAP_STL_IF_EMPLACE_HINT_MINOR, 
+	BTREETEST_MULTIMAP_STL_IF_EMPLACE_HINT_SIGNIFICANT, 
+	BTREETEST_MULTIMAP_STL_IF_EMPLACE_HINT_LARGE, 
+	BTREETEST_MULTIMAP_STL_IF_INSERT_HINT, 
+	BTREETEST_MULTIMAP_STL_IF_INSERT_HINT_MINOR, 
+	BTREETEST_MULTIMAP_STL_IF_INSERT_HINT_SIGNIFICANT, 
+	BTREETEST_MULTIMAP_STL_IF_INSERT_HINT_LARGE, 
 } btreetest_multimap_t;
 
 template<class _t_container>

@@ -2,7 +2,7 @@
 **
 ** file:	btreeassociativetestwrapper.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -23,6 +23,7 @@ CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::
 	:	m_pReference (NULL)
 	,	m_nNodeSize (nNodeSize)
 	,	m_nPageSize (nPageSize)
+	,	m_nHintVariation (0)
 {
 	m_pReference = new reference_t;
 
@@ -34,6 +35,7 @@ CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::
 	:	m_pReference (NULL)
 	,	m_nNodeSize (rContainer.m_nNodeSize)
 	,	m_nPageSize (rContainer.m_nPageSize)
+	,	m_nHintVariation (0)
 {
 	m_pReference = new reference_t (*rContainer.m_pReference);
 
@@ -238,6 +240,86 @@ typename CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_con
 	this->test ();
 
 	return (sRefIter);
+}
+
+template<class _t_data, class _t_value, class _t_sizetype, class _t_ref_container>
+void CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::insert_hint (const typename CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::value_type &rData)
+{
+	iterator					sRefIter;
+	iterator					sIterBegin;
+	size_type					nRefDiff;
+	size_type					nRefKeyDist;
+	size_type					nDist;
+	uint32_t					i;
+	test_iterator				sTestIter;
+	size_test_type				nTestDiff;
+	size_test_type				nTestKeyDist;
+	value_test_type				sData;
+	test_const_iterator			sCIterTestHint;
+	signed_size_type			nVariation = 0;
+	size_type					nHintVariation;
+	
+	sRefIter = m_pReference->insert (rData);
+
+	nRefDiff = ::std::distance (m_pReference->begin (), sRefIter);
+
+	sRefIter = m_pReference->lower_bound (get_entry_key (rData));
+
+	nRefKeyDist = ::std::distance (m_pReference->begin (), sRefIter);
+
+	nDist = nRefDiff;
+
+	if (generate_rand32 () & 0x1)
+	{
+		nHintVariation = ::std::min<size_type> (nDist, this->m_nHintVariation);
+
+		nVariation = 0 - (generate_rand32 () % (nHintVariation + 1));
+	}
+	else
+	{
+		nHintVariation = ::std::min<size_type> ((this->m_pReference->size () - 1) - nDist, this->m_nHintVariation);
+
+		nVariation = generate_rand32 () % (nHintVariation + 1);
+	}
+
+	nDist += nVariation;
+
+	for (i = 0; i < this->get_num_containers (); i++)
+	{
+		entry_conversion (sData, rData);
+
+		sCIterTestHint = m_ppContainers[i]->cbegin ();
+
+		::std::advance (sCIterTestHint, nDist);
+
+		sCIterTestHint.sync ();
+
+		sTestIter = m_ppContainers[i]->insert (sCIterTestHint, sData);
+
+		nTestDiff = ::std::distance (m_ppContainers[i]->begin (), sTestIter);
+
+		sTestIter = m_ppContainers[i]->lower_bound (get_entry_key (sData));
+
+		nTestKeyDist = ::std::distance (m_ppContainers[i]->begin (), sTestIter);
+
+		if ((nTestDiff != nRefDiff) || (nTestKeyDist != nRefKeyDist))
+		{
+			::std::cerr << "Container returned different iterator offset than reference container" << ::std::endl;
+			::std::cerr << "reference offset:" << nRefDiff << ::std::endl;
+			::std::cerr << "container offset (" << i << "):" << nTestDiff << ::std::endl;
+			::std::cerr << "reference distance:" << nRefKeyDist << ::std::endl;
+			::std::cerr << "container distance (" << i << "):" << nTestKeyDist << ::std::endl;
+			::std::cerr << "writing output to mismatch.html" << ::std::endl << ::std::flush;
+
+			m_ppContainers[i]->show_integrity ("mismatch.html");
+
+			::std::cerr << "completed" << ::std::endl << ::std::flush;
+
+			exit (-1);
+		}
+	}
+
+	this->test ();
 }
 
 template<class _t_data, class _t_value, class _t_sizetype, class _t_ref_container>
@@ -891,6 +973,12 @@ bool CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_contain
 }
 
 template<class _t_data, class _t_value, class _t_sizetype, class _t_ref_container>
+void CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::set_hint_variation (const typename _t_ref_container::size_type nHintVariation)
+{
+	m_nHintVariation = nHintVariation;
+}
+
+template<class _t_data, class _t_value, class _t_sizetype, class _t_ref_container>
 CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>& CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::operator= (const CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container> &rContainer)
 {
 	uint32_t		i;
@@ -949,79 +1037,84 @@ bool CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_contain
 
 	for (i = 0; i < this->get_num_containers (); i++)
 	{
-		test_const_iterator		sTestCIter;
-		test_const_iterator		sExtTestCIter;
-
-		sTestCIter = m_ppContainers[i]->cbegin ();
-		sExtTestCIter = rContainer.m_ppContainers[i]->cbegin ();
-
-		while (sTestCIter != m_ppContainers[i]->cend ())
+		if (*(m_ppContainers[i]) != *(rContainer.m_ppContainers[i]))
 		{
-			value_test_type				sTestEntry (*sTestCIter);
-			value_test_type				sExtTestEntry (*sExtTestCIter);
-
-			if (is_entry_not_equal_to_entry (sTestEntry, sExtTestEntry))
-			{
-				if (get_entry_key (sTestEntry) != get_entry_key (sExtTestEntry))
-				{
-					return (false);
-				}
-				else
-				{
-					test_const_iterator		sTestBeginCIter = m_ppContainers[i]->lower_bound (get_entry_key (sTestEntry));
-					test_const_iterator		sTestEndCIter = m_ppContainers[i]->upper_bound (get_entry_key (sTestEntry));
-					test_const_iterator		sExtTestBeginCIter = rContainer.m_ppContainers[i]->lower_bound (get_entry_key (sTestEntry));
-					test_const_iterator		sExtTestEndCIter = rContainer.m_ppContainers[i]->upper_bound (get_entry_key (sTestEntry));
-
-					size_test_type			nKeySetSize = ::std::distance (sTestBeginCIter, sTestEndCIter);
-					size_test_type			nExtKeySetSize = ::std::distance (sExtTestBeginCIter, sExtTestEndCIter);
-
-					if (nKeySetSize != nExtKeySetSize)
-					{
-						return (false);
-					}
-					else
-					{
-						::std::list<value_test_type>								sList;
-						typename ::std::list<value_test_type>::const_iterator		sListCIter;
-
-						sList.insert (sList.cbegin (), sExtTestBeginCIter, sExtTestEndCIter);
-
-						while (sTestBeginCIter != sTestEndCIter)
-						{
-							sListCIter = sList.cbegin ();
-
-							while (sListCIter != sList.cend ())
-							{
-								if (get_entry_data ((value_test_type &) *sListCIter) == get_entry_data ((value_test_type &) *sTestBeginCIter))
-								{
-									sList.erase (sListCIter);
-
-									break;
-								}
-
-								::std::advance (sListCIter, 1);
-							}
-
-							::std::advance (sTestBeginCIter, 1);
-						}
-
-						if (sList.size () > 0)
-						{
-							return (false);
-						}
-					}
-
-					sExtTestCIter = sExtTestEndCIter;
-					sTestCIter = sTestEndCIter;
-				}
-			}
-			else
-			{
-				::std::advance (sExtTestCIter, 1);
-				::std::advance (sTestCIter, 1);
-			}
+			return (false);
 		}
+
+//		test_const_iterator		sTestCIter;
+//		test_const_iterator		sExtTestCIter;
+//
+//		sTestCIter = m_ppContainers[i]->cbegin ();
+//		sExtTestCIter = rContainer.m_ppContainers[i]->cbegin ();
+//
+//		while (sTestCIter != m_ppContainers[i]->cend ())
+//		{
+//			value_test_type				sTestEntry (*sTestCIter);
+//			value_test_type				sExtTestEntry (*sExtTestCIter);
+//
+//			if (is_entry_not_equal_to_entry (sTestEntry, sExtTestEntry))
+//			{
+//				if (get_entry_key (sTestEntry) != get_entry_key (sExtTestEntry))
+//				{
+//					return (false);
+//				}
+//				else
+//				{
+//					test_const_iterator		sTestBeginCIter = m_ppContainers[i]->lower_bound (get_entry_key (sTestEntry));
+//					test_const_iterator		sTestEndCIter = m_ppContainers[i]->upper_bound (get_entry_key (sTestEntry));
+//					test_const_iterator		sExtTestBeginCIter = rContainer.m_ppContainers[i]->lower_bound (get_entry_key (sTestEntry));
+//					test_const_iterator		sExtTestEndCIter = rContainer.m_ppContainers[i]->upper_bound (get_entry_key (sTestEntry));
+//
+//					size_test_type			nKeySetSize = ::std::distance (sTestBeginCIter, sTestEndCIter);
+//					size_test_type			nExtKeySetSize = ::std::distance (sExtTestBeginCIter, sExtTestEndCIter);
+//
+//					if (nKeySetSize != nExtKeySetSize)
+//					{
+//						return (false);
+//					}
+//					else
+//					{
+//						::std::list<value_test_type>								sList;
+//						typename ::std::list<value_test_type>::const_iterator		sListCIter;
+//
+//						sList.insert (sList.cbegin (), sExtTestBeginCIter, sExtTestEndCIter);
+//
+//						while (sTestBeginCIter != sTestEndCIter)
+//						{
+//							sListCIter = sList.cbegin ();
+//
+//							while (sListCIter != sList.cend ())
+//							{
+//								if (get_entry_data ((value_test_type &) *sListCIter) == get_entry_data ((value_test_type &) *sTestBeginCIter))
+//								{
+//									sList.erase (sListCIter);
+//
+//									break;
+//								}
+//
+//								::std::advance (sListCIter, 1);
+//							}
+//
+//							::std::advance (sTestBeginCIter, 1);
+//						}
+//
+//						if (sList.size () > 0)
+//						{
+//							return (false);
+//						}
+//					}
+//
+//					sExtTestCIter = sExtTestEndCIter;
+//					sTestCIter = sTestEndCIter;
+//				}
+//			}
+//			else
+//			{
+//				::std::advance (sExtTestCIter, 1);
+//				::std::advance (sTestCIter, 1);
+//			}
+//		}
 	}
 
 	return (true);

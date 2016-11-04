@@ -2,7 +2,7 @@
 **
 ** file:	btreetestmap.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -20,6 +20,7 @@
 
 #include <map>
 #include <utility>
+#include <sstream>
 
 #include "testbench/common/btreetestcommon.h"
 
@@ -83,7 +84,7 @@ public:
 	typedef ::std::map<key_type, map_type>							reference_t;
 
 							CBTreeTestMap<_t_datalayerproperties>
-								(_t_datalayerproperties &rDataLayerProperties, const bayerTreeCacheDescription_t *psCacheDescription, sub_node_iter_type nNodeSize, reference_t *pClRefData);
+								(_t_datalayerproperties &rDataLayerProperties, sub_node_iter_type nNodeSize, reference_t *pClRefData);
 
 							CBTreeTestMap<_t_datalayerproperties>
 								(const CBTreeTestMap<_t_datalayerproperties> &rBT, bool bAssign = true);
@@ -97,6 +98,8 @@ public:
 	void					insert					(_t_iterator sItFirst, _t_iterator sItLast);
 
 	iterator				insert					(const value_type &rData);
+
+	iterator				insert					(const_iterator sCIterHint, const value_type &rData);
 
 	iterator				erase					(const_iterator sCIterPos);
 	size_type				erase					(const key_type &rKey);
@@ -125,6 +128,7 @@ protected:
 	reference_t				*m_pClRef;
 
 	bool					m_bAtomicTesting;
+	btree_time_stamp_t		*m_psTestTimeStamp;
 
 public:
 

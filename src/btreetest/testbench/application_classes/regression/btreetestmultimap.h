@@ -2,7 +2,7 @@
 **
 ** file:	btreetestmultimap.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -88,7 +88,7 @@ public:
 	typedef ::std::multimap<key_type, map_type>							reference_t;
 
 							CBTreeTestMultiMap<_t_datalayerproperties>
-								(_t_datalayerproperties &rDataLayerProperties, const bayerTreeCacheDescription_t *psCacheDescription, sub_node_iter_type nNodeSize, reference_t *pClRefData);
+								(_t_datalayerproperties &rDataLayerProperties, sub_node_iter_type nNodeSize, reference_t *pClRefData);
 
 							CBTreeTestMultiMap<_t_datalayerproperties>
 								(const CBTreeTestMultiMap<_t_datalayerproperties> &rBT, bool bAssign = true);
@@ -103,6 +103,8 @@ public:
 	template<class _t_iterator, class _t_ref_iterator>
 	void					insert					(_t_iterator sItFirst, _t_iterator sItLast);
 	iterator				insert					(const value_type &rData);
+
+	iterator				insert					(const_iterator sCIterHint, const value_type &rData);
 
 	iterator				erase					(const_iterator sCIterPos);
 	size_type				erase					(const key_type &rKey);
@@ -129,6 +131,7 @@ protected:
 	reference_t				*m_pClRef;
 
 	bool					m_bAtomicTesting;
+	btree_time_stamp_t		*m_psTestTimeStamp;
 
 public:
 

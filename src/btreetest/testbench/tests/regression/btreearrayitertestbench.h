@@ -2,7 +2,7 @@
 **
 ** file:	btreearrayitertestbench.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -30,6 +30,7 @@
 #include "testbench/primitives/btreearraytestprimitive.h"
 
 #include "btreeiofile.h"
+#include "btreeioram.h"
 
 typedef enum
 {

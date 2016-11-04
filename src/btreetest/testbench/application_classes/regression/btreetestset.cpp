@@ -2,7 +2,7 @@
 **
 ** file:	btreetestset.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -22,19 +22,19 @@ template<class _t_datalayerproperties>
 CBTreeTestSet<_t_datalayerproperties>::CBTreeTestSet
 	(
 		_t_datalayerproperties &rDataLayerProperties, 
-		const bayerTreeCacheDescription_t *psCacheDescription, 
 		typename _t_datalayerproperties::sub_node_iter_type nNodeSize, 
 		typename CBTreeTestSet<_t_datalayerproperties>::reference_t *pClRefData
 	)
 	:	CBTreeSet<uint32_t, _t_datalayerproperties>
 	(
 		rDataLayerProperties, 
-		psCacheDescription, 
 		nNodeSize
 	)
 	,	m_pClRef (pClRefData)
 	,	m_bAtomicTesting (true)
+	,	m_psTestTimeStamp (NULL)
 {
+	m_psTestTimeStamp = new btree_time_stamp_t (this->get_time_stamp ());
 }
 
 template<class _t_datalayerproperties>
@@ -47,7 +47,10 @@ CBTreeTestSet<_t_datalayerproperties>::CBTreeTestSet
 	)
 	,	m_pClRef (NULL)
 	,	m_bAtomicTesting (false)
+	,	m_psTestTimeStamp (NULL)
 {
+	m_psTestTimeStamp = new btree_time_stamp_t (this->get_time_stamp ());
+
 	if (bAssign)
 	{
 		this->_assign (rBT);
@@ -59,6 +62,12 @@ CBTreeTestSet<_t_datalayerproperties>::CBTreeTestSet
 template<class _t_datalayerproperties>
 CBTreeTestSet<_t_datalayerproperties>::~CBTreeTestSet ()
 {
+	if (m_psTestTimeStamp != NULL)
+	{
+		delete m_psTestTimeStamp;
+
+		m_psTestTimeStamp = NULL;
+	}
 }
 
 template<class _t_datalayerproperties>
@@ -128,6 +137,24 @@ typename CBTreeTestSet<_t_datalayerproperties>::iterator
 			exit (-1);
 		}
 	}
+
+	test ();
+
+	return (sIter);
+}
+
+template<class _t_datalayerproperties>
+template<class ..._t_va_args>
+typename CBTreeTestSet<_t_datalayerproperties>::iterator
+	CBTreeTestSet<_t_datalayerproperties>::insert
+	(
+		typename CBTreeTestSet<_t_datalayerproperties>::const_iterator sCIterHint, 
+		_t_va_args && ... rrArgs
+	)
+{
+	iterator					sIter;
+
+	sIter = CBTreeSet_t::insert (sCIterHint, ::std::forward<_t_va_args> (rrArgs) ...);
 
 	test ();
 
@@ -273,11 +300,18 @@ void CBTreeTestSet<_t_datalayerproperties>::test () const
 		return;
 	}
 
+	if (*m_psTestTimeStamp == this->get_time_stamp ())
+	{
+		return;
+	}
+
+	*m_psTestTimeStamp = this->get_time_stamp ();
+
 	typedef typename reference_t::const_iterator	citer_set_t;
 
 	reference_t										sSet;
 	key_type										nKey;
-	key_type										nNextKey;
+	key_type										*pnKey;
 	bool											bBounce;
 	size_type										nTotalCount = 0;
 	value_type										sEntry;
@@ -313,20 +347,20 @@ void CBTreeTestSet<_t_datalayerproperties>::test () const
 
 	if (this->size () > 0)
 	{
-		this->extract_key (&nKey, ((value_type) (*sCIter)));
+		pnKey = this->extract_key (&nKey, ((value_type) (*sCIter)));
 	}
 
 	while (sCIter != sCIterEnd)
 	{
-		if (m_pClRef->count (nKey) != this->count (nKey))
+		if (m_pClRef->count (*pnKey) != this->count (*pnKey))
 		{
 			::std::cerr << ::std::endl;
 			::std::cerr << "number of instances mismatches" << ::std::endl;
-			::std::cerr << "key: " << std::setfill ('0') << std::hex << std::setw (8) << nKey << ::std::endl;
+			::std::cerr << "key: " << std::setfill ('0') << std::hex << std::setw (8) << *pnKey << ::std::endl;
 			::std::cerr << std::setfill (' ') << std::dec << std::setw (0);
 
-			::std::cerr << "count: " << this->count (nKey) << ::std::endl;
-			::std::cerr << "reference: " << m_pClRef->count (nKey) << ::std::endl;
+			::std::cerr << "count: " << this->count (*pnKey) << ::std::endl;
+			::std::cerr << "reference: " << m_pClRef->count (*pnKey) << ::std::endl;
 			
 			::std::cerr << "creating count.html..." << ::std::endl;
 
@@ -337,11 +371,11 @@ void CBTreeTestSet<_t_datalayerproperties>::test () const
 			exit (-1);
 		}
 
-		if (this->count (nKey) == 1)
+		if (this->count (*pnKey) == 1)
 		{
-			sItSetLower = m_pClRef->lower_bound (nKey);
+			sItSetLower = m_pClRef->lower_bound (*pnKey);
 
-			sCIterLower = this->lower_bound (nKey);
+			sCIterLower = this->lower_bound (*pnKey);
 
 			sValue = *sItSetLower;
 
@@ -372,13 +406,13 @@ void CBTreeTestSet<_t_datalayerproperties>::test () const
 		}
 		else
 		{
-			sItSetLower = m_pClRef->lower_bound (nKey);
-			sItSetUpper = m_pClRef->upper_bound (nKey);
+			sItSetLower = m_pClRef->lower_bound (*pnKey);
+			sItSetUpper = m_pClRef->upper_bound (*pnKey);
 
 			sSet.insert<citer_set_t> (sItSetLower, sItSetUpper);
 
-			sCIterLower = this->lower_bound (nKey);
-			sCIterUpper = this->upper_bound (nKey);
+			sCIterLower = this->lower_bound (*pnKey);
+			sCIterUpper = this->upper_bound (*pnKey);
 
 			for (sCIter = sCIterLower; sCIter != sCIterUpper; sCIter++)
 			{
@@ -449,14 +483,12 @@ void CBTreeTestSet<_t_datalayerproperties>::test () const
 			}
 		}
 
-		this->get_next_key (nKey, nNextKey, bBounce);
+		this->get_next_key (*pnKey, *pnKey, bBounce);
 
 		if (bBounce)
 		{
 			break;
 		}
-
-		nKey = nNextKey;
 	}
 	
 	if ((m_pClRef == NULL) && (!this->empty ()))

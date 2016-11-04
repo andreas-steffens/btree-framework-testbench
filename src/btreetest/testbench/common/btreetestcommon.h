@@ -2,7 +2,7 @@
 **
 ** file:	btreetestcommon.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -31,6 +31,11 @@
 
 #include "common/btreecommon.h"
 
+typedef enum
+{
+	SIZE_TYPE_32, 
+	SIZE_TYPE_64
+} size_type_e;
 
 extern uint32_t		g_nDebug;
 
@@ -50,6 +55,14 @@ public:
 					:	::std::pair<_t_key, _t_map> ()
 				{
 
+				};
+
+				CBTreePairTest<_t_key, _t_map> (uint32_t nKey, uint32_t nData, uint32_t nDebug)
+					:	::std::pair<_t_key, _t_map> ()
+				{
+					(typename ::std::remove_const <_t_key>::type &) this->first = nKey;
+					((typename ::std::remove_const <_t_map>::type &) this->second).nData = nData;
+					((typename ::std::remove_const <_t_map>::type &) this->second).nDebug = nDebug;
 				};
 
 				CBTreePairTest<_t_key, _t_map> (const CBTreePairTest<_t_key, _t_map> &rPair)
@@ -247,77 +260,6 @@ void container_insert (::std::vector<::std::pair<typename ::std::add_const<typen
 	}
 }
 
-/*
-template<class _t_iterator>
-void container_insert (::std::vector<typename _t_iterator::value_type> *pContainer, const typename ::std::vector<typename _t_iterator::value_type>::iterator &rItPos, _t_iterator &rItBegin, _t_iterator &rItEnd)
-{
-	typedef typename ::std::vector<typename _t_iterator::value_type>::size_type		size_type;
-	typedef typename _t_iterator::value_type										value_type;
-
-	_t_iterator		rIt;
-	size_type		nSize = pContainer->size ();
-	size_type		nOffset = ::std::distance (pContainer->begin (), rItPos);
-	size_type		nGrow;
-	size_type		i;
-	value_type		*pData;
-
-	nGrow = ::std::distance (rItBegin, rItEnd);
-
-	pContainer->resize (nSize + nGrow);
-
-	pData = pContainer->data ();
-
-	memmove ((void *) &(pData[nOffset + nGrow]), (void *) &(pData[nOffset]), sizeof (value_type) * (nSize - nOffset));
-
-	for (rIt = rItBegin, i = 0; rIt != rItEnd; ::std::advance (rIt, 1), i++)
-	{
-		value_type		sData ((value_type) (*rIt));
-
-		memcpy ((void *) &(pData[nOffset + i]), (void *) &sData, sizeof (value_type));
-	}
-}
-
-template<class _t_iterator>
-void container_insert (::std::vector<typename _t_iterator::value_type> *pContainer, const typename ::std::vector<typename _t_iterator::value_type>::const_iterator &rItPos, _t_iterator &rItBegin, _t_iterator &rItEnd)
-{
-	typedef typename ::std::vector<typename _t_iterator::value_type>::size_type		size_type;
-	typedef typename _t_iterator::value_type										value_type;
-
-	_t_iterator		rIt;
-	size_type		nSize = pContainer->size ();
-	size_type		nOffset = ::std::distance (pContainer->cbegin (), rItPos);
-	size_type		nGrow;
-	size_type		i;
-	value_type		*pData;
-
-	nGrow = ::std::distance (rItBegin, rItEnd);
-
-	pContainer->resize (nSize + nGrow);
-
-	pData = pContainer->data ();
-
-	memmove ((void *) &(pData[nOffset + nGrow]), (void *) &(pData[nOffset]), sizeof (value_type) * (nSize - nOffset));
-
-	for (rIt = rItBegin, i = 0; rIt != rItEnd; ::std::advance (rIt, 1), i++)
-	{
-		value_type		sData ((value_type) (*rIt));
-
-		memcpy ((void *) &(pData[nOffset + i]), (void *) &sData, sizeof (value_type));
-	}
-}
-
-template<class _t_iterator>
-void container_insert (::std::vector<typename _t_iterator::value_type> *pContainer, typename ::std::vector<typename _t_iterator::value_type>::iterator &rItPos, _t_iterator &rItBegin, _t_iterator &rItEnd)
-{
-	container_insert (pContainer, (const typename ::std::vector<typename _t_iterator::value_type>::iterator &) rItPos, rItBegin, rItEnd);
-}
-
-template<class _t_iterator>
-void container_insert (::std::vector<typename _t_iterator::value_type> *pContainer, typename ::std::vector<typename _t_iterator::value_type>::const_iterator &rItPos, _t_iterator &rItBegin, _t_iterator &rItEnd)
-{
-	container_insert (pContainer, (const typename ::std::vector<typename _t_iterator::value_type>::const_iterator &) rItPos, rItBegin, rItEnd);
-}
-*/
 #endif
 
 /************************************************

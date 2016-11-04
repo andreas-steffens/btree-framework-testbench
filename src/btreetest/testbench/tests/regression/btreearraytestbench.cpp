@@ -2,7 +2,7 @@
 **
 ** file:	btreearraytestbench.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -202,6 +202,22 @@ void TestBTreeArrayCopyConstructorTest (_t_container *pClRef, _t_container sClCo
 		::std::cerr << "outputting copied instance to cc_copy.html" << ::std::endl;
 
 		sClCopy.show_integrity ("cc_copy.html");
+
+		exit (-1);
+	}
+
+	arrayPrim_add (&sClCopy, 1, BTREETEST_ARRAY_PRIMITIVE_SEEK_RANDOM);
+
+	if (sClCopy == *pClRef)
+	{
+		::std::cerr << ::std::endl << "ERROR: copied instance is supposed to mismatch reference!" << ::std::endl;
+		::std::cerr << "outputting reference to cc_reference.html" << ::std::endl;
+
+		pClRef->show_integrity ("cc_reference.html");
+
+		::std::cerr << "outputting copied instance to cc_copy_match.html" << ::std::endl;
+
+		sClCopy.show_integrity ("cc_copy_match.html");
 
 		exit (-1);
 	}
@@ -1427,6 +1443,22 @@ void TestBTreeArraySTLifSwap (_t_container *pContainer, typename _t_container::s
 }
 
 template<class _t_container>
+void TestBTreeArraySTLifEmplace (_t_container *pContainer, typename _t_container::size_type nNumEntries)
+{
+	::std::cout << "exercises method compatible to STL interface CBTreeBaseDefaults<>::CBTreeArray<>:: emplace ()" << ::std::endl;
+
+	arrayPrim_emplace (pContainer, nNumEntries, BTREETEST_ARRAY_PRIMITIVE_SEEK_RANDOM);
+}
+
+template<class _t_container>
+void TestBTreeArraySTLifEmplaceBack (_t_container *pContainer, typename _t_container::size_type nNumEntries)
+{
+	::std::cout << "exercises method compatible to STL interface CBTreeBaseDefaults<>::CBTreeArray<>:: emplace_back ()" << ::std::endl;
+
+	arrayPrim_emplace_back (pContainer, nNumEntries);
+}
+
+template<class _t_container>
 void TestBTreeArray (uint32_t nTest, uint32_t nNodeSize, uint32_t nPageSize, _t_container *pArrayWrapper)
 {
 	typename _t_container::size_test_type		sTypeSelect;
@@ -1685,6 +1717,20 @@ void TestBTreeArray (uint32_t nTest, uint32_t nNodeSize, uint32_t nPageSize, _t_
 			break;
 		}
 
+	case BTREETEST_ARRAY_STL_IF_EMPLACE:
+		{
+			TestBTreeArraySTLifEmplace (pArrayWrapper, 64);
+
+			break;
+		}
+
+	case BTREETEST_ARRAY_STL_IF_EMPLACE_BACK	:
+		{
+			TestBTreeArraySTLifEmplaceBack (pArrayWrapper, 64);
+
+			break;
+		}
+	
 	case BTREETEST_ARRAY_SERLIALIZE_ZERO_LENGTH			:
 		{
 			TestBTreeArraySerializeIncomplete (pArrayWrapper, 0, 1, 0);

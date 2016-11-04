@@ -2,7 +2,7 @@
 **
 ** file:	btreesettestbench.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -25,12 +25,17 @@ template<class _t_key>
 class CBTreeTestBenchSet;
 
 #include "testbench/tests/regression/btreemultisettestbench.h"
+#include "testbench/tests/regression/btreemaptestbench.h"
 
 #include "testbench/application_classes/regression/btreetestset.h"
 
-#include "testbench/primitives/btreemultisetprimitives.h"
+//#include "testbench/primitives/btreemultisetprimitives.h"
+#include "testbench/primitives/btreecommonprimitives.h"
 
 #include "testbench/common/btreetestcommon.h"
+
+#include "testbench/wrapper_classes/btreemultisettestwrapper.h"
+
 #include "specific_data_classes/btreeset.h"
 
 typedef enum
@@ -45,7 +50,16 @@ typedef enum
 	BTREETEST_SET_STL_IF_VALUE_COMP, 
 	BTREETEST_SET_STL_IF_SWAP, 
 	BTREETEST_SET_STL_IF_FIND, 
-	BTREETEST_SET_STL_IF_LOWER_BOUND_UPPER_BOUND
+	BTREETEST_SET_STL_IF_LOWER_BOUND_UPPER_BOUND, 
+	BTREETEST_SET_STL_IF_EMPLACE, 
+	BTREETEST_SET_STL_IF_EMPLACE_HINT, 
+	BTREETEST_SET_STL_IF_EMPLACE_HINT_MINOR, 
+	BTREETEST_SET_STL_IF_EMPLACE_HINT_SIGNIFICANT, 
+	BTREETEST_SET_STL_IF_EMPLACE_HINT_LARGE, 
+	BTREETEST_SET_STL_IF_INSERT_HINT, 
+	BTREETEST_SET_STL_IF_INSERT_HINT_MINOR, 
+	BTREETEST_SET_STL_IF_INSERT_HINT_SIGNIFICANT, 
+	BTREETEST_SET_STL_IF_INSERT_HINT_LARGE, 
 } btreetest_set_t;
 
 template<class _t_key>
@@ -125,7 +139,7 @@ void TestBTreeSetSTLifInsertViaIteratorPart (const char *pszTitle, int nArg, uin
 
 	for (i = 0; i < nNumInstances; i++)
 	{
-		multiSetPrim_add (pContainer, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pContainer, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	get_begin (pContainer, sIterBegin);
@@ -180,7 +194,7 @@ void TestBTreeSetSTLifInsertViaIteratorPart (const char *pszTitle, int nArg, uin
 
 	for (i = 0; i < nNumInstances; i++)
 	{
-		multiSetPrim_add (pSrcContainer, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pSrcContainer, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	get_begin (pSrcContainer, sSrcIterBegin);
@@ -210,7 +224,7 @@ void TestBTreeSetSTLifInsertViaIteratorSame (const char *pszTitle, int nArg, uin
 
 	for (i = 0; i < nNumInstances; i++)
 	{
-		multiSetPrim_add (pSrcContainer, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pSrcContainer, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	get_end (pSrcContainer, sSrcIterEnd);
@@ -291,7 +305,7 @@ void TestBTreeSetSTLifInsertViaIteratorPartExtern (const char *pszTitle, int nAr
 
 	for (i = 0; i < nNumInstances; i++)
 	{
-		multiSetPrim_add (pSrcContainer, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pSrcContainer, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	_t_ext_iterator		sExtIterBegin;
@@ -339,7 +353,7 @@ void TestBTreeSetSTLifInsertViaIteratorSameExtern (const char *pszTitle, int nAr
 
 	for (i = 0; i < nNumInstances; i++)
 	{
-		multiSetPrim_add (pSrcContainer, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pSrcContainer, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	get_begin (pSrcContainer, sSrcIterBegin);

@@ -2,7 +2,7 @@
 **
 ** file:	btreemultisettestbench.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -28,9 +28,13 @@ class CBTreeTestBenchMultiSet;
 
 #include "testbench/application_classes/regression/btreetestmultiset.h"
 
-#include "testbench/primitives/btreemultisetprimitives.h"
+//#include "testbench/primitives/btreemultisetprimitives.h"
+#include "testbench/primitives/btreecommonprimitives.h"
 
 #include "testbench/common/btreetestcommon.h"
+
+#include "testbench/wrapper_classes/btreesettestwrapper.h"
+
 #include "specific_data_classes/btreemultiset.h"
 
 template<class _t_key>
@@ -95,7 +99,16 @@ typedef enum
 	BTREETEST_MULTISET_STL_IF_VALUE_COMP, 
 	BTREETEST_MULTISET_STL_IF_SWAP, 
 	BTREETEST_MULTISET_STL_IF_FIND, 
-	BTREETEST_MULTISET_STL_IF_LOWER_BOUND_UPPER_BOUND
+	BTREETEST_MULTISET_STL_IF_LOWER_BOUND_UPPER_BOUND, 
+	BTREETEST_MULTISET_STL_IF_EMPLACE, 
+	BTREETEST_MULTISET_STL_IF_EMPLACE_HINT, 
+	BTREETEST_MULTISET_STL_IF_EMPLACE_HINT_MINOR, 
+	BTREETEST_MULTISET_STL_IF_EMPLACE_HINT_SIGNIFICANT, 
+	BTREETEST_MULTISET_STL_IF_EMPLACE_HINT_LARGE, 
+	BTREETEST_MULTISET_STL_IF_INSERT_HINT, 
+	BTREETEST_MULTISET_STL_IF_INSERT_HINT_MINOR, 
+	BTREETEST_MULTISET_STL_IF_INSERT_HINT_SIGNIFICANT, 
+	BTREETEST_MULTISET_STL_IF_INSERT_HINT_LARGE, 
 } btreetest_multiset_t;
 
 template<class _t_container>

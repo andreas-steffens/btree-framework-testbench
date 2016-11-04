@@ -2,7 +2,7 @@
 **
 ** file:	btreearraytestbench.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -27,6 +27,8 @@
 #include "testbench/common/btreetestcommon.h"
 #include "testbench/application_classes/regression/btreetestarray.h"
 #include "testbench/primitives/btreearraytestprimitive.h"
+
+#include "testbench/wrapper_classes/btreearraytestwrapper.h"
 
 typedef enum
 {
@@ -61,6 +63,8 @@ typedef enum
 	BTREETEST_ARRAY_STL_IF_ERASE_SINGLE, 
 	BTREETEST_ARRAY_STL_IF_ERASE_MULTIPLE, 
 	BTREETEST_ARRAY_STL_IF_SWAP, 
+	BTREETEST_ARRAY_STL_IF_EMPLACE, 
+	BTREETEST_ARRAY_STL_IF_EMPLACE_BACK, 
 	BTREETEST_ARRAY_CODE_COVERAGE_ROOT_MERGE_WITH_LOWER_RIGHT = 2000
 } btreetest_array_e;
 

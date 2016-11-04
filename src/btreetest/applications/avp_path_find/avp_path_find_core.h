@@ -2,7 +2,7 @@
 **
 ** file:	avp_path_find_core.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -294,7 +294,7 @@ public:
 	typedef	typename ::std::make_signed<size_type>::type				difference_type;
 
 	CBayerTree_intrinsic<_t_data, _t_datalayerproperties>
-		(_t_datalayerproperties &rDataLayerProperties, bayerTreeCacheDescription_t *psCacheDescription, sub_node_iter_type nodeSize);
+		(_t_datalayerproperties &rDataLayerProperties, sub_node_iter_type nodeSize);
 
 protected:
 
@@ -316,9 +316,9 @@ protected:
 };
 
 template<class _t_data, class _t_datalayerproperties>
-CBayerTree_intrinsic<_t_data, _t_datalayerproperties>::CBayerTree_intrinsic (_t_datalayerproperties &rDataLayerProperties, bayerTreeCacheDescription_t *psCacheDescription, typename _t_datalayerproperties::sub_node_iter_type nodeSize)
+CBayerTree_intrinsic<_t_data, _t_datalayerproperties>::CBayerTree_intrinsic (_t_datalayerproperties &rDataLayerProperties, typename _t_datalayerproperties::sub_node_iter_type nodeSize)
 	:	CBTreeKeySort <_t_data, _t_data, _t_datalayerproperties>
-		(rDataLayerProperties, psCacheDescription, nodeSize)
+		(rDataLayerProperties, nodeSize)
 {
 }
 
@@ -337,7 +337,7 @@ public:
 
 
 	CBTreeKeySort_AgentStep<_t_datalayerproperties>
-		(_t_datalayerproperties &rDataLayerProperties, bayerTreeCacheDescription_t *psCacheDescription, sub_node_iter_type nodeSize);
+		(_t_datalayerproperties &rDataLayerProperties, sub_node_iter_type nodeSize);
 
 	CBTreeKeySort_AgentStep<_t_datalayerproperties>
 		(CBTreeKeySort_AgentStep<_t_datalayerproperties> &rBT, bool bAssign = true);
@@ -346,9 +346,9 @@ protected:
 };
 
 template<class _t_datalayerproperties>
-CBTreeKeySort_AgentStep<_t_datalayerproperties>::CBTreeKeySort_AgentStep (_t_datalayerproperties &rDataLayerProperties, bayerTreeCacheDescription_t *psCacheDescription, typename _t_datalayerproperties::sub_node_iter_type nodeSize)
+CBTreeKeySort_AgentStep<_t_datalayerproperties>::CBTreeKeySort_AgentStep (_t_datalayerproperties &rDataLayerProperties, typename _t_datalayerproperties::sub_node_iter_type nodeSize)
 	:	CBTreeKeySort <agent_step_t, uint32_t, _t_datalayerproperties>
-		(rDataLayerProperties, psCacheDescription, nodeSize)
+		(rDataLayerProperties, nodeSize)
 {
 }
 

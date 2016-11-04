@@ -2,7 +2,7 @@
 **
 ** file:	btreetestkeysort.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -23,6 +23,7 @@
 #include <fstream>
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 
 #include "testbench/common/btreetestcommon.h"
 
@@ -44,6 +45,17 @@ typedef struct keySortEntry_s
 	uint32_t		nKey;
 	uint32_t		nData;
 	uint32_t		nDebug;
+
+	keySortEntry_s ()
+	{
+	}
+		
+	keySortEntry_s (uint32_t _nKey, uint32_t _nData, uint32_t _nDebug)
+	{
+		nKey = _nKey;
+		nData = _nData;
+		nDebug = _nDebug;
+	}
 
 	operator		const uint32_t ()
 	{
@@ -142,7 +154,7 @@ public:
 	typedef ::std::multimap<key_type, keySortMap_t>					reference_t;
 
 						CBTreeKeySortTest<_t_data, _t_key, _t_datalayerproperties>
-													(_t_datalayerproperties &rDataLayerProperties, const bayerTreeCacheDescription_t *psCacheDescription, sub_node_iter_type nNodeSize, reference_t *pClRefData);
+													(_t_datalayerproperties &rDataLayerProperties, sub_node_iter_type nNodeSize, reference_t *pClRefData);
 
 						CBTreeKeySortTest<_t_data, _t_key, _t_datalayerproperties>
 													(CBTreeKeySortTest<_t_data, _t_key, _t_datalayerproperties> &rBT, bool bAssign = true);
@@ -153,6 +165,9 @@ public:
 	template<class _t_iterator>
 	void				insert						(_t_iterator sItFirst, _t_iterator sItLast);
 	iterator			insert						(const value_type &rData);
+
+	template<class ..._t_va_args>
+	iterator			insert						(const_iterator sCIterHint, _t_va_args && ... rrArgs);
 
 	iterator			erase						(const_iterator sCIterPos);
 	size_type			erase						(const key_type &rKey);
@@ -205,6 +220,7 @@ protected:
 	reference_t			*m_pClRefData;
 
 	bool				m_bAtomicTesting;
+	btree_time_stamp_t	*m_psTestTimeStamp;
 };
 
 template<class _t_datalayerproperties>
@@ -235,7 +251,7 @@ public:
 	typedef ::std::multimap<key_type, map_type>						reference_t;
 
 						CBTreeKeySortTest<keySortEntry_t, uint32_t, _t_datalayerproperties>
-													(_t_datalayerproperties &rDataLayerProperties, const bayerTreeCacheDescription_t *psCacheDescription, sub_node_iter_type nNodeSize, reference_t *pClRefData);
+													(_t_datalayerproperties &rDataLayerProperties, sub_node_iter_type nNodeSize, reference_t *pClRefData);
 
 						CBTreeKeySortTest<keySortEntry_t, uint32_t, _t_datalayerproperties>
 													(CBTreeKeySortTest<keySortEntry_t, uint32_t, _t_datalayerproperties> &rBT, bool bAssign = true);
@@ -246,6 +262,9 @@ public:
 	template<class _t_iterator>
 	void				insert						(_t_iterator sItFirst, _t_iterator sItLast);
 	iterator			insert						(const value_type &rData);
+
+	template<class ..._t_va_args>
+	iterator			insert						(const_iterator sCIterHint, _t_va_args && ... rrArgs);
 
 	iterator			erase						(const_iterator sCIterPos);
 	size_type			erase						(const key_type &rKey);
@@ -295,6 +314,7 @@ protected:
 	reference_t			*m_pClRefData;
 
 	bool				m_bAtomicTesting;
+	btree_time_stamp_t	*m_psTestTimeStamp;
 };
 
 #endif // BTREETESTKEYSORT_H

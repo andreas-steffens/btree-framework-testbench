@@ -2,7 +2,7 @@
 **
 ** file:	btreekeysortitertestbench.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -23,7 +23,9 @@
 #include "testbench/common/btreetestcommon.h"
 #include "testbench/application_classes/regression/btreetestkeysort.h"
 #include "testbench/primitives/btreekeysorttestprimitive.h"
+#include "testbench/primitives/btreecommonprimitives.h"
 
+#include "btreeioram.h"
 #include "btreeiofile.h"
 
 typedef enum

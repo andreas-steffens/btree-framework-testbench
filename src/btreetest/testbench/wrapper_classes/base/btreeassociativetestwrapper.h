@@ -2,7 +2,7 @@
 **
 ** file:	btreeassociativetestwrapper.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -43,6 +43,8 @@ public:
 	typedef typename reference_t::value_type					value_type;
 	typedef typename reference_t::key_type						key_type;
 	typedef typename reference_t::size_type						size_type;
+
+	typedef typename ::std::make_signed<size_type>::type		signed_size_type;
 
 	typedef _t_data												value_test_type;
 	typedef uint32_t											key_test_type;
@@ -89,6 +91,8 @@ public:
 
 	iterator				insert								(const value_type &rData);
 
+	void					insert_hint							(const value_type &rData);
+
 	iterator				erase								(const_iterator sCIterPos);
 	size_type				erase								(key_type &rKey);
 	iterator				erase								(const_iterator sCIterFirst, const_iterator sCIterLast);
@@ -111,6 +115,8 @@ public:
 	void					unload								();
 
 	bool					compare_individual_containers		(const CBTreeAssociativeTestWrapper &rContainer) const;
+
+	void					set_hint_variation					(const size_type nHintVariation);
 
 	CBTreeAssociativeTestWrapper &
 							operator=							(const CBTreeAssociativeTestWrapper &rContainer);
@@ -136,6 +142,8 @@ protected:
 	virtual void			init_containers						(const CBTreeAssociativeTestWrapper &rWrapper) = 0;
 
 	virtual void			transfer_containers					() = 0;
+
+	size_type							m_nHintVariation;
 
 	uint32_t							m_nNodeSize;
 	uint32_t							m_nPageSize;

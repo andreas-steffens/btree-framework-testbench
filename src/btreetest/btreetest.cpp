@@ -2,7 +2,7 @@
 **
 ** file:	btreetest.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -35,49 +35,24 @@
 
 #include <stdint.h>
 
-#include "btreeioram.h"
-#include "btreeiofile.h"
+#include "testbench/sub_division/btreetestsubdivisionkeysort.h"
+#include "testbench/sub_division/btreetestsubdivisionarray.h"
 
-#include "btreearray.h"
+#include "testbench/sub_division/btreetestsubdivisionkeysortiter.h"
+#include "testbench/sub_division/btreetestsubdivisionarrayiter.h"
 
-#include "testbench/application_classes/regression/btreetestarray.h"
-#include "testbench/application_classes/regression/btreetestkeysort.h"
-
-#include "testbench/application_classes/regression/btreetestmultimap.h"
-#include "testbench/application_classes/regression/btreetestmap.h"
-#include "testbench/application_classes/regression/btreetestmultiset.h"
-#include "testbench/application_classes/regression/btreetestset.h"
-
-#include "testbench/tests/regression/btreearraytestbench.h"
-#include "testbench/tests/regression/btreearraytestbench.cpp"
-#include "testbench/tests/regression/btreekeysorttestbench.h"
-#include "testbench/tests/regression/btreekeysorttestbench.cpp"
-
-#include "testbench/tests/regression/btreearrayitertestbench.h"
-#include "testbench/tests/regression/btreearrayitertestbench.cpp"
-#include "testbench/tests/regression/btreekeysortitertestbench.h"
-#include "testbench/tests/regression/btreekeysortitertestbench.cpp"
-
-#include "testbench/tests/regression/btreemultimaptestbench.h"
-#include "testbench/tests/regression/btreemultimaptestbench.cpp"
-#include "testbench/tests/regression/btreemaptestbench.h"
-#include "testbench/tests/regression/btreemaptestbench.cpp"
-#include "testbench/tests/regression/btreemultisettestbench.h"
-#include "testbench/tests/regression/btreemultisettestbench.cpp"
-#include "testbench/tests/regression/btreesettestbench.h"
-#include "testbench/tests/regression/btreesettestbench.cpp"
+#include "testbench/sub_division/btreetestsubdivisionmap.h"
+#include "testbench/sub_division/btreetestsubdivisionmultimap.h"
+#include "testbench/sub_division/btreetestsubdivisionset.h"
+#include "testbench/sub_division/btreetestsubdivisionmultiset.h"
 
 #include "testbench/tests/performance/btreearrayperftestbench.h"
-
-#include "testbench/wrapper_classes/btreearraytestwrapper.h"
-#include "testbench/wrapper_classes/btreekeysorttestwrapper.h"
-
-#include "testbench/wrapper_classes/btreemaptestwrapper.h"
-#include "testbench/wrapper_classes/btreemultimaptestwrapper.h"
-#include "testbench/wrapper_classes/btreesettestwrapper.h"
-#include "testbench/wrapper_classes/btreemultisettestwrapper.h"
+#include "testbench/tests/performance/btreemultimapperftestbench.h"
 
 #include "avp_path_find_core.h"
+
+#include "testbench/examples/example_1_polymorphic_calls.h"
+#include "testbench/examples/example_2_simple_database.h"
 
 using namespace std;
 
@@ -119,11 +94,212 @@ typedef enum
 	APPLICATION_TYPE_AVP
 } application_type_e;
 
-typedef enum
+void print_usage (const char *pszBinary)
 {
-	SIZE_TYPE_32, 
-	SIZE_TYPE_64
-} size_type_e;
+	::std::cerr << "Synopsis" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << pszBinary << " -help | --help | -usage | --usage" << ::std::endl;
+	::std::cerr << pszBinary << " -type <test type> [-app <app name>] -test <test number> [-sizetype <address space bit width>]" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "-type           selects the container type or application test mode" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "                stl-set         - selects STL interface equivalent set container types" << ::std::endl;
+	::std::cerr << "                stl-multiset    - selects STL interface equivalent multiset container types" << ::std::endl;
+	::std::cerr << "                stl-map         - selects STL interface equivalent map container types" << ::std::endl;
+	::std::cerr << "                stl-multimap    - selects STL interface equivalent multimap container types" << ::std::endl;
+	::std::cerr << "                array           - selects array container types" << ::std::endl;
+	::std::cerr << "                keysort         - selects keysort container types" << ::std::endl;
+	::std::cerr << "                array-iter      - selects array iterators" << ::std::endl;
+	::std::cerr << "                keysort-iter    - selects keysort iterators" << ::std::endl;
+	::std::cerr << "                app             - switches test bench to application testing mode" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "-app            selects an application name for real world testing" << ::std::endl;
+	::std::cerr << "                purposes, in case the application testing mode has" << ::std::endl;
+	::std::cerr << "                been selected" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "                avp             - AVP path find application" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "-test           selects the test number of the test to be executed" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "                The test list can be found at the end of this document." << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "-sizetype       selects the bit width of size_type of the target containers" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "                32              - size_type is set to uint32_t (default)" << ::std::endl;
+	::std::cerr << "                64              - size_type is set to uint64_t (default)" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "                This setting is ineffective in application testing mode." << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "stl-set, stl-multiset, stl-map and stl-multimap" << ::std::endl;
+	::std::cerr << "0       - test exercises assignment operator of selected container type" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "1000    - test exercises interface method insert (const value_type &)" << ::std::endl;
+	::std::cerr << "1001    - test exercises interface method insert<iterator> (iterator &, iterator &)" << ::std::endl;
+	::std::cerr << "1002    - test exercises interface method erase (const_iterator &) " << ::std::endl;
+	::std::cerr << "1003    - test exercises interface method erase (const key_value &)" << ::std::endl;
+	::std::cerr << "1004    - test exercises interface method erase (const_iterator &, const_iterator &)" << ::std::endl;
+	::std::cerr << "1005    - test exercises interface method key_comp ()" << ::std::endl;
+	::std::cerr << "1006    - test exercises interface method value_comp ()" << ::std::endl;
+	::std::cerr << "1007    - test exercises interface method swap (container &)" << ::std::endl;
+	::std::cerr << "1008    - test exercises interface method find (const key_type &)" << ::std::endl;
+	::std::cerr << "1009    - test exercises interface methods lower_bound (const key_type &) and upper_bound (const key_type &)" << ::std::endl;
+	::std::cerr << "1010    - test exercises interface method emplace<_t_va_args> (_t_va_args && ...)" << ::std::endl;
+	::std::cerr << "1011    - test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with perfect hint" << ::std::endl;
+	::std::cerr << "1012    - test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with near perfect hint" << ::std::endl;
+	::std::cerr << "1013    - test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with potentially bad hint" << ::std::endl;
+	::std::cerr << "1014    - test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with terrible hint" << ::std::endl;
+	::std::cerr << "1015    - test exercises interface method insert (const_iterator &, const value_type &) with perfect hint" << ::std::endl;
+	::std::cerr << "1016    - test exercises interface method insert (const_iterator &, const value_type &) with near perfect hint" << ::std::endl;
+	::std::cerr << "1017    - test exercises interface method insert (const_iterator &, const value_type &) with potentially bad hint" << ::std::endl;
+	::std::cerr << "1018    - test exercises interface method insert (const_iterator &, const value_type &) with terrible hint" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "array" << ::std::endl;
+	::std::cerr << "0       - test adds data at the beginning and removes data at the end" << ::std::endl;
+	::std::cerr << "1       - test adds data at the beginning and removes data at the end on a smaller scale" << ::std::endl;
+	::std::cerr << "2       - test adds data at the end and removes data at the beginning" << ::std::endl;
+	::std::cerr << "3       - test adds data at the end and removes data at the beginning on a smaller scale" << ::std::endl;
+	::std::cerr << "4       - test adds data at a random positions and removes data at random positions" << ::std::endl;
+	::std::cerr << "5       - test adds data at a random positions and removes data at random positions on a smaller scale" << ::std::endl;
+	::std::cerr << "6       - test exercises if container is still ready to operate once interface method clear () has been called" << ::std::endl;
+	::std::cerr << "7       - test exercises scenario where data is rapidly inserted and removed again" << ::std::endl;
+	::std::cerr << "8       - test exercises if container is still ready to operate once interface method unload () has been called" << ::std::endl;
+	::std::cerr << "9       - test exercises if container is still ready to operate once interface debug method show_integrity () has been called" << ::std::endl;
+	::std::cerr << "10      - test exercises copy constructor of container type" << ::std::endl;
+	::std::cerr << "11      - test exercises overloaded assignment operator of container type" << ::std::endl;
+	::std::cerr << "12      - test exercises overloaded subscript operator of container type" << ::std::endl;
+	::std::cerr << "13      - test reads all data from container using method serialize ()" << ::std::endl;
+	::std::cerr << "14      - test reads data from half of a random node using method serialize ()" << ::std::endl;
+	::std::cerr << "15      - test reads data from part of a random node using method serialize ()" << ::std::endl;
+	::std::cerr << "16      - test reads data from from container using method serialize (), while parameters exceeding container size" << ::std::endl;
+	::std::cerr << "17      - test exercises situation where a container is self-referenced using iterators" << ::std::endl;
+	::std::cerr << "18      - test reads no data from container using method serialize () with read length set to zero" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "1000    - test exercises interface method assign (const size_type, const value_type &)" << ::std::endl;
+	::std::cerr << "1001    - test exercises interface method assign<iterator> (iterator &, iterator &)" << ::std::endl;
+	::std::cerr << "1002    - test exercises interface method push_back () and pop_back ()" << ::std::endl;
+	::std::cerr << "1003    - test exercises interface method insert (const_iterator, const size_type &, const value_type &)" << ::std::endl;
+	::std::cerr << "1004    - test exercises interface method insert<iterator> (const_iterator, iterator &, iterator &)" << ::std::endl;
+	::std::cerr << "1005    - test exercises interface method insert (const_iterator, iterator &, iterator &) on a large container via self-reference" << ::std::endl;
+	::std::cerr << "1006    - test exercises interface method insert (const_iterator, const_iterator &, const_iterator &) on a large container via self-reference" << ::std::endl;
+	::std::cerr << "1007    - test exercises interface method insert (const_iterator, reverse_iterator &, reverse_iterator &) on a large container via self-reference" << ::std::endl;
+	::std::cerr << "1008    - test exercises interface method insert (const_iterator, const_reverse_iterator &, const_reverse_iterator &) on a large container via self-reference" << ::std::endl;
+	::std::cerr << "1009    - test exercises interface method erase (const key_value &)" << ::std::endl;
+	::std::cerr << "1010    - test exercises interface method erase (const_iterator &, const_iterator &)" << ::std::endl;
+	::std::cerr << "1011    - test exercises interface method swap (container &)" << ::std::endl;
+	::std::cerr << "1012    - test exercises interface method emplace<_t_va_args> (const_iterator &, _t_va_args && ...)" << ::std::endl;
+	::std::cerr << "1013    - test exercises interface method emplace_back<_t_va_args> (_t_va_args && ...)" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "2000    - code coverage test where data is removed resulting in nodes being merged, while the right node has a lower id than the left node" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "keysort" << ::std::endl;
+	::std::cerr << "0       - test adds data at the beginning and removes data at the end" << ::std::endl;
+	::std::cerr << "1       - test adds data at the beginning and removes data at the end on a smaller scale" << ::std::endl;
+	::std::cerr << "2       - test adds data at the end and removes data at the beginning" << ::std::endl;
+	::std::cerr << "3       - test adds data at the end and removes data at the beginning on a smaller scale" << ::std::endl;
+	::std::cerr << "4       - test adds data at a random positions and removes data at random positions" << ::std::endl;
+	::std::cerr << "5       - test adds data at a random positions and removes data at random positions on a smaller scale" << ::std::endl;
+	::std::cerr << "6       - test exercises if container is still ready to operate once interface method clear () has been called" << ::std::endl;
+	::std::cerr << "7       - test exercises scenario where data is rapidly inserted and removed again" << ::std::endl;
+	::std::cerr << "8       - test exercises if container is still ready to operate once interface method unload () has been called" << ::std::endl;
+	::std::cerr << "9       - test exercises interface method erase (const_iterator &), while removing specific instance of a key set" << ::std::endl;
+	::std::cerr << "10      - test exercises if container is still ready to operate once interface debug method show_integrity () has been called" << ::std::endl;
+	::std::cerr << "11      - test exercises copy constructor of container type" << ::std::endl;
+	::std::cerr << "12      - test exercises overloaded assignment operator of container type" << ::std::endl;
+	::std::cerr << "13      - test exercises overloaded assignment operator of container type, while making sure key sets remain in order" << ::std::endl;
+	::std::cerr << "14      - test reads all data from container using method serialize ()" << ::std::endl;
+	::std::cerr << "15      - test reads data from half of a random node using method serialize ()" << ::std::endl;
+	::std::cerr << "16      - test reads data from part of a random node using method serialize ()" << ::std::endl;
+	::std::cerr << "17      - test reads data from from container using method serialize (), while parameters exceeding container size" << ::std::endl;
+	::std::cerr << "18      - test reads all data from container using method serialize (), while making sure key sets remain in order" << ::std::endl;
+	::std::cerr << "19      - test reads data from half of a random node using method serialize (), while making sure key sets remain in order" << ::std::endl;
+	::std::cerr << "20      - test reads data from part of a random node using method serialize (), while making sure key sets remain in order" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "1000    - test exercises interface method insert (const value_type &)" << ::std::endl;
+	::std::cerr << "1001    - test exercises interface method insert<iterator> (iterator &, iterator &)" << ::std::endl;
+	::std::cerr << "1002    - test exercises interface method erase (const_iterator &) " << ::std::endl;
+	::std::cerr << "1003    - test exercises interface method erase (const key_value &)" << ::std::endl;
+	::std::cerr << "1004    - test exercises interface method erase (const_iterator &, const_iterator &)" << ::std::endl;
+	::std::cerr << "1005    - test exercises interface method swap (container &)" << ::std::endl;
+	::std::cerr << "1006    - test exercises interface method find (const key_type &)" << ::std::endl;
+	::std::cerr << "1007    - test exercises interface methods lower_bound (const key_type &) and upper_bound (const key_type &)" << ::std::endl;
+	::std::cerr << "1008    - test exercises interface method emplace<_t_va_args> (_t_va_args && ...)" << ::std::endl;
+	::std::cerr << "1009    - test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with perfect hint" << ::std::endl;
+	::std::cerr << "1010    - test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with near perfect hint" << ::std::endl;
+	::std::cerr << "1011    - test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with potentially bad hint" << ::std::endl;
+	::std::cerr << "1012    - test exercises interface method emplace_hint<_t_va_args> (const_iterator &, _t_va_args && ...) with terrible hint" << ::std::endl;
+	::std::cerr << "1013    - test exercises interface method insert (const_iterator &, const value_type &) with perfect hint" << ::std::endl;
+	::std::cerr << "1014    - test exercises interface method insert (const_iterator &, const value_type &) with near perfect hint" << ::std::endl;
+	::std::cerr << "1015    - test exercises interface method insert (const_iterator &, const value_type &) with potentially bad hint" << ::std::endl;
+	::std::cerr << "1016    - test exercises interface method insert (const_iterator &, const value_type &) with terrible hint" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "2000    - code coverage test which exercises corner cases in method determine_position ()" << ::std::endl;
+	::std::cerr << "2001    - code coverage test which exercises corner cases in method find_first_key ()" << ::std::endl;
+	::std::cerr << "2002    - code coverage test which exercises corner cases in method get_init_pos_of_key () on leaf node" << ::std::endl;
+	::std::cerr << "2003    - code coverage test which exercises corner cases in overloaded method set_iter_data ()" << ::std::endl;
+	::std::cerr << "2004    - code coverage test which exercises corner cases in overloaded compare operator" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "array-iter" << ::std::endl;
+	::std::cerr << "0       - test exercises increment operator" << ::std::endl;
+	::std::cerr << "1       - test exercises increment operator on a small scale" << ::std::endl;
+	::std::cerr << "2       - test exercises decrement operator" << ::std::endl;
+	::std::cerr << "3       - test exercises decrement operator on a small scale" << ::std::endl;
+	::std::cerr << "4       - test exercises arithmetic operator+ with one of the operands being the result instance (a = a + n)" << ::std::endl;
+	::std::cerr << "5       - test exercises arithmetic operator+ with one of the operands being the result instance on a small scale" << ::std::endl;
+	::std::cerr << "6       - test exercises arithmetic operator- with one of the operands being the result instance (a = a - n)" << ::std::endl;
+	::std::cerr << "7       - test exercises arithmetic operator- with one of the operands being the result instance on a small scale" << ::std::endl;
+	::std::cerr << "8       - test exercises arithmetic operator+ with different step sizes versus different node sizes" << ::std::endl;
+	::std::cerr << "9       - test exercises arithmetic operator- with different step sizes versus different node sizes" << ::std::endl;
+	::std::cerr << "10      - test exercises dereference operator*" << ::std::endl;
+	::std::cerr << "11      - test exercises subscript operator[size_type]" << ::std::endl;
+	::std::cerr << "12      - test exercises subscript operator[int]" << ::std::endl;
+	::std::cerr << "13      - test exercises compound operator+= (size_type)" << ::std::endl;
+	::std::cerr << "14      - test exercises compound operator+= (int)" << ::std::endl;
+	::std::cerr << "15      - test exercises compound operator+= (iterator)" << ::std::endl;
+	::std::cerr << "16      - test exercises arithmetic operator+ and operator- with none of the operands being the result instance (r = a + b) or (r = a - b)" << ::std::endl;
+	::std::cerr << "17      - test exercises all compare operators (<, >, <=, >=, ==, !=)" << ::std::endl;
+	::std::cerr << "18      - test exercises interface method swap (iterator &) with parameter from a different container" << ::std::endl;
+	::std::cerr << "19      - test exercises interface method swap (iterator &) with parameter from the same different container" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "2000    - code coverage test exercises compare operator with same instance as an input" << ::std::endl;
+	::std::cerr << "2001    - code coverage test exercises situation where the time stamp is up to date after a re-assignment" << ::std::endl;
+	::std::cerr << "2002    - code coverage test exercises situation where the time stamp is up to date after a re-register" << ::std::endl;
+	::std::cerr << "2003    - code coverage test exercises situation where an uninitialised iterator is assigned to another instance" << ::std::endl;
+	::std::cerr << "2004    - code coverage test exercises all begin () and end () methods" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "keysort-iter" << ::std::endl;
+	::std::cerr << "0       - test exercises increment operator" << ::std::endl;
+	::std::cerr << "1       - test exercises increment operator on a small scale" << ::std::endl;
+	::std::cerr << "2       - test exercises decrement operator" << ::std::endl;
+	::std::cerr << "3       - test exercises decrement operator on a small scale" << ::std::endl;
+	::std::cerr << "4       - test exercises arithmetic operator+ with one of the operands being the result instance (a = a + n)" << ::std::endl;
+	::std::cerr << "5       - test exercises arithmetic operator+ with one of the operands being the result instance on a small scale" << ::std::endl;
+	::std::cerr << "6       - test exercises arithmetic operator- with one of the operands being the result instance (a = a - n)" << ::std::endl;
+	::std::cerr << "7       - test exercises arithmetic operator- with one of the operands being the result instance on a small scale" << ::std::endl;
+	::std::cerr << "8       - test exercises arithmetic operator+ with different step sizes versus different node sizes" << ::std::endl;
+	::std::cerr << "9       - test exercises arithmetic operator- with different step sizes versus different node sizes" << ::std::endl;
+	::std::cerr << "10      - test exercises subscript operator[size_type]" << ::std::endl;
+	::std::cerr << "11      - test exercises subscript operator[int]" << ::std::endl;
+	::std::cerr << "12      - test exercises compound operator+= (size_type)" << ::std::endl;
+	::std::cerr << "13      - test exercises compound operator+= (int)" << ::std::endl;
+	::std::cerr << "14      - test exercises compound operator+= (iterator)" << ::std::endl;
+	::std::cerr << "15      - test exercises arithmetic operator+ and operator- with none of the operands being the result instance (r = a + b) or (r = a - b)" << ::std::endl;
+	::std::cerr << "16      - test exercises all compare operators (<, >, <=, >=, ==, !=)" << ::std::endl;
+	::std::cerr << "17      - test exercises interface method swap (iterator &) with parameter from the same different container" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "app" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "avp-application" << ::std::endl;
+	::std::cerr << "0       - full path resolution" << ::std::endl;
+	::std::cerr << "1       - speed run full path resolution" << ::std::endl;
+	::std::cerr << "2       - parallel / part path resolution" << ::std::endl;
+}
 
 int main (int argc, char **argv)
 {
@@ -137,11 +313,13 @@ int main (int argc, char **argv)
 	int						i;
 	uint32_t				nTestNum = ~0x0;
 	uint32_t				nNodeSize = 2;
+	uint64_t				nProblemSize = 10000000;
+	uint32_t				nProblemBias = 1;
 	btreeType_e				eBtreeType = BTREETYPE_NOT_SPECIFIED;
 	application_type_e		eApplicationType = APPLICATION_TYPE_NOT_SPECIFIED;
 	bool					bPerformanceTest = false;
 	size_type_e				eSizeType =	SIZE_TYPE_64;
-
+	
 #if defined (_MSC_VER)
 
 	SYSTEM_INFO				systemInfo;
@@ -153,18 +331,6 @@ int main (int argc, char **argv)
 #elif defined(__GNUC__) || defined(__GNUG__)
 
 	uint32_t				nPageSize = (uint64_t) getpagesize ();
-
-#endif
-
-	bayerTreeCacheDescription_t				sCacheDesc;
-
-#if defined (_DEBUG)
-
-	sCacheDesc.nMinNumberOfBytesPerSuperBlock = nPageSize;
-
-#else
-
-	sCacheDesc.nMinNumberOfBytesPerSuperBlock = nPageSize * 16;
 
 #endif
 
@@ -220,6 +386,10 @@ int main (int argc, char **argv)
 			{
 				eBtreeType = BTREETYPE_STL_SET;
 			}
+			else if (strcmp (argv[i], "example") == 0)
+			{
+				eBtreeType = BTREETYPE_EXAMPLES;
+			}
 			else
 			{
 				cerr << "ERROR: Unknown btree type specified!" << endl;
@@ -273,36 +443,43 @@ int main (int argc, char **argv)
 							break;
 			}
 		}
+		else if (strcmp (argv[i], "-problemsize") == 0)
+		{
+			i++;
+
+			sscanf (argv[i], "%llu", &nProblemSize);
+		}
+		else if (strcmp (argv[i], "-problembias") == 0)
+		{
+			i++;
+
+			sscanf (argv[i], "%lu", &nProblemBias);
+		}
 		else if (strcmp (argv[i], "-performance") == 0)
 		{
 			bPerformanceTest = true;
 		}
+		else if (
+					(strcmp (argv[i], "-help") == 0) || 
+					(strcmp (argv[i], "--help") == 0) || 
+					(strcmp (argv[i], "-usage") == 0) || 
+					(strcmp (argv[i], "--usage") == 0)
+				)
+		{
+			print_usage (argv[0]);
+
+			return (0);
+		}
 		else
 		{
-			break;
+			::std::cerr << "Unknown argument: " << argv[i] << ::std::endl;
+			::std::cerr << ::std::endl;
+
+			print_usage (argv[0]);
+
+			return (-1);
 		}
 	}
-
-	CBTreeKeySortTestWrapper<keySortEntry_t, keySortEntry_t, uint32_t, keysort_reference_t>	*pKeySortWrapper32 = NULL;
-	CBTreeKeySortTestWrapper<keySortEntry_t, keySortEntry_t, uint64_t, keysort_reference_t>	*pKeySortWrapper64 = NULL;
-
-	CBTreeKeySortTestWrapper<keySortPair_t, keySortPair_t, uint32_t, keysort_reference_t>	*pKeySortPairWrapper32 = NULL;
-	CBTreeKeySortTestWrapper<keySortPair_t, keySortPair_t, uint64_t, keysort_reference_t>	*pKeySortPairWrapper64 = NULL;
-
-	CBTreeMapTestWrapper<mapPair_t, ::std::pair<uint32_t, mapMap_t>, uint32_t, map_reference_t>	*pMapWrapper32 = NULL;
-	CBTreeMapTestWrapper<mapPair_t, ::std::pair<uint32_t, mapMap_t>, uint64_t, map_reference_t>	*pMapWrapper64 = NULL;
-
-	CBTreeMultiMapTestWrapper<multiMapPair_t, ::std::pair<uint32_t, multiMapMap_t>, uint32_t, multimap_reference_t>	*pMultiMapWrapper32 = NULL;
-	CBTreeMultiMapTestWrapper<multiMapPair_t, ::std::pair<uint32_t, multiMapMap_t>, uint64_t, multimap_reference_t>	*pMultiMapWrapper64 = NULL;
-
-	CBTreeSetTestWrapper<uint32_t, uint32_t, uint32_t, set_reference_t>				*pSetWrapper32 = NULL;
-	CBTreeSetTestWrapper<uint32_t, uint32_t, uint64_t, set_reference_t>				*pSetWrapper64 = NULL;
-
-	CBTreeMultiSetTestWrapper<uint32_t, uint32_t, uint32_t, multiset_reference_t>	*pMultiSetWrapper32 = NULL;
-	CBTreeMultiSetTestWrapper<uint32_t, uint32_t, uint64_t, multiset_reference_t>	*pMultiSetWrapper64 = NULL;
-
-	CBTreeArrayTestWrapper<arrayEntry_t, uint32_t, ::std::list<arrayEntry_t> >		*pArrayWrapper32 = NULL;
-	CBTreeArrayTestWrapper<arrayEntry_t, uint64_t, ::std::list<arrayEntry_t> >		*pArrayWrapper64 = NULL;
 
 	try
 	{
@@ -314,7 +491,7 @@ int main (int argc, char **argv)
 
 											break;
 
-			case BTREETYPE_ARRAY		:	TestArrayPerf (nTestNum);
+			case BTREETYPE_ARRAY		:	TestArrayPerf (nTestNum, nProblemSize, nProblemBias);
 
 											break;
 
@@ -343,7 +520,7 @@ int main (int argc, char **argv)
 
 											break;
 
-			case BTREETYPE_STL_MULTIMAP	:	
+			case BTREETYPE_STL_MULTIMAP	:	TestMultiMapPerf (nTestNum, nProblemSize, nProblemBias);
 
 											break;
 
@@ -372,44 +549,14 @@ int main (int argc, char **argv)
 			{
 			case BTREETYPE_KEY_SORT		:	
 			{
-				switch (eSizeType)
-				{
-				case SIZE_TYPE_32	:	TestBTreeKeySort (nTestNum, nNodeSize, nPageSize, pKeySortWrapper32, pKeySortPairWrapper32);
-
-										break;
-
-				case SIZE_TYPE_64	:	TestBTreeKeySort (nTestNum, nNodeSize, nPageSize, pKeySortWrapper64, pKeySortPairWrapper64);
-
-										break;
-
-				default				:	::std::cerr << "ERROR: size type not specified or not supported!" << ::std::endl;
-
-										return (-1);
-
-										break;
-				}
+				TestBTreeKeySortSubDivision (nTestNum, nNodeSize, nPageSize, eSizeType);
 				
 				break;
 			}
 
 			case BTREETYPE_ARRAY		:	
 			{
-				switch (eSizeType)
-				{
-				case SIZE_TYPE_32	:	TestBTreeArray (nTestNum, nNodeSize, nPageSize, pArrayWrapper32);
-
-										break;
-
-				case SIZE_TYPE_64	:	TestBTreeArray (nTestNum, nNodeSize, nPageSize, pArrayWrapper64);
-
-										break;
-
-				default				:	::std::cerr << "ERROR: size type not specified or not supported!" << ::std::endl;
-
-										return (-1);
-
-										break;
-				}
+				TestBTreeArraySubDivision (nTestNum, nNodeSize, nPageSize, eSizeType);
 				
 				break;
 			}
@@ -423,8 +570,22 @@ int main (int argc, char **argv)
 											break;
 
 			case BTREETYPE_EXAMPLES		:	
+				switch (nTestNum)
+				{
+					case	0:
 
-											break;
+					example_1_polymorphic_calls ();
+
+					break;
+
+					case	1:
+
+					example_2_simple_database ();
+
+					break;
+				}
+
+				break;
 
 			case BTREETYPE_APPLICATION	:	
 				switch (eApplicationType)
@@ -461,132 +622,42 @@ int main (int argc, char **argv)
 
 			case BTREETYPE_KEY_SORT_ITERATOR	:
 			{
-				switch (eSizeType)
-				{
-				case SIZE_TYPE_32	:	TestBTreeKeySortIter<uint32_t> (nTestNum, nNodeSize, nPageSize);
-
-										break;
-
-				case SIZE_TYPE_64	:	TestBTreeKeySortIter<uint64_t> (nTestNum, nNodeSize, nPageSize);
-
-										break;
-
-				default				:	::std::cerr << "ERROR: size type not specified or not supported!" << ::std::endl;
-
-										return (-1);
-
-										break;
-				}
+				TestBTreeKeySortIterSubDivision (nTestNum, nNodeSize, nPageSize, eSizeType);
 				
 				break;
 			}
 
 			case BTREETYPE_ARRAY_ITERATOR:	
 			{
-				switch (eSizeType)
-				{
-				case SIZE_TYPE_32	:	TestBTreeArrayIter<uint32_t> (nTestNum, nNodeSize, nPageSize);
-
-										break;
-
-				case SIZE_TYPE_64	:	TestBTreeArrayIter<uint64_t> (nTestNum, nNodeSize, nPageSize);
-
-										break;
-
-				default				:	::std::cerr << "ERROR: size type not specified or not supported!" << ::std::endl;
-
-										return (-1);
-
-										break;
-				}
+				TestBTreeArrayIterSubDivision (nTestNum, nNodeSize, nPageSize, eSizeType);
 				
 				break;
 			}
 
 			case BTREETYPE_STL_MULTIMAP:	
 			{
-				switch (eSizeType)
-				{
-				case SIZE_TYPE_32	:	TestBTreeSTLmultiMap (nTestNum, nNodeSize, nPageSize, pMultiMapWrapper32);
-
-										break;
-
-				case SIZE_TYPE_64	:	TestBTreeSTLmultiMap (nTestNum, nNodeSize, nPageSize, pMultiMapWrapper64);
-
-										break;
-
-				default				:	::std::cerr << "ERROR: size type not specified or not supported!" << ::std::endl;
-
-										return (-1);
-
-										break;
-				}
+				TestBTreeMultiMapSubDivision (nTestNum, nNodeSize, nPageSize, eSizeType);
 				
 				break;
 			}
 
 			case BTREETYPE_STL_MAP		:	
 			{
-				switch (eSizeType)
-				{
-				case SIZE_TYPE_32	:	TestBTreeSTLmap (nTestNum, nNodeSize, nPageSize, pMapWrapper32);
-
-										break;
-
-				case SIZE_TYPE_64	:	TestBTreeSTLmap (nTestNum, nNodeSize, nPageSize, pMapWrapper64);
-
-										break;
-
-				default				:	::std::cerr << "ERROR: size type not specified or not supported!" << ::std::endl;
-
-										return (-1);
-
-										break;
-				}
+				TestBTreeMapSubDivision (nTestNum, nNodeSize, nPageSize, eSizeType);
 				
 				break;
 			}
 
 			case BTREETYPE_STL_MULTISET:
 			{
-				switch (eSizeType)
-				{
-				case SIZE_TYPE_32	:	TestBTreeSTLmultiSet (nTestNum, nNodeSize, nPageSize, pMultiSetWrapper32);
-
-										break;
-
-				case SIZE_TYPE_64	:	TestBTreeSTLmultiSet (nTestNum, nNodeSize, nPageSize, pMultiSetWrapper64);
-
-										break;
-
-				default				:	::std::cerr << "ERROR: size type not specified or not supported!" << ::std::endl;
-
-										return (-1);
-
-										break;
-				}
+				TestBTreeMultiSetSubDivision (nTestNum, nNodeSize, nPageSize, eSizeType);
 				
 				break;
 			}
 
 			case BTREETYPE_STL_SET:
 			{
-				switch (eSizeType)
-				{
-				case SIZE_TYPE_32	:	TestBTreeSTLset (nTestNum, nNodeSize, nPageSize, pSetWrapper32);
-
-										break;
-
-				case SIZE_TYPE_64	:	TestBTreeSTLset (nTestNum, nNodeSize, nPageSize, pSetWrapper64);
-
-										break;
-
-				default				:	::std::cerr << "ERROR: size type not specified or not supported!" << ::std::endl;
-
-										return (-1);
-
-										break;
-				}
+				TestBTreeSetSubDivision (nTestNum, nNodeSize, nPageSize, eSizeType);
 
 				break;
 			}

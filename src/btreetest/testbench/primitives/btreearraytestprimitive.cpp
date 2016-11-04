@@ -2,7 +2,7 @@
 **
 ** file:	btreearraytestprimitive.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -78,6 +78,95 @@ void arrayPrim_add (_t_container *pContainer, typename _t_container::size_type n
 	}
 
 	::std::cout << "insert: " << i << " / " << nEntries << ::std::endl;
+}
+
+template<class _t_container>
+void arrayPrim_emplace (_t_container *pContainer, typename _t_container::size_type nEntries, btreetest_array_primitive_seek_e eWhere)
+{
+	typedef typename _t_container::const_iterator			citer_t;
+	typedef typename _t_container::size_type				size_type;
+	typedef typename _t_container::value_type				value_type;
+
+	size_type		nPos;
+	size_type		i;
+	value_type		sData;
+	citer_t			sCIter;
+
+	for (i = 0; i < nEntries; i++)
+	{
+		::std::cout << "emplace: " << i << " / " << nEntries << "\r" << ::std::flush;
+
+		sData.nDebug = g_nDebug;
+		sData.nData = generate_rand32 ();
+
+		g_nDebug++;
+
+		switch (eWhere)
+		{
+		case BTREETEST_ARRAY_PRIMITIVE_SEEK_BEGIN		:
+			{
+				nPos = 0;
+
+				break;
+			}
+
+		case BTREETEST_ARRAY_PRIMITIVE_SEEK_END		:
+			{
+				nPos = pContainer->size ();
+				
+				break;
+			}
+
+		case BTREETEST_ARRAY_PRIMITIVE_SEEK_RANDOM	:
+			{
+				nPos = generate_rand64 () % (pContainer->size () + 1);
+
+				break;
+			}
+
+		default									:
+			{
+				::std::cerr << "ERROR: arrayPrim_emplace: eWhere corrupted or not set!" << ::std::endl;
+
+				exit (-1);
+
+				break;
+			}
+		}
+
+		sCIter = pContainer->cbegin ();
+
+		::std::advance (sCIter, nPos);
+
+		pContainer->emplace (sCIter, sData);
+	}
+
+	::std::cout << "emplace: " << i << " / " << nEntries << ::std::endl;
+}
+
+template<class _t_container>
+void arrayPrim_emplace_back (_t_container *pContainer, typename _t_container::size_type nEntries)
+{
+	typedef typename _t_container::const_iterator			citer_t;
+	typedef typename _t_container::size_type				size_type;
+	typedef typename _t_container::value_type				value_type;
+
+	size_type		i;
+	value_type		sData;
+
+	for (i = 0; i < nEntries; i++)
+	{
+		::std::cout << "emplace back: " << i << " / " << nEntries << "\r" << ::std::flush;
+
+		sData.nDebug = g_nDebug;
+		sData.nData = generate_rand32 ();
+
+		g_nDebug++;
+
+		pContainer->emplace_back (sData);
+	}
+
+	::std::cout << "emplace back: " << i << " / " << nEntries << ::std::endl;
 }
 
 template<class _t_container>

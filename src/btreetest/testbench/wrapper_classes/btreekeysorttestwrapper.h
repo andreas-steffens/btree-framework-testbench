@@ -2,7 +2,7 @@
 **
 ** file:	btreekeysorttestwrapper.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -18,6 +18,7 @@
 
 #include <sstream>
 #include <vector>
+#include <algorithm>
 
 #include <stdint.h>
 
@@ -53,6 +54,8 @@ public:
 	typedef typename reference_t::key_type						key_type;
 	typedef typename reference_t::size_type						size_type;
 
+	typedef typename ::std::make_signed<size_type>::type		signed_size_type;
+
 	typedef _t_data												value_test_type;
 	typedef uint32_t											key_test_type;
 	typedef _t_sizetype											size_test_type;
@@ -81,9 +84,15 @@ public:
 	template<class _t_iterator>
 	void					insert								(_t_iterator sIterFirst, _t_iterator sIterLast);
 	iterator				insert								(const value_type &rData);
+
+	void					insert_hint							(const value_type &rData);
 	
 	template<class _t_iterator, class _t_test_iterator>
 	void					insert_self_reference				(_t_iterator sIterFirst, _t_iterator sIterLast, _t_test_iterator &rIterTest);
+
+	void					emplace								(const value_type &rData);
+	
+	void					emplace_hint						(const value_type &rData);
 
 protected:
 

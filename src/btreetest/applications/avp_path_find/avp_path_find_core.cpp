@@ -2,7 +2,7 @@
 **
 ** file:	avp_path_find_core.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -1508,7 +1508,6 @@ int avp_path_find_core (int nTestNum, const uint32_t nNodeSize, bool bPrintStati
 #else
 
 	CBTreeIOpropertiesRAM <>			clBTreeRAMIOproperties;
-	bayerTreeCacheDescription_t			sCacheDesc;
 	
 #endif
 
@@ -1519,13 +1518,6 @@ int avp_path_find_core (int nTestNum, const uint32_t nNodeSize, bool bPrintStati
 
 	field_t								*psField;
 
-#if defined (USE_STL)
-#else
-
-	sCacheDesc.nMinNumberOfBytesPerSuperBlock = 4096;
-
-#endif
-
 	g_bPrintStatistics = bPrintStatistics;
 	
 #if defined (USE_STL)
@@ -1534,7 +1526,7 @@ int avp_path_find_core (int nTestNum, const uint32_t nNodeSize, bool bPrintStati
 	
 #else
 
-	psOccupation = new multiset_agent_t (clBTreeRAMIOproperties, &sCacheDesc, nNodeSize);
+	psOccupation = new multiset_agent_t (clBTreeRAMIOproperties, nNodeSize);
 
 #endif
 
@@ -1551,7 +1543,7 @@ int avp_path_find_core (int nTestNum, const uint32_t nNodeSize, bool bPrintStati
 	
 #else
 
-	psAgentList = new set_type_intrinsic_t (clBTreeRAMIOproperties, &sCacheDesc, nNodeSize);
+	psAgentList = new set_type_intrinsic_t (clBTreeRAMIOproperties, nNodeSize);
 
 #endif
 
@@ -1568,7 +1560,7 @@ int avp_path_find_core (int nTestNum, const uint32_t nNodeSize, bool bPrintStati
 	
 #else
 
-	psAgentStepLists = new multiset_agent_step_t (clBTreeRAMIOproperties, &sCacheDesc, nNodeSize);
+	psAgentStepLists = new multiset_agent_step_t (clBTreeRAMIOproperties, nNodeSize);
 
 #endif
 
@@ -1585,7 +1577,7 @@ int avp_path_find_core (int nTestNum, const uint32_t nNodeSize, bool bPrintStati
 	
 #else
 
-	psStepList = new vector_pos_t (clBTreeRAMIOproperties, &sCacheDesc, nNodeSize);
+	psStepList = new vector_pos_t (clBTreeRAMIOproperties, nNodeSize);
 
 #endif
 

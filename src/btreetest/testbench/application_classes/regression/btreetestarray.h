@@ -2,7 +2,7 @@
 **
 ** file:	btreetestarray.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -30,6 +30,18 @@ class CBTreeArrayTestSubscriptAccessWrapper;
 
 typedef struct arrayEntry_s
 {
+	arrayEntry_s ()
+	{
+		nData;
+		nDebug;
+	}
+	
+	arrayEntry_s (uint32_t _nData, uint32_t _nDebug)
+	{
+		nData = _nData;
+		nDebug = _nDebug;
+	}
+
 	uint32_t		nData;
 	uint32_t		nDebug;
 
@@ -75,10 +87,10 @@ public:
 	typedef std::list<value_type>									reference_t;
 	
 						CBTreeTestArray<_t_datalayerproperties>
-													(_t_datalayerproperties &rDataLayerProperties, const bayerTreeCacheDescription_t *psCacheDescription, sub_node_iter_type nNodeSize, reference_t *pClRef);
+													(_t_datalayerproperties &rDataLayerProperties, sub_node_iter_type nNodeSize, reference_t *pClRef);
 
 						CBTreeTestArray<_t_datalayerproperties>
-													(CBTreeTestArray<_t_datalayerproperties> &rBT, bool bAssign);
+													(CBTreeTestArray<_t_datalayerproperties> &rBT, bool bAssign = true);
 
 						~CBTreeTestArray<_t_datalayerproperties>
 													();
@@ -126,6 +138,7 @@ protected:
 	reference_t			*m_pClRef;
 
 	bool				m_bAtomicTesting;
+	btree_time_stamp_t	*m_psTestTimeStamp;
 };
 
 #endif // BTREETESTARRAY_H

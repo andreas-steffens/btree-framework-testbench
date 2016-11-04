@@ -2,7 +2,7 @@
 **
 ** file:	btreetestmultiset.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -20,6 +20,7 @@
 
 #include <set>
 #include <utility>
+#include <sstream>
 
 #include "testbench/common/btreetestcommon.h"
 
@@ -76,7 +77,7 @@ public:
 	typedef ::std::multiset<key_type>									reference_t;
 
 							CBTreeTestMultiSet<_t_datalayerproperties>
-								(_t_datalayerproperties &rDataLayerProperties, const bayerTreeCacheDescription_t *psCacheDescription, sub_node_iter_type nNodeSize, reference_t *pClRefData);
+								(_t_datalayerproperties &rDataLayerProperties, sub_node_iter_type nNodeSize, reference_t *pClRefData);
 
 							CBTreeTestMultiSet<_t_datalayerproperties>
 								(const CBTreeTestMultiSet<_t_datalayerproperties> &rBT, bool bAssign = true);
@@ -93,6 +94,9 @@ public:
 	void					insert					(_t_iterator sItFirst, _t_iterator sItLast);
 	
 	iterator				insert					(const value_type &rData);
+
+	template<class ..._t_va_args>
+	iterator				insert					(const_iterator sCIterHint, _t_va_args && ... rrArgs);
 
 	iterator				erase					(const_iterator sCIterPos);
 	size_type				erase					(const key_type &rKey);
@@ -121,6 +125,7 @@ protected:
 	reference_t				*m_pClRef;
 
 	bool					m_bAtomicTesting;
+	btree_time_stamp_t		*m_psTestTimeStamp;
 
 public:
 

@@ -2,7 +2,7 @@
 **
 ** file:	btreearraytestwrapper.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -107,6 +107,10 @@ public:
 
 	template<class _t_iterator>
 	void						insert_via_self_reference		(const_iterator sCIterPos, _t_iterator &rItFirst, _t_iterator &rItLast);
+
+	void						emplace							(const_iterator sCIterPos, const value_type &rData);
+	
+	void						emplace_back					(const value_type &rData);
 
 	iterator					erase							(const_iterator sCIterPos);
 	iterator					erase							(const_iterator sCIterFirst, const_iterator sCIterLast);

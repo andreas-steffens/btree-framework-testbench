@@ -2,7 +2,7 @@
 **
 ** file:	btreemaptestbench.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -27,7 +27,7 @@ void TestBTreeMapSTLifAssignmentOperator (_t_map *pClM, typename _t_map::size_ty
 	
 	::std::cout << "exercises assignment operator compatible to STL interface CBTreeMap<>:: operator= (CBTreeMap<> &)" << ::std::endl;
 
-	multiMapPrim_add (pClM, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClM, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	sClMM = *pClM;
 
@@ -47,7 +47,7 @@ void TestBTreeMapSTLifInsert (_t_map *pClM, typename _t_map::size_type nNumEntri
 
 	::std::cout << "CBTreeMap::insert (const valuetype &) is exercised" << ::std::endl;
 
-	multiMapPrim_add (pClM, nNumEntries, nLastSeed, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClM, nNumEntries, nLastSeed, BTREETEST_KEY_GENERATION_RANDOM);
 }
 
 template<class _t_map>
@@ -65,7 +65,7 @@ void TestBTreeMapSTLifEraseViaIterator (_t_map *pClM, typename _t_map::size_type
 	
 	::std::cout << "exercises method compatible to STL interface CBTreeMap<>:: erase (const_iterator)" << ::std::endl;
 
-	multiMapPrim_add (pClM, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClM, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	while (pClM->size () > 0)
 	{
@@ -109,7 +109,7 @@ void TestBTreeMapSTLifEraseViaKey (_t_map *pClM, typename _t_map::size_type nNum
 	{
 		nLastKey = 0;
 
-		multiMapPrim_add (pClM, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pClM, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	while (pClM->size () > 0)
@@ -161,7 +161,7 @@ void TestBTreeMapSTLifEraseViaIteratorMultiple (_t_map *pClM, typename _t_map::s
 	{
 		nLastKey = 0;
 
-		multiMapPrim_add (pClM, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pClM, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	while (pClM->size () > 0)
@@ -224,7 +224,7 @@ void TestBTreeMapSTLifKeyComp (_t_map *pClM, typename _t_map::size_type nNumEntr
 	
 	::std::cout << "exercises method compatible to STL interface CBTreeMap<>:: key_comp ()" << ::std::endl;
 
-	multiMapPrim_add (pClM, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClM, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	sIterBegin = pClM->begin ();
 	sIterEnd = pClM->end ();
@@ -267,7 +267,7 @@ void TestBTreeMapSTLifValueComp (_t_map *pClM, typename _t_map::size_type nNumEn
 	
 	::std::cout << "exercises method compatible to STL interface CBTreeMap<>:: value_comp ()" << ::std::endl;
 
-	multiMapPrim_add (pClM, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClM, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	sIterBegin = pClM->begin ();
 	sIterEnd = pClM->end ();
@@ -306,7 +306,7 @@ void TestBTreeMapSTLifSwap (_t_map *pClM, typename _t_map::size_type nNumEntries
 
 	::std::cout << "exercises method compatible to STL interface CBTreeMap<>:: swap (CBTreeMap &)" << ::std::endl;
 
-	multiMapPrim_add (pClM, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClM, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	sClMapRef.insert (pClM->cbegin (), pClM->cend ());
 
@@ -317,7 +317,7 @@ void TestBTreeMapSTLifSwap (_t_map *pClM, typename _t_map::size_type nNumEntries
 		exit (-1);
 	}
 
-	multiMapPrim_add (&sClMapTarget, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (&sClMapTarget, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	sCIterBegin = sClMapTarget.cbegin ();
 	sCIterEnd = sClMapTarget.cend ();
@@ -377,7 +377,7 @@ void TestBTreeMapSTLifFind (_t_map *pClM, typename _t_map::size_type nNumEntries
 	
 	::std::cout << "exercises method compatible to STL interface CBTreeMap<>:: find (const _t_keytype &)" << ::std::endl;
 
-	multiMapPrim_add (pClM, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_ASCEND_KEY);
+	associative_container_add_primitive (pClM, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_ASCEND);
 
 	for (sCIter = pClM->cbegin (); sCIter != pClM->cend (); sCIter++)
 	{
@@ -437,7 +437,7 @@ void TestBTreeMapSTLifLowerBoundUpperBound (_t_map *pClM, typename _t_map::size_
 	{
 		nLastKey = 1;
 
-		multiMapPrim_add (pClM, nNumEntries, nLastKey, BTREETEST_MULTIMAP_PRIMITIVE_ASCEND_KEY);
+		associative_container_add_primitive (pClM, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_ASCEND);
 	}
 
 	for (i = 0; i < nNumEntries; i++)
@@ -489,6 +489,36 @@ void TestBTreeMapSTLifLowerBoundUpperBound (_t_map *pClM, typename _t_map::size_
 
 		exit (-1);
 	}
+}
+
+template<class _t_map>
+void TestBTreeMapSTLifEmplace (_t_map *pClM, typename _t_map::size_type nNumEntries)
+{
+	uint32_t		nLastKey = 1;
+
+	::std::cout << "exercises method compatible to STL interface CBTreeMap<>:: emplace ()" << ::std::endl;
+
+	associative_container_emplace_primitive (pClM, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
+}
+
+template<class _t_map>
+void TestBTreeMapSTLifEmplaceHint (_t_map *pClM, typename _t_map::size_type nNumEntries, typename _t_map::size_type nHintVariation)
+{
+	uint32_t		nLastKey = 1;
+
+	::std::cout << "exercises method compatible to STL interface CBTreeMap<>:: emplace_hint () with hint variation set to " << nHintVariation << ::std::endl;
+
+	associative_container_emplace_hint_primitive (pClM, nNumEntries, nHintVariation, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
+}
+
+template<class _t_map>
+void TestBTreeMapSTLifInsertHint (_t_map *pClM, typename _t_map::size_type nNumEntries, typename _t_map::size_type nHintVariation)
+{
+	uint32_t		nLastKey = 1;
+
+	::std::cout << "exercises method compatible to STL interface CBTreeMap<>:: insert (hint) with hint variation set to " << nHintVariation << ::std::endl;
+
+	associative_container_insert_hint_primitive (pClM, nNumEntries, nHintVariation, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 }
 
 template<class _t_container>
@@ -585,6 +615,70 @@ void TestBTreeSTLmap (uint32_t nTestNum, uint32_t nNodeSize, uint32_t nPageSize,
 	case BTREETEST_MAP_STL_IF_LOWER_BOUND_UPPER_BOUND	:
 		{
 			TestBTreeMapSTLifLowerBoundUpperBound (pMapWrapper, 64, 5);
+
+			break;
+		}
+	
+		
+	case BTREETEST_MAP_STL_IF_EMPLACE	:
+		{
+			TestBTreeMapSTLifEmplace (pMapWrapper, 64);
+
+			break;
+		}
+	
+	case BTREETEST_MAP_STL_IF_EMPLACE_HINT	:
+		{
+			TestBTreeMapSTLifEmplaceHint (pMapWrapper, 64, 0);
+
+			break;
+		}
+	
+	case BTREETEST_MAP_STL_IF_EMPLACE_HINT_MINOR	:
+		{
+			TestBTreeMapSTLifEmplaceHint (pMapWrapper, 64, 1);
+
+			break;
+		}
+	
+	case BTREETEST_MAP_STL_IF_EMPLACE_HINT_SIGNIFICANT	:
+		{
+			TestBTreeMapSTLifEmplaceHint (pMapWrapper, 64, 6);
+
+			break;
+		}
+	
+	case BTREETEST_MAP_STL_IF_EMPLACE_HINT_LARGE	:
+		{
+			TestBTreeMapSTLifEmplaceHint (pMapWrapper, 64, 64);
+
+			break;
+		}
+	
+	case BTREETEST_MAP_STL_IF_INSERT_HINT	:
+		{
+			TestBTreeMapSTLifInsertHint (pMapWrapper, 64, 0);
+
+			break;
+		}
+	
+	case BTREETEST_MAP_STL_IF_INSERT_HINT_MINOR	:
+		{
+			TestBTreeMapSTLifInsertHint (pMapWrapper, 64, 1);
+
+			break;
+		}
+	
+	case BTREETEST_MAP_STL_IF_INSERT_HINT_SIGNIFICANT	:
+		{
+			TestBTreeMapSTLifInsertHint (pMapWrapper, 64, 6);
+
+			break;
+		}
+	
+	case BTREETEST_MAP_STL_IF_INSERT_HINT_LARGE	:
+		{
+			TestBTreeMapSTLifInsertHint (pMapWrapper, 64, 64);
 
 			break;
 		}

@@ -2,7 +2,7 @@
 **
 ** file:	btreemultisetprimitives.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -13,7 +13,7 @@
 
 #ifndef BTREEMULTISETPRIMITIVES_CPP
 #define BTREEMULTISETPRIMITIVES_CPP
-
+/*
 #include "btreemultisetprimitives.h"
-
+*/
 #endif // BTREEMULTISETPRIMITIVES_CPP

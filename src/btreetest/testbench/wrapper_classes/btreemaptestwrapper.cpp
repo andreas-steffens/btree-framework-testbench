@@ -2,7 +2,7 @@
 **
 ** file:	btreemaptestwrapper.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -59,44 +59,44 @@ void CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::ins
 
 	this->m_pReference->insert (sIterFirst, sIterLast);
 
-	m_pContainerRAM6565_n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM6555_n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5555_n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5554_n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5454_n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5444_n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM4444_n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM6565_2n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM6555_2n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5555_2n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5554_2n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5454_2n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5444_2n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM4444_2n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM6565_4n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM6555_4n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5555_4n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5554_4n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5454_4n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM5444_4n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerRAM4444_4n->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile6565min->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile6555min->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile5555min->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile5554min->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile5454min->insert (sIterFirst, sIterLast); i++;
+	m_pContainerRAM6565_n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM6555_n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5555_n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5554_n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5454_n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5444_n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM4444_n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM6565_2n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM6555_2n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5555_2n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5554_2n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5454_2n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5444_2n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM4444_2n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM6565_4n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM6555_4n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5555_4n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5554_4n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5454_4n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM5444_4n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerRAM4444_4n->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile6565min->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile6555min->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile5555min->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile5554min->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile5454min->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
 
-	m_pContainerFile6565default->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile6555default->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile5555default->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile5554default->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile5454default->insert (sIterFirst, sIterLast); i++;
+	m_pContainerFile6565default->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile6555default->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile5555default->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile5554default->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile5454default->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
 
-	m_pContainerFile6565large->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile6555large->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile5555large->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile5554large->insert (sIterFirst, sIterLast); i++;
-	m_pContainerFile5454large->insert (sIterFirst, sIterLast); i++;
+	m_pContainerFile6565large->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile6555large->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile5555large->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile5554large->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
+	m_pContainerFile5454large->template insert<_t_iterator> (sIterFirst, sIterLast); i++;
 
 	BTREE_ASSERT (i == this->get_num_containers (), "CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::insert<_t_iterator>: ERROR: Unexpected number of test containers!");
 
@@ -116,6 +116,15 @@ template<class _t_data, class _t_value, class _t_sizetype, class _t_ref_containe
 typename CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::iterator CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::insert (const typename CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::value_type &rData)
 {
 	return (CBTreeAssociativeTestWrapper_t::insert (rData));
+}
+
+template<class _t_data, class _t_value, class _t_sizetype, class _t_ref_container>
+void CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::insert_hint
+	(
+		const typename CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::value_type &rData
+	)
+{
+	CBTreeAssociativeTestWrapper_t::insert_hint (rData);
 }
 
 template<class _t_data, class _t_value, class _t_sizetype, class _t_ref_container>
@@ -143,44 +152,44 @@ void CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::ins
 
 	this->m_pReference->insert (sCIterRefBegin, sCIterRefEnd);
 
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6565_n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6555_n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5555_n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5554_n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5454_n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5444_n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM4444_n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6565_2n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6555_2n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5555_2n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5554_2n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5454_2n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5444_2n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM4444_2n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6565_4n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6555_4n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5555_4n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5554_4n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5454_4n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5444_4n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM4444_4n->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6565min->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6555min->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5555min->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5554min->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5454min->insert (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6565_n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6555_n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5555_n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5554_n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5454_n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5444_n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM4444_n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6565_2n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6555_2n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5555_2n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5554_2n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5454_2n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5444_2n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM4444_2n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6565_4n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM6555_4n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5555_4n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5554_4n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5454_4n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM5444_4n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerRAM4444_4n->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6565min->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6555min->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5555min->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5554min->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5454min->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
 
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6565default->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6555default->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5555default->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5554default->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5454default->insert (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6565default->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6555default->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5555default->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5554default->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5454default->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
 
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6565large->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6555large->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5555large->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5554large->insert (sIterTestFirst, sIterTestLast); i++;
-	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5454large->insert (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6565large->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile6555large->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5555large->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5554large->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
+	get_begin (this->m_ppContainers[i], sIterTestFirst); sIterTestLast = sIterTestFirst; ::std::advance (sIterTestFirst, nFirst); ::std::advance (sIterTestLast, nLast); m_pContainerFile5454large->template insert<_t_test_iterator> (sIterTestFirst, sIterTestLast); i++;
 
 	BTREE_ASSERT (i == this->get_num_containers (), "CBTreeAssociativeTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::insert<_t_iterator>: ERROR: Unexpected number of test containers!");
 
@@ -243,6 +252,155 @@ void CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::tes
 	test_one_container_insert (&sExtOriginal, pExtContainer, nDist, nFirst, nLast, rExtPos, bRefIterConst, bRefIterReverse, m_pContainerFile5454large); i++;
 
 	BTREE_ASSERT (i == this->get_num_containers (), "CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::test_all_containers_insert: ERROR: Unexpected number of containers has been exercised!");
+}
+
+template<class _t_data, class _t_value, class _t_sizetype, class _t_ref_container>
+template<class ..._t_va_args>
+void CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::emplace (_t_va_args && ... rrArgs)
+{
+	uint32_t								i = 0;
+	_t_data									sInputData;
+	typename _t_ref_container::value_type	sRefData;
+
+	new (&sInputData) _t_data (::std::forward<_t_va_args> (rrArgs) ...);
+
+	entry_conversion (sRefData, sInputData);
+
+	this->m_pReference->emplace (sRefData);
+
+	m_pContainerRAM6565_n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM6555_n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5555_n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5554_n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5454_n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5444_n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM4444_n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM6565_2n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM6555_2n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5555_2n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5554_2n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5454_2n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5444_2n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM4444_2n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM6565_4n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM6555_4n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5555_4n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5554_4n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5454_4n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM5444_4n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerRAM4444_4n->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile6565min->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile6555min->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile5555min->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile5554min->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile5454min->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+
+	m_pContainerFile6565default->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile6555default->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile5555default->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile5554default->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile5454default->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+
+	m_pContainerFile6565large->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile6555large->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile5555large->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile5554large->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+	m_pContainerFile5454large->emplace (::std::forward<_t_va_args> (rrArgs) ...); i++;
+
+	BTREE_ASSERT (i == this->get_num_containers (), "CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::emplace<>: ERROR: Unexpected number of test containers!");
+
+	this->test ();	
+}
+
+template<class _t_data, class _t_value, class _t_sizetype, class _t_ref_container>
+template<class ..._t_va_args>
+void CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::emplace_hint
+	(
+		_t_va_args && ... rrArgs
+	)
+{
+	uint32_t								i = 0;
+	_t_data									sInputData;
+	value_type								sRefData;
+	::std::pair<iterator, bool>				sPairHint;
+	iterator								sIterHint;
+	iterator								sIterBegin;
+	size_type								nDist;
+	test_const_iterator						sCIterTestHint;
+	signed_size_type						nVariation = 0;
+	size_type								nHintVariation;
+	
+	new (&sInputData) _t_data (::std::forward<_t_va_args> (rrArgs) ...);
+
+	entry_conversion (sRefData, sInputData);
+
+	sPairHint = this->m_pReference->emplace (sRefData);
+
+	sIterHint = sPairHint.first;
+
+	sIterBegin = this->m_pReference->begin ();
+
+	nDist = ::std::distance (sIterBegin, sIterHint);
+
+	if (generate_rand32 () & 0x1)
+	{
+		nHintVariation = ::std::min<size_type> (nDist, this->m_nHintVariation);
+
+		nVariation = 0 - (generate_rand32 () % (nHintVariation + 1));
+	}
+	else
+	{
+		nHintVariation = ::std::min<size_type> ((this->m_pReference->size () - 1) - nDist, this->m_nHintVariation);
+
+		nVariation = generate_rand32 () % (nHintVariation + 1);
+	}
+
+	nDist += nVariation;
+	
+	sCIterTestHint = m_pContainerRAM6565_n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM6565_n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM6555_n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM6555_n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5555_n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5555_n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5554_n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5554_n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5454_n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5454_n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5444_n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5444_n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM4444_n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM4444_n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+
+	sCIterTestHint = m_pContainerRAM6565_2n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM6565_2n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM6555_2n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM6555_2n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5555_2n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5555_2n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5554_2n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5554_2n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5454_2n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5454_2n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5444_2n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5444_2n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM4444_2n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM4444_2n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM6565_4n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM6565_4n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM6555_4n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM6555_4n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5555_4n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5555_4n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5554_4n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5554_4n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5454_4n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5454_4n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM5444_4n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM5444_4n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerRAM4444_4n->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerRAM4444_4n->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+
+	sCIterTestHint = m_pContainerFile6565min->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile6565min->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile6555min->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile6555min->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile5555min->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile5555min->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile5554min->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile5554min->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile5454min->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile5454min->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+
+	sCIterTestHint = m_pContainerFile6565default->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile6565default->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile6555default->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile6555default->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile5555default->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile5555default->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile5554default->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile5554default->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile5454default->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile5454default->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+
+	sCIterTestHint = m_pContainerFile6565large->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile6565large->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile6555large->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile6555large->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile5555large->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile5555large->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile5554large->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile5554large->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+	sCIterTestHint = m_pContainerFile5454large->cbegin (); ::std::advance (sCIterTestHint, nDist); sCIterTestHint.sync (); m_pContainerFile5454large->emplace_hint (sCIterTestHint, ::std::forward<_t_va_args> (rrArgs) ...); i++;
+
+	BTREE_ASSERT (i == this->get_num_containers (), "CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::emplace_hint<>: ERROR: Unexpected number of test containers!");
+
+	this->test ();
 }
 
 template<class _t_data, class _t_value, class _t_sizetype, class _t_ref_container>
@@ -321,62 +479,65 @@ void CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::ini
 	CBTreeIOpropertiesRAM<size_test_type, uint32_t, uint16_t, uint32_t, uint16_t>		sRAMprop5454;
 	CBTreeIOpropertiesRAM<size_test_type, uint32_t, uint16_t, uint16_t, uint16_t>		sRAMprop5444;
 	CBTreeIOpropertiesRAM<size_test_type, uint16_t, uint16_t, uint16_t, uint16_t>		sRAMprop4444;
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesMin6565 ("./", 1);
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin6555 ("./", 1);
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin5555 ("./", 1);
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesMin5554 ("./", 1);
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesMin5454 ("./", 1);
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesDefault6565 ("./");
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault6555 ("./");
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault5555 ("./");
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesDefault5554 ("./");
-	CBTreeIOpropertiesFile<size_test_type, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesDefault5454 ("./");
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesLarge6565 ("./", 16777216);
-	CBTreeIOpropertiesFile<size_test_type, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesLarge6555 ("./", 16777216);
-	bayerTreeCacheDescription_t															sCacheDescPageSize = {nPageSize};
-	bayerTreeCacheDescription_t															sCacheDescMin = {1};
-	bayerTreeCacheDescription_t															sCacheDescNearestBigger = {nPageSize * 2 / 3};
-	bayerTreeCacheDescription_t															sCacheDescLarge = {nPageSize * 16};
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesMin6565 ("./", 1, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin6555 ("./", 1, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin5555 ("./", 1, 1);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesMin5554 ("./", 1, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesMin5454 ("./", 1, nPageSize * 16);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesDefault6565 ("./", 1048576, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault6555 ("./", 1048576, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault5555 ("./", 1048576, nPageSize * 16);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesDefault5554 ("./", 1048576, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesDefault5454 ("./", 1048576, 1);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesLarge6565 ("./", 16777216, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesLarge6555 ("./", 16777216, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesLarge5555 ("./", 1048576, 1);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesLarge5554 ("./", 1048576, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesLarge5454 ("./", 1048576, nPageSize * 16);
+//	btree_cache_description_t															sCacheDescPageSize = {nPageSize};
+//	btree_cache_description_t															sCacheDescMin = {1};
+//	btree_cache_description_t															sCacheDescNearestBigger = {nPageSize * 2 / 3};
+//	btree_cache_description_t															sCacheDescLarge = {nPageSize * 16};
 	uint32_t																			i = 0;
 
-	m_pContainerRAM6565_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM6555_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM5555_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM5554_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM5454_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM5444_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM4444_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, &sCacheDescPageSize, nNodeSize, this->m_pReference);
-	m_pContainerRAM6565_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM6555_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM5555_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM5554_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM5454_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM5444_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM4444_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, &sCacheDescPageSize, nNodeSize * 2, this->m_pReference);
-	m_pContainerRAM6565_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM6555_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM5555_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM5554_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM5454_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM5444_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerRAM4444_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerFile6565min = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesMin6565, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerFile6555min = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin6555, &sCacheDescPageSize, nNodeSize * 8, this->m_pReference);
-	m_pContainerFile5555min = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin5555, &sCacheDescMin, nNodeSize * 7, this->m_pReference);
-	m_pContainerFile5554min = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesMin5554, &sCacheDescNearestBigger, nNodeSize * 6, this->m_pReference);
-	m_pContainerFile5454min = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesMin5454, &sCacheDescLarge, nNodeSize * 5, this->m_pReference);
+	m_pContainerRAM6565_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, nNodeSize, this->m_pReference);
+	m_pContainerRAM6555_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, nNodeSize, this->m_pReference);
+	m_pContainerRAM5555_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, nNodeSize, this->m_pReference);
+	m_pContainerRAM5554_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, nNodeSize, this->m_pReference);
+	m_pContainerRAM5454_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, nNodeSize, this->m_pReference);
+	m_pContainerRAM5444_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, nNodeSize, this->m_pReference);
+	m_pContainerRAM4444_n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, nNodeSize, this->m_pReference);
+	m_pContainerRAM6565_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM6555_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM5555_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM5554_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM5454_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM5444_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM4444_2n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, nNodeSize * 2, this->m_pReference);
+	m_pContainerRAM6565_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM6555_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM5555_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM5554_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM5454_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM5444_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, nNodeSize * 4, this->m_pReference);
+	m_pContainerRAM4444_4n = new CBTreeTestMap<CBTreeIOpropertiesRAM <size_test_type, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, nNodeSize * 4, this->m_pReference);
+	m_pContainerFile6565min = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesMin6565, nNodeSize * 4, this->m_pReference);
+	m_pContainerFile6555min = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin6555, nNodeSize * 8, this->m_pReference);
+	m_pContainerFile5555min = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin5555, nNodeSize * 7, this->m_pReference);
+	m_pContainerFile5554min = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesMin5554, nNodeSize * 6, this->m_pReference);
+	m_pContainerFile5454min = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesMin5454, nNodeSize * 5, this->m_pReference);
 
-	m_pContainerFile6565default = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesDefault6565, &sCacheDescNearestBigger, nNodeSize * 3, this->m_pReference);
-	m_pContainerFile6555default = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault6555, &sCacheDescNearestBigger, nNodeSize * 2, this->m_pReference);
-	m_pContainerFile5555default = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault5555, &sCacheDescLarge, nNodeSize, this->m_pReference);
-	m_pContainerFile5554default = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesDefault5554, &sCacheDescPageSize, nNodeSize * 8, this->m_pReference);
-	m_pContainerFile5454default = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesDefault5454, &sCacheDescMin, nNodeSize * 7, this->m_pReference);
+	m_pContainerFile6565default = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesDefault6565, nNodeSize * 3, this->m_pReference);
+	m_pContainerFile6555default = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault6555, nNodeSize * 2, this->m_pReference);
+	m_pContainerFile5555default = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault5555, nNodeSize, this->m_pReference);
+	m_pContainerFile5554default = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesDefault5554, nNodeSize * 8, this->m_pReference);
+	m_pContainerFile5454default = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesDefault5454, nNodeSize * 7, this->m_pReference);
 
-	m_pContainerFile6565large = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesLarge6565, &sCacheDescPageSize, nNodeSize * 5, this->m_pReference);
-	m_pContainerFile6555large = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesLarge6555, &sCacheDescPageSize, nNodeSize * 4, this->m_pReference);
-	m_pContainerFile5555large = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault5555, &sCacheDescMin, nNodeSize * 3, this->m_pReference);
-	m_pContainerFile5554large = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesDefault5554, &sCacheDescNearestBigger, nNodeSize * 2, this->m_pReference);
-	m_pContainerFile5454large = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesDefault5454, &sCacheDescLarge, nNodeSize, this->m_pReference);
+	m_pContainerFile6565large = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesLarge6565, nNodeSize * 5, this->m_pReference);
+	m_pContainerFile6555large = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesLarge6555, nNodeSize * 4, this->m_pReference);
+	m_pContainerFile5555large = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesLarge5555, nNodeSize * 3, this->m_pReference);
+	m_pContainerFile5554large = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesLarge5554, nNodeSize * 2, this->m_pReference);
+	m_pContainerFile5454large = new CBTreeTestMap<CBTreeIOpropertiesFile <size_test_type, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesLarge5454, nNodeSize, this->m_pReference);
 
 	BTREE_ASSERT (NULL != m_pContainerRAM6565_n, "CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::CBTreeMapTestWrapper: ERROR: insufficient memory! (m_pContainerRAM6565_n)");
 	BTREE_ASSERT (NULL != m_pContainerRAM6555_n, "CBTreeMapTestWrapper<_t_data, _t_value, _t_sizetype, _t_ref_container>::CBTreeMapTestWrapper: ERROR: insufficient memory! (m_pContainerRAM6555_n)");

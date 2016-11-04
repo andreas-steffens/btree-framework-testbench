@@ -2,7 +2,7 @@
 **
 ** file:	btreemultisetprimitives.h
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -13,7 +13,7 @@
 
 #ifndef BTREEMULTISETPRIMITIVES_H
 #define	BTREEMULTISETPRIMITIVES_H
-
+/*
 #include <stdint.h>
 
 #include "testbench/common/btreetestcommon.h"
@@ -97,7 +97,7 @@ void multiSetPrim_add (_t_container *pClMS, typename _t_container::size_type nEn
 
 	::std::cout << "insert: " << ui32 << " / " << nEntries << ::std::endl;
 }
-
+*/
 #endif // !BTREEMULTIMAPPRIMITIVES_H
 
 //#include "btreemultisetprimitives.cpp"

@@ -2,7 +2,7 @@
 **
 ** file:	btreemultimapprimitives.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -15,9 +15,9 @@
 #define BTREEMULTIMAPPRIMITIVES_CPP
 
 #include "testbench/primitives/btreemultimapprimitives.h"
-
+/*
 template<class _t_container>
-void multiMapPrim_add (_t_container *pClMM, typename _t_container::size_type nEntries, uint32_t &nFromWhereOrSeed, btreetest_multimap_primitive_seek_e eWhere)
+void multi_map_add_primitive (_t_container *pClMM, typename _t_container::size_type nEntries, uint32_t &nFromWhereOrSeed, btreetest_multimap_primitive_seek_e eWhere)
 {
 	typedef typename _t_container::value_type		data_t;
 
@@ -75,7 +75,7 @@ void multiMapPrim_add (_t_container *pClMM, typename _t_container::size_type nEn
 
 		default									:
 			{
-				::std::cerr << "ERROR: multiMapPrim_add: eWhere corrupted or not set!" << ::std::endl;
+				::std::cerr << "ERROR: multi_map_add_primitive: eWhere corrupted or not set!" << ::std::endl;
 
 				exit (-1);
 
@@ -92,5 +92,5 @@ void multiMapPrim_add (_t_container *pClMM, typename _t_container::size_type nEn
 
 	::std::cout << "insert: " << ui32 << " / " << nEntries << ::std::endl;
 }
-
+*/
 #endif // BTREEMULTIMAPPRIMITIVES_CPP

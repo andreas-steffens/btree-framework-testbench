@@ -2,7 +2,7 @@
 **
 ** file:	btreemultisettestbench.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -27,7 +27,7 @@ void TestBTreeMultiSetSTLifAssignmentOperator (_t_multiset *pClMSet, typename _t
 	
 	::std::cout << "exercises assignment operator compatible to STL interface CBTreeMultiSet<>:: operator= (CBTreeMultiSet<> &)" << ::std::endl;
 
-	multiSetPrim_add (pClMSet, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClMSet, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	sClMSet = *pClMSet;
 
@@ -47,7 +47,7 @@ void TestBTreeMultiSetSTLifInsert (_t_multiset *pClMSet, typename _t_multiset::s
 
 	::std::cout << "CBTreeMultiSet::insert (const valuetype &) is exercised" << ::std::endl;
 
-	multiSetPrim_add (pClMSet, nNumEntries, nLastSeed, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClMSet, nNumEntries, nLastSeed, BTREETEST_KEY_GENERATION_RANDOM);
 }
 
 template<class _t_multiset>
@@ -65,7 +65,7 @@ void TestBTreeMultiSetSTLifEraseViaIterator (_t_multiset *pClMSet, typename _t_m
 	
 	::std::cout << "exercises method compatible to STL interface CBTreeMultiSet<>:: erase (const_iterator)" << ::std::endl;
 
-	multiSetPrim_add (pClMSet, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClMSet, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	while (pClMSet->size () > 0)
 	{
@@ -109,7 +109,7 @@ void TestBTreeMultiSetSTLifEraseViaKey (_t_multiset *pClMSet, typename _t_multis
 	{
 		nLastKey = 0;
 
-		multiSetPrim_add (pClMSet, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pClMSet, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	while (pClMSet->size () > 0)
@@ -161,7 +161,7 @@ void TestBTreeMultiSetSTLifEraseViaIteratorMultiple (_t_multiset *pClMSet, typen
 	{
 		nLastKey = 0;
 
-		multiSetPrim_add (pClMSet, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+		associative_container_add_primitive (pClMSet, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 	}
 
 	while (pClMSet->size () > 0)
@@ -224,7 +224,7 @@ void TestBTreeMultiSetSTLifKeyComp (_t_multiset *pClMSet, typename _t_multiset::
 	
 	::std::cout << "exercises method compatible to STL interface CBTreeMultiSet<>:: key_comp ()" << ::std::endl;
 
-	multiSetPrim_add (pClMSet, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClMSet, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	sIterBegin = pClMSet->begin ();
 	sIterEnd = pClMSet->end ();
@@ -266,7 +266,7 @@ void TestBTreeMultiSetSTLifValueComp (_t_multiset *pClMSet, typename _t_multiset
 	
 	::std::cout << "exercises method compatible to STL interface CBTreeMultiSet<>:: value_comp ()" << ::std::endl;
 
-	multiSetPrim_add (pClMSet, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClMSet, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	sIterBegin = pClMSet->begin ();
 	sIterEnd = pClMSet->end ();
@@ -303,7 +303,7 @@ void TestBTreeMultiSetSTLifSwap (_t_multiset *pClMSet, typename _t_multiset::siz
 
 	::std::cout << "exercises method compatible to STL interface CBTreeMultiSet<>:: swap (CBTreeMultiSet &)" << ::std::endl;
 
-	multiSetPrim_add (pClMSet, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (pClMSet, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	sClMultiSetRef.insert (pClMSet->cbegin (), pClMSet->cend ());
 
@@ -314,7 +314,7 @@ void TestBTreeMultiSetSTLifSwap (_t_multiset *pClMSet, typename _t_multiset::siz
 		exit (-1);
 	}
 
-	multiSetPrim_add (&sClMultiSetTarget, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_RANDOM_KEY);
+	associative_container_add_primitive (&sClMultiSetTarget, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
 
 	sClMultiSetTargetRef.insert (sClMultiSetTarget.cbegin (), sClMultiSetTarget.cend ());
 
@@ -371,7 +371,7 @@ void TestBTreeMultiSetSTLifFind (_t_multiset *pClMSet, typename _t_multiset::siz
 	
 	::std::cout << "exercises method compatible to STL interface CBTreeMultiSet<>:: find (const _t_keytype &)" << ::std::endl;
 
-	multiSetPrim_add (pClMSet, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_ASCEND_KEY);
+	associative_container_add_primitive (pClMSet, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_ASCEND);
 
 	for (sCIter = pClMSet->cbegin (); sCIter != pClMSet->cend (); sCIter++)
 	{
@@ -431,7 +431,7 @@ void TestBTreeMultiSetSTLifLowerBoundUpperBound (_t_multiset *pClMSet, typename 
 	{
 		nLastKey = 1;
 
-		multiSetPrim_add (pClMSet, nNumEntries, nLastKey, BTREETEST_MULTISET_PRIMITIVE_ASCEND_KEY);
+		associative_container_add_primitive (pClMSet, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_ASCEND);
 	}
 
 	for (i = 0; i < nNumEntries; i++)
@@ -485,8 +485,38 @@ void TestBTreeMultiSetSTLifLowerBoundUpperBound (_t_multiset *pClMSet, typename 
 	}
 }
 
+template<class _t_multiset>
+void TestBTreeMultiSetSTLifEmplace (_t_multiset *pClMSet, typename _t_multiset::size_type nNumEntries)
+{
+	uint32_t		nLastKey = 1;
+
+	::std::cout << "exercises method compatible to STL interface CBTreeMultiSet<>:: emplace ()" << ::std::endl;
+
+	associative_container_emplace_primitive (pClMSet, nNumEntries, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
+}
+
+template<class _t_multiset>
+void TestBTreeMultiSetSTLifEmplaceHint (_t_multiset *pClMSet, typename _t_multiset::size_type nNumEntries, typename _t_multiset::size_type nHintVariation)
+{
+	uint32_t		nLastKey = 1;
+
+	::std::cout << "exercises method compatible to STL interface CBTreeMultiSet<>:: emplace_hint () with hint variation set to " << nHintVariation << ::std::endl;
+
+	associative_container_emplace_hint_primitive (pClMSet, nNumEntries, nHintVariation, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
+}
+
+template<class _t_multiset>
+void TestBTreeMultiSetSTLifInsertHint (_t_multiset *pClMSet, typename _t_multiset::size_type nNumEntries, typename _t_multiset::size_type nHintVariation)
+{
+	uint32_t		nLastKey = 1;
+
+	::std::cout << "exercises method compatible to STL interface CBTreeMultiSet<>:: insert (hint) with hint variation set to " << nHintVariation << ::std::endl;
+
+	associative_container_insert_hint_primitive (pClMSet, nNumEntries, nHintVariation, nLastKey, BTREETEST_KEY_GENERATION_RANDOM);
+}
+
 template<class _t_container>
-void TestBTreeSTLmultiSet (uint32_t nTestNum, uint32_t nNodeSize, uint32_t nPageSize, _t_container *pContainerpMSetWrapper)
+void TestBTreeSTLmultiSet (uint32_t nTestNum, uint32_t nNodeSize, uint32_t nPageSize, _t_container *pMSetWrapper)
 {
 	typename _t_container::size_test_type		sTypeSelect;
 	::std::string								sTypeStr;
@@ -495,9 +525,9 @@ void TestBTreeSTLmultiSet (uint32_t nTestNum, uint32_t nNodeSize, uint32_t nPage
 
 	::std::cout << "b-tree multi-set test bench selected using type " << sTypeStr << ::std::endl;
 
-	pContainerpMSetWrapper = new _t_container (nNodeSize, nPageSize);
+	pMSetWrapper = new _t_container (nNodeSize, nPageSize);
 
-	if (pContainerpMSetWrapper == NULL)
+	if (pMSetWrapper == NULL)
 	{
 		::std::cerr << "insufficient memory!" << ::std::endl;
 
@@ -508,77 +538,140 @@ void TestBTreeSTLmultiSet (uint32_t nTestNum, uint32_t nNodeSize, uint32_t nPage
 	{
 	case BTREETEST_MULTISET_ASSIGNMENT_OPERATOR	:
 		{
-			TestBTreeMultiSetSTLifAssignmentOperator (pContainerpMSetWrapper, 64);
+			TestBTreeMultiSetSTLifAssignmentOperator (pMSetWrapper, 64);
 
 			break;
 		}
 		
 	case BTREETEST_MULTISET_STL_IF_INSERT	:
 		{
-			TestBTreeMultiSetSTLifInsert (pContainerpMSetWrapper, 64);
+			TestBTreeMultiSetSTLifInsert (pMSetWrapper, 64);
 
 			break;
 		}
 	
 	case BTREETEST_MULTISET_STL_IF_INSERT_VIA_ITERATOR	:
 		{
-			TestBTreeSetSTLifInsertViaIterator (pContainerpMSetWrapper, 64);
+			TestBTreeSetSTLifInsertViaIterator (pMSetWrapper, 64);
 
 			break;
 		}
 	
 	case BTREETEST_MULTISET_STL_IF_ERASE_VIA_ITERATOR	:
 		{
-			TestBTreeMultiSetSTLifEraseViaIterator (pContainerpMSetWrapper, 64);
+			TestBTreeMultiSetSTLifEraseViaIterator (pMSetWrapper, 64);
 
 			break;
 		}
 		
 	case BTREETEST_MULTISET_STL_IF_ERASE_VIA_KEY	:
 		{
-			TestBTreeMultiSetSTLifEraseViaKey (pContainerpMSetWrapper, 64, 5);
+			TestBTreeMultiSetSTLifEraseViaKey (pMSetWrapper, 64, 5);
 
 			break;
 		}
 	
 	case BTREETEST_MULTISET_STL_IF_ERASE_VIA_ITERATOR_MULTIPLE	:
 		{
-			TestBTreeMultiSetSTLifEraseViaIteratorMultiple (pContainerpMSetWrapper, 64, 5);
+			TestBTreeMultiSetSTLifEraseViaIteratorMultiple (pMSetWrapper, 64, 5);
 
 			break;
 		}
 	
 	case BTREETEST_MULTISET_STL_IF_KEY_COMP	:
 		{
-			TestBTreeMultiSetSTLifKeyComp (pContainerpMSetWrapper, 64);
+			TestBTreeMultiSetSTLifKeyComp (pMSetWrapper, 64);
 
 			break;
 		}
 	
 	case BTREETEST_MULTISET_STL_IF_VALUE_COMP	:
 		{
-			TestBTreeMultiSetSTLifValueComp (pContainerpMSetWrapper, 64);
+			TestBTreeMultiSetSTLifValueComp (pMSetWrapper, 64);
 
 			break;
 		}
 	
 	case BTREETEST_MULTISET_STL_IF_SWAP	:
 		{
-			TestBTreeMultiSetSTLifSwap (pContainerpMSetWrapper, 128);
+			TestBTreeMultiSetSTLifSwap (pMSetWrapper, 128);
 
 			break;
 		}
 	
 	case BTREETEST_MULTISET_STL_IF_FIND	:
 		{
-			TestBTreeMultiSetSTLifFind (pContainerpMSetWrapper, 64);
+			TestBTreeMultiSetSTLifFind (pMSetWrapper, 64);
 
 			break;
 		}
 	
 	case BTREETEST_MULTISET_STL_IF_LOWER_BOUND_UPPER_BOUND	:
 		{
-			TestBTreeMultiSetSTLifLowerBoundUpperBound (pContainerpMSetWrapper, 64, 5);
+			TestBTreeMultiSetSTLifLowerBoundUpperBound (pMSetWrapper, 64, 5);
+
+			break;
+		}
+	
+	case BTREETEST_MULTISET_STL_IF_EMPLACE	:
+		{
+			TestBTreeMultiSetSTLifEmplace (pMSetWrapper, 64);
+
+			break;
+		}
+	
+	case BTREETEST_MULTISET_STL_IF_EMPLACE_HINT	:
+		{
+			TestBTreeMultiSetSTLifEmplaceHint (pMSetWrapper, 64, 0);
+
+			break;
+		}
+	
+	case BTREETEST_MULTISET_STL_IF_EMPLACE_HINT_MINOR	:
+		{
+			TestBTreeMultiSetSTLifEmplaceHint (pMSetWrapper, 64, 1);
+
+			break;
+		}
+	
+	case BTREETEST_MULTISET_STL_IF_EMPLACE_HINT_SIGNIFICANT	:
+		{
+			TestBTreeMultiSetSTLifEmplaceHint (pMSetWrapper, 64, 6);
+
+			break;
+		}
+	
+	case BTREETEST_MULTISET_STL_IF_EMPLACE_HINT_LARGE	:
+		{
+			TestBTreeMultiSetSTLifEmplaceHint (pMSetWrapper, 64, 64);
+
+			break;
+		}
+	
+	case BTREETEST_MULTISET_STL_IF_INSERT_HINT	:
+		{
+			TestBTreeMultiSetSTLifInsertHint (pMSetWrapper, 64, 0);
+
+			break;
+		}
+	
+	case BTREETEST_MULTISET_STL_IF_INSERT_HINT_MINOR	:
+		{
+			TestBTreeMultiSetSTLifInsertHint (pMSetWrapper, 64, 1);
+
+			break;
+		}
+	
+	case BTREETEST_MULTISET_STL_IF_INSERT_HINT_SIGNIFICANT	:
+		{
+			TestBTreeMultiSetSTLifInsertHint (pMSetWrapper, 64, 6);
+
+			break;
+		}
+	
+	case BTREETEST_MULTISET_STL_IF_INSERT_HINT_LARGE	:
+		{
+			TestBTreeMultiSetSTLifInsertHint (pMSetWrapper, 64, 64);
 
 			break;
 		}
@@ -593,5 +686,5 @@ void TestBTreeSTLmultiSet (uint32_t nTestNum, uint32_t nNodeSize, uint32_t nPage
 		}
 	}
 
-	delete pContainerpMSetWrapper;
+	delete pMSetWrapper;
 }

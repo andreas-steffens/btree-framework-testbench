@@ -2,7 +2,7 @@
 **
 ** file:	btreetestarray.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -22,19 +22,19 @@ template<class _t_datalayerproperties>
 CBTreeTestArray<_t_datalayerproperties>::CBTreeTestArray 
 	(
 		_t_datalayerproperties &rDataLayerProperties, 
-		const bayerTreeCacheDescription_t *psCacheDescription, 
 		typename _t_datalayerproperties::sub_node_iter_type nNodeSize, 
 		typename CBTreeTestArray<_t_datalayerproperties>::reference_t *pClRef
 	)
 	:	CBTreeArray<typename CBTreeTestArray<_t_datalayerproperties>::value_type, _t_datalayerproperties>
 	(
 		rDataLayerProperties, 
-		psCacheDescription, 
 		nNodeSize
 	)
 	,	m_pClRef (pClRef)
 	,	m_bAtomicTesting (true)
+	,	m_psTestTimeStamp (NULL)
 {
+	m_psTestTimeStamp = new btree_time_stamp_t (this->get_time_stamp ());
 }
 
 template<class _t_datalayerproperties>
@@ -45,7 +45,10 @@ CBTreeTestArray<_t_datalayerproperties>::CBTreeTestArray (CBTreeTestArray<_t_dat
 	)
 	,	m_pClRef (rBT.m_pClRef)
 	,	m_bAtomicTesting (false)
+	,	m_psTestTimeStamp (NULL)
 {
+	m_psTestTimeStamp = new btree_time_stamp_t (this->get_time_stamp ());
+
 	if (bAssign)
 	{
 		this->_assign (rBT);
@@ -57,6 +60,12 @@ CBTreeTestArray<_t_datalayerproperties>::CBTreeTestArray (CBTreeTestArray<_t_dat
 template<class _t_datalayerproperties>
 CBTreeTestArray<_t_datalayerproperties>::~CBTreeTestArray ()
 {
+	if (m_psTestTimeStamp != NULL)
+	{
+		delete m_psTestTimeStamp;
+
+		m_psTestTimeStamp = NULL;
+	}
 }
 
 template<class _t_datalayerproperties>
@@ -231,6 +240,13 @@ void CBTreeTestArray<_t_datalayerproperties>::test () const
 	{
 		return;
 	}
+
+	if (*m_psTestTimeStamp == this->get_time_stamp ())
+	{
+		return;
+	}
+
+	*m_psTestTimeStamp = this->get_time_stamp ();
 
 	if (!this->test_integrity ())
 	{

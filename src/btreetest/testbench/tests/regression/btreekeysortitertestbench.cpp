@@ -2,7 +2,7 @@
 **
 ** file:	btreekeysortitertestbench.cpp
 ** author:	Andreas Steffens
-** license:	GPL v2
+** license:	LGPL v3
 **
 ** description:
 **
@@ -1204,22 +1204,25 @@ void TestBTreeKeySortIter (uint32_t nTest, uint32_t nNodeSize, uint32_t nPageSiz
 	CBTreeIOpropertiesRAM<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sRAMprop5454;
 	CBTreeIOpropertiesRAM<_t_sizetype, uint32_t, uint16_t, uint16_t, uint16_t>		sRAMprop5444;
 	CBTreeIOpropertiesRAM<_t_sizetype, uint16_t, uint16_t, uint16_t, uint16_t>		sRAMprop4444;
-	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesMin6565 ("./", 1);
-	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin6555 ("./", 1);
-	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin5555 ("./", 1);
-	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesMin5554 ("./", 1);
-	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesMin5454 ("./", 1);
-	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesDefault6565 ("./");
-	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault6555 ("./");
-	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault5555 ("./");
-	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesDefault5554 ("./");
-	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesDefault5454 ("./");
-	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesLarge6565 ("./", 16777216);
-	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesLarge6555 ("./", 16777216);
-	bayerTreeCacheDescription_t														sCacheDescPageSize = {nPageSize};
-	bayerTreeCacheDescription_t														sCacheDescMin = {1};
-	bayerTreeCacheDescription_t														sCacheDescNearestBigger = {nPageSize * 2 / 3};
-	bayerTreeCacheDescription_t														sCacheDescLarge = {nPageSize * 16};
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesMin6565 ("./", 1, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin6555 ("./", 1, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesMin5555 ("./", 1, 1);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesMin5554 ("./", 1, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesMin5454 ("./", 1, nPageSize * 16);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesDefault6565 ("./", 1048576, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault6555 ("./", 1048576, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesDefault5555 ("./", 1048576, nPageSize * 16);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesDefault5554 ("./", 1048576, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesDefault5454 ("./", 1048576, 1);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t>		sFilePropertiesLarge6565 ("./", 16777216, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesLarge6555 ("./", 16777216, nPageSize);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t>		sFilePropertiesLarge5555 ("./", 1048576, 1);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t>		sFilePropertiesLarge5554 ("./", 1048576, nPageSize * 2 / 3);
+	CBTreeIOpropertiesFile<_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t>		sFilePropertiesLarge5454 ("./", 1048576, nPageSize * 16);
+//	btree_cache_description_t														sCacheDescPageSize = {nPageSize};
+//	btree_cache_description_t														sCacheDescMin = {1};
+//	btree_cache_description_t														sCacheDescNearestBigger = {nPageSize * 2 / 3};
+//	btree_cache_description_t														sCacheDescLarge = {nPageSize * 16};
 	uint32_t																		i = 0;
 	container_t																		*pContainer;
 
@@ -1267,44 +1270,44 @@ void TestBTreeKeySortIter (uint32_t nTest, uint32_t nNodeSize, uint32_t nPageSiz
 
 	::std::cout << "b-tree keysort iterator test bench selected" << ::std::endl;
 
-	m_pContainerRAM6565_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, &sCacheDescPageSize, nNodeSize);
-	m_pContainerRAM6555_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, &sCacheDescPageSize, nNodeSize);
-	m_pContainerRAM5555_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, &sCacheDescPageSize, nNodeSize);
-	m_pContainerRAM5554_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, &sCacheDescPageSize, nNodeSize);
-	m_pContainerRAM5454_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, &sCacheDescPageSize, nNodeSize);
-	m_pContainerRAM5444_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, &sCacheDescPageSize, nNodeSize);
-	m_pContainerRAM4444_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, &sCacheDescPageSize, nNodeSize);
-	m_pContainerRAM6565_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, &sCacheDescPageSize, nNodeSize * 2);
-	m_pContainerRAM6555_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, &sCacheDescPageSize, nNodeSize * 2);
-	m_pContainerRAM5555_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, &sCacheDescPageSize, nNodeSize * 2);
-	m_pContainerRAM5554_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, &sCacheDescPageSize, nNodeSize * 2);
-	m_pContainerRAM5454_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, &sCacheDescPageSize, nNodeSize * 2);
-	m_pContainerRAM5444_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, &sCacheDescPageSize, nNodeSize * 2);
-	m_pContainerRAM4444_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, &sCacheDescPageSize, nNodeSize * 2);
-	m_pContainerRAM6565_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, &sCacheDescPageSize, nNodeSize * 4);
-	m_pContainerRAM6555_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, &sCacheDescPageSize, nNodeSize * 4);
-	m_pContainerRAM5555_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, &sCacheDescPageSize, nNodeSize * 4);
-	m_pContainerRAM5554_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, &sCacheDescPageSize, nNodeSize * 4);
-	m_pContainerRAM5454_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, &sCacheDescPageSize, nNodeSize * 4);
-	m_pContainerRAM5444_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, &sCacheDescPageSize, nNodeSize * 4);
-	m_pContainerRAM4444_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, &sCacheDescPageSize, nNodeSize * 4);
-	m_pContainerFile6565min = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesMin6565, &sCacheDescPageSize, nNodeSize * 4);
-	m_pContainerFile6555min = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin6555, &sCacheDescPageSize, nNodeSize * 8);
-	m_pContainerFile5555min = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin5555, &sCacheDescMin, nNodeSize * 7);
-	m_pContainerFile5554min = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesMin5554, &sCacheDescNearestBigger, nNodeSize * 6);
-	m_pContainerFile5454min = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesMin5454, &sCacheDescLarge, nNodeSize * 5);
+	m_pContainerRAM6565_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, nNodeSize);
+	m_pContainerRAM6555_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, nNodeSize);
+	m_pContainerRAM5555_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, nNodeSize);
+	m_pContainerRAM5554_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, nNodeSize);
+	m_pContainerRAM5454_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, nNodeSize);
+	m_pContainerRAM5444_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, nNodeSize);
+	m_pContainerRAM4444_n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, nNodeSize);
+	m_pContainerRAM6565_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, nNodeSize * 2);
+	m_pContainerRAM6555_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, nNodeSize * 2);
+	m_pContainerRAM5555_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, nNodeSize * 2);
+	m_pContainerRAM5554_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, nNodeSize * 2);
+	m_pContainerRAM5454_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, nNodeSize * 2);
+	m_pContainerRAM5444_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, nNodeSize * 2);
+	m_pContainerRAM4444_2n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, nNodeSize * 2);
+	m_pContainerRAM6565_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sRAMprop6565, nNodeSize * 4);
+	m_pContainerRAM6555_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sRAMprop6555, nNodeSize * 4);
+	m_pContainerRAM5555_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sRAMprop5555, nNodeSize * 4);
+	m_pContainerRAM5554_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sRAMprop5554, nNodeSize * 4);
+	m_pContainerRAM5454_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sRAMprop5454, nNodeSize * 4);
+	m_pContainerRAM5444_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint32_t, uint16_t, uint16_t, uint16_t> > (sRAMprop5444, nNodeSize * 4);
+	m_pContainerRAM4444_4n = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesRAM <_t_sizetype, uint16_t, uint16_t, uint16_t, uint16_t> > (sRAMprop4444, nNodeSize * 4);
+	m_pContainerFile6565min = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesMin6565, nNodeSize * 4);
+	m_pContainerFile6555min = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin6555, nNodeSize * 8);
+	m_pContainerFile5555min = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesMin5555, nNodeSize * 7);
+	m_pContainerFile5554min = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesMin5554, nNodeSize * 6);
+	m_pContainerFile5454min = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesMin5454, nNodeSize * 5);
 
-	m_pContainerFile6565default = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesDefault6565, &sCacheDescNearestBigger, nNodeSize * 3);
-	m_pContainerFile6555default = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault6555, &sCacheDescNearestBigger, nNodeSize * 2);
-	m_pContainerFile5555default = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault5555, &sCacheDescLarge, nNodeSize);
-	m_pContainerFile5554default = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesDefault5554, &sCacheDescPageSize, nNodeSize * 8);
-	m_pContainerFile5454default = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesDefault5454, &sCacheDescMin, nNodeSize * 7);
+	m_pContainerFile6565default = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesDefault6565, nNodeSize * 3);
+	m_pContainerFile6555default = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault6555, nNodeSize * 2);
+	m_pContainerFile5555default = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault5555, nNodeSize);
+	m_pContainerFile5554default = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesDefault5554, nNodeSize * 8);
+	m_pContainerFile5454default = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesDefault5454, nNodeSize * 7);
 
-	m_pContainerFile6565large = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesLarge6565, &sCacheDescPageSize, nNodeSize * 5);
-	m_pContainerFile6555large = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesLarge6555, &sCacheDescPageSize, nNodeSize * 4);
-	m_pContainerFile5555large = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesDefault5555, &sCacheDescMin, nNodeSize * 3);
-	m_pContainerFile5554large = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesDefault5554, &sCacheDescNearestBigger, nNodeSize * 2);
-	m_pContainerFile5454large = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesDefault5454, &sCacheDescLarge, nNodeSize);
+	m_pContainerFile6565large = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint64_t, uint32_t> > (sFilePropertiesLarge6565, nNodeSize * 5);
+	m_pContainerFile6555large = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint64_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesLarge6555, nNodeSize * 4);
+	m_pContainerFile5555large = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint32_t> > (sFilePropertiesLarge5555, nNodeSize * 3);
+	m_pContainerFile5554large = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint32_t, uint32_t, uint16_t> > (sFilePropertiesLarge5554, nNodeSize * 2);
+	m_pContainerFile5454large = new CBTreeKeySort<data_t, uint32_t, CBTreeIOpropertiesFile <_t_sizetype, uint32_t, uint16_t, uint32_t, uint16_t> > (sFilePropertiesLarge5454, nNodeSize);
 
 	if (NULL == m_pContainerRAM6565_n) {::std::cerr << "TestBTreeKeySortIter<_t_sizetype> (uint32_t, uint32_t, uint32_t): ERROR: insufficient memory! (m_pContainerRAM6565_n)" << ::std::endl; exit (-1);}
 	if (NULL == m_pContainerRAM6555_n) {::std::cerr << "TestBTreeKeySortIter<_t_sizetype> (uint32_t, uint32_t, uint32_t): ERROR: insufficient memory! (m_pContainerRAM6555_n)" << ::std::endl; exit (-1);}
