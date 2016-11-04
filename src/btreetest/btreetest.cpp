@@ -112,6 +112,7 @@ void print_usage (const char *pszBinary)
 	::std::cerr << "                array-iter      - selects array iterators" << ::std::endl;
 	::std::cerr << "                keysort-iter    - selects keysort iterators" << ::std::endl;
 	::std::cerr << "                app             - switches test bench to application testing mode" << ::std::endl;
+	::std::cerr << "                example         - runs the code of an example as it is displayed in the \"quick overview\" documentation" << ::std::endl;
 	::std::cerr << ::std::endl;
 	::std::cerr << "-app            selects an application name for real world testing" << ::std::endl;
 	::std::cerr << "                purposes, in case the application testing mode has" << ::std::endl;
@@ -291,6 +292,12 @@ void print_usage (const char *pszBinary)
 	::std::cerr << "15      - test exercises arithmetic operator+ and operator- with none of the operands being the result instance (r = a + b) or (r = a - b)" << ::std::endl;
 	::std::cerr << "16      - test exercises all compare operators (<, >, <=, >=, ==, !=)" << ::std::endl;
 	::std::cerr << "17      - test exercises interface method swap (iterator &) with parameter from the same different container" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "example" << ::std::endl;
+	::std::cerr << ::std::endl;
+	::std::cerr << "0       - run polymorphic calls example" << ::std::endl;
+	::std::cerr << "1       - run simple database example" << ::std::endl;
 	::std::cerr << ::std::endl;
 	::std::cerr << ::std::endl;
 	::std::cerr << "app" << ::std::endl;

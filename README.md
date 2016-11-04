@@ -7,7 +7,11 @@ The project is cmake based and is therefore very easy to set up. The two "How to
 <br>
 ## Synopsis
 ```
+./btreetest -help | --help | -usage | --usage
 ./btreetest -type <test type> [-app <app name>] -test <test number> [-sizetype <address space bit width>]
+
+-help, --help, 	prints this help page and exits
+-usage, --usage
 
 -type			selects the container type or application test mode
 
@@ -20,6 +24,7 @@ The project is cmake based and is therefore very easy to set up. The two "How to
 				array-iter		- selects array iterators
 				keysort-iter	- selects keysort iterators
 				app				- switches test bench to application testing mode
+				example			- runs the code of an example as it is displayed in the "quick overview" documentation
 
 -app			selects an application name for real world testing
 				purposes, in case the application testing mode has
@@ -273,6 +278,11 @@ keysort-iter
 	15		- test exercises arithmetic operator+ and operator- with none of the operands being the result instance (r = a + b) or (r = a - b)
 	16		- test exercises all compare operators (<, >, <=, >=, ==, !=)
 	17		- test exercises interface method swap (iterator &) with parameter from the same different container
+
+example
+
+	0		- run polymorphic calls example
+	1		- run simple database example
 
 app
 
