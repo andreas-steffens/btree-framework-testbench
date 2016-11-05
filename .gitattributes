@@ -1,0 +1,5 @@
+src/btreetest/applications/avp_path_find/sublevel*.h linguist-vendored
+src/btreetest/applications/avp_path_find/airduct*.h linguist-vendored
+src/btreetest/applications/avp_path_find/alienvessel.h linguist-vendored
+src/btreetest/applications/avp_path_find/predatorship.h linguist-vendored
+
