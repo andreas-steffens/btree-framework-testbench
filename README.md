@@ -141,6 +141,9 @@ stl-set, stl-multiset, stl-map and stl-multimap
 	1016	- test exercises interface method insert (const_iterator &, const value_type &) with near perfect hint
 	1017	- test exercises interface method insert (const_iterator &, const value_type &) with potentially bad hint
 	1018	- test exercises interface method insert (const_iterator &, const value_type &) with terrible hint
+	1019	- test exercises interface method emplace (const value_type &)
+	1020	- test exercises interface method emplace_hint (const_iterator &, const value_type &) with perfect hint
+	1021	- test exercises interface method equal_range ()
 
 array
 
@@ -222,6 +225,9 @@ keysort
 	1014	- test exercises interface method insert (const_iterator &, const value_type &) with near perfect hint
 	1015	- test exercises interface method insert (const_iterator &, const value_type &) with potentially bad hint
 	1016	- test exercises interface method insert (const_iterator &, const value_type &) with terrible hint
+	1017	- test exercises interface method emplace (const value_type &)
+	1018	- test exercises interface method emplace_hint (const_iterator &, const value_type &) with perfect hint
+	1019	- test exercises interface method equal_range ()
 
 	2000	- code coverage test which exercises corner cases in method determine_position ()
 	2001	- code coverage test which exercises corner cases in method find_first_key ()
